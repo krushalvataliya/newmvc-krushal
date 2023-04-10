@@ -1,0 +1,50 @@
+<?php
+$customer = $this->getData('customer');
+$address  = $this->getData('customerAddress');
+?>
+<table>
+  <tr>
+    <td><h3>Edit customer<h3></td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
+    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
+      <td><button class="btn btn-primary">save</button></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th> FIRST_NAME</th>
+      <td><input type="text" name="customer[first_name]" value="<?php echo $customer->first_name ?>"></td>
+    </tr>
+    <tr>
+      <th> LAST_NAME</th>
+      <td><input type="text" name="customer[last_name]" value="<?php echo $customer->last_name ?>"></td>
+    </tr>
+    <tr>
+      <th> EMAIL</th>
+      <td><input type="email" name="customer[email]" value="<?php echo $customer->email ?>"></td>
+    </tr>
+    <tr>
+      <th> GENDER</th>
+      <td> <select name="customer[gender]"   >
+        <option value="male" name="male">male</option>
+        <option value="female" name="female">female</option>
+      </select> </td>
+    </tr>
+    <tr>
+      <th> MOBILE</th>
+      <td><input type="number" name="customer[mobile]" value="<?php echo $customer->mobile ?>"></td>
+    </tr>
+    <tr>
+      <th> STATUS</th>
+      <td> <select name="customer[status]"   >
+        <?php foreach ($customer->getResource()->getStatusOptions() as $key => $value): ?>
+        <option value="<?php echo $key ?>" <?php if($customer->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <?php endforeach; ?>
+      </select> </td>
+    </tr>
+    <tr>
+      <td>address</td>
+    </tr>
+    <?php require 'View/customer/address/edit.phtml' ?>
+  </form>
+</table>

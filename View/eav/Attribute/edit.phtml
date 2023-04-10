@@ -1,0 +1,112 @@
+<?php
+$attribute = $this->getData('attribute');
+$entities = $this->getentities();
+$options = $this->getOptions();
+?>
+<div class="modal-body">
+	<div class="modal-header">
+		<h5 class="modal-title" id="editProductModalLabel">Edit Attribute</h5>
+	</div>
+	<form action="<?php echo $this->getModelurl()->getUrl('save','eav_attribute')?>" method="post">
+		<table class="table table-bordered">
+			<tr>
+				<td>Entity Type</td>
+				<td><select  name="attribute[entity_type_id]">
+					<?php foreach ($entities->getData() as $entity): ?>
+					<option value="<?php echo $entity->entity_type_id ?>"><?php echo $entity->name; ?></option>
+					<?php endforeach ?>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Code</td>
+				<td><input type="text" name="attribute[code]" value="<?php echo $attribute->code; ?>"></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" name="attribute[name]" value="<?php echo $attribute->name; ?>"></td>
+			</tr>
+			<tr >
+				<td>Input Type</td>
+				<td><select  name="attribute[input_type]"  id="inputTypeSelect" >
+					<?php foreach ($attribute->getResource()->getInputTypeOptions() as $key => $value): ?>
+					<option value="<?php echo $key ?>" <?php if($attribute->getInputType() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+					<?php endforeach; ?>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Backend Type</td>
+				<td><select  name="attribute[backend_type]" >
+					<?php foreach ($attribute->getResource()->getBackendTypeOptions() as $key => $value): ?>
+					<option value="<?php echo $key ?>" <?php if($attribute->getBackendType() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+					<?php endforeach; ?>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td> <select name="attribute[status]" >
+					<?php foreach ($attribute->getResource()->getStatusOptions() as $key => $value): ?>
+					<option value="<?php echo $key ?>" <?php if($attribute->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+					<?php endforeach; ?>
+				</select> </td>
+			</tr>
+			<tr>
+				<td>Backend Model</td>
+				<td><input type="text" name="attribute[backend_model]" value="<?php echo $attribute->backend_model; ?>"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" name="submit" value="Save"></td>
+			</tr>
+		</table>
+		<div style="border:0px ; display: none;margin: 10px 5px;" id="inputTypeOptionBlock">
+			<table>
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th><input type="button" name="add" value="ADD" id="addOption"></th>
+					</tr>
+				</thead>
+				<tbody id="inputTypeOptionTable">
+					<?php if ($options): ?>
+					<?php foreach ($options->getData() as $option): ?>
+					<tr>
+						<td><input type="text" name="option[exist][<?php echo $option->option_id; ?>]" value="<?php echo $option->name ?>" ></td>
+						<td><input type="button" onclick="removeOption(this)" name="remove" value="REMOVE"></td>
+					</tr>
+					<?php endforeach ?>
+					<?php endif ?>
+				</tbody>
+			</table>
+		</div>
+	</form>
+	<table style="display:none">
+		<tbody id="inputTypeOptionDefault">
+			
+			<td><input type="text" name="option[new][]"></td>
+			<td><input type="button" name="remove" onclick="removeOption(this)" value="REMOVE"></td>
+			
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function (){
+		$("#addOption").click(function(){
+			$('#inputTypeOptionTable').prepend($('#inputTypeOptionDefault').html());
+		});
+		$('#inputTypeSelect').change(function (){
+			var SelectedInputType = $(this);
+			const backendTypeArray = ["select", "multiselect", "checkbox", "radio"];
+			if(backendTypeArray.includes(SelectedInputType.val())){
+				$('#inputTypeOptionBlock').show();
+			}
+			else{
+				$('#inputTypeOptionBlock').hide();
+			}
+		});
+		$('#inputTypeSelect').trigger('change');
+	})
+	function removeOption(obj)
+	{
+		var parent = $(obj).parent().parent().remove();
+	}
+</script>

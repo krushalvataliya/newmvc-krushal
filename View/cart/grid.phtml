@@ -1,0 +1,123 @@
+<?php
+$request = $this->getRequest();
+$products = $this->getProducts();
+$cart_details = $this->getCartDetails();
+$methods = $this->getShippingMethods();
+$selected_method =$this->getselectedShippingMethod();
+$total =$this->getTotal();
+?>
+<form action="<?php echo $this->getModelUrl()->getUrl('addproduct','cart',['shipping_method_id'=>334]) ?>" method="POST">
+	<table class="table table-bordered mx-1">
+		<tr>
+			<select name="product[product_id]">
+				<?php foreach ($products->getData() as $product):?>
+				<option value="<?php echo $product->product_id;?>"><?php echo $product->sku.'-$'.$product->price.'.00'; ?></option>
+				<?php endforeach; ?>
+			</select>
+		</tr>
+		<tr>
+			<input type="number"  name="product[quantity]">
+		</tr>
+		<tr>
+			<input type="submit" class="btn btn-primary mx-1" value="ADD ITEM" >
+		</tr>
+	</table>
+</form>
+<form action="<?php echo $this->getModelUrl()->getUrl('addMethod','cart',['shipping_method_id'=>334]) ?>" method="POST">
+	<table class="table table-bordered">
+		<tr>
+			<select name="shiping_method_id">
+				<option>select</option>
+				<?php foreach ($methods->getData() as $method):?>
+				<option value="<?php echo $method->shiping_method_id;?>" <?php if(isset($_GET['shipping_method_id'])) {if($request->getParam('shipping_method_id') == $method->shiping_method_id ){echo "selected";}} ?>  ><?php echo $method->name.'-$'.$method->amount.'.00'; ?></option>
+				<?php endforeach; ?>
+			</select>
+		</tr>
+		<tr>
+			
+		</tr>
+		<tr>
+			<input type="submit" class="btn btn-primary mx-1" value="save" >
+		</tr>
+	</table>
+	<table class="table table-bordered">
+		<tr>
+			<input type="number" value="5" name="tax_percent">
+		</tr>
+		<tr>
+			<input type="submit" class="btn btn-primary mx-1" value="save">
+		</tr>
+	</table>
+</form>
+<table class="table table-bordered">
+	<tr>
+		<td>PRODUCT ID</td>
+		<td>NAME</td>
+		<td>SKU</td>
+		<td>PRICE</td>
+		<td>QUANTITY</td>
+		<td>ROW TOTAL</td>
+		<td>REMOVE</td>
+	</tr>
+	<form action="<?php echo $this->getModelUrl()->getUrl('updateQuantity','cart',['shipping_method_id'=>334])?>" method="POST">
+		<input type="submit" class="btn btn-primary mx-1" value="update">
+		<?php foreach ($cart_details->getData() as $detail):?>
+		<tr>
+			<td><?php echo $detail->product_id ?></td>
+			<td><?php echo $detail->name ?></td>
+			<td><?php echo $detail->sku ?></td>
+			<td><?php echo $detail->price ?></td>
+			<td> <input type="number" name="quantity[<?php echo $detail->product_id ?>]" value="<?php echo $detail->quantity?>">  </td>
+			<td><?php echo $detail->price * $detail->quantity ?></td>
+			<td><a href="<?php echo $this->getModelUrl()->getUrl('deleteproduct','cart',['product_id'=>$detail->product_id]) ?>">remove</a></td>
+		</tr>
+		<?php endforeach; ?>
+	</form>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td style="text-align: right;">total = </td>
+		<td> <?php echo $total?> </td>
+	</tr>
+</table>
+<div style="text-align: right;float: right;">
+	<table class="table table-bordered">
+		<?php if($request->getParam('shipping_method_id') != null && $selected_method != null): ?>
+		<tr >
+			<th>SUB TOTAL</th>
+			<td><?php echo $total;?></td>
+		</tr>
+		<tr>
+			<th>SHIPPING AMOUNT</th>
+			<td><?php echo $selected_method->shiping_amount ?></td>
+		</tr>
+		<tr>
+			<th>TAX (<?php echo $selected_method->tax_percent."%" ?>)</th>
+			<td><?php echo $tax = ($total*$selected_method->tax_percent)/100;?></td>
+		</tr>
+		<tr>
+			<th>GRAND TOTAL</th>
+			<td><?php echo $total+$selected_method->shipping_amount+$tax;?></td>
+		</tr>
+		<?php else: ?>
+		<tr >
+			<th>SUB TOTAL</th>
+			<td><?php echo $total;?></td>
+		</tr>
+		<tr>
+			<th>SHIPPING AMOUNT</th>
+			<td>Please select shipping method</td>
+		</tr>
+		<tr>
+			<th>TAX ()</th>
+			<td></td>
+		</tr>
+		<tr>
+			<th>GRAND TOTAL</th>
+			<td><?php echo $total;?></td>
+		</tr>
+		<?php endif; ?>
+	</table>
+</div>

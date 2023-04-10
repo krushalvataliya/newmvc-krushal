@@ -1,0 +1,16 @@
+<?php
+$request = $this->getRequest();
+$productId=(int)$request->getParam('product_id');
+?>
+<form action="<?php echo $this->getModelUrl()->getUrl('insert','product_media',['product_id'=>$productId]); ?>" method="POST" enctype="multipart/form-data">
+  <table class="table table-bordered">
+    <tr>
+      <th>IMAGE</th>
+      <td> <input type="file" name="fileToUpload"></td>
+    </tr>
+    <th>IMAGE NAME</th>
+    <td><input type="text" name="media[filename]">
+  </td>
+  </table>
+  <input type="submit">
+</form>

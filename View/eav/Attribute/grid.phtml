@@ -1,0 +1,40 @@
+<?php
+$attributes = $this->getCollection();
+
+
+
+?>
+<div>
+	<table width="100%">
+		<tr>
+			<td><h2>Attribute</h2></td>
+			<td><a class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">Add</a></td>
+		</tr>
+	</table>
+	<table class="table table-bordered">
+		<tr>
+			<td>Attribute Id</td>
+			<td>Entity Type Id</td>
+			<td>Code</td>
+			<td>Backed Type</td>
+			<td>Name</td>
+			<td>status</td>
+			<td>Backend Model</td>
+			<td>Input Type</td>
+		</tr>
+		<?php foreach ($attributes->getData() as $key => $attribute): ?>
+		<tr>
+			<td><?php echo $attribute->attribute_id;?></td>
+			<td><?php echo $attribute->entity_type_id;?></td>
+			<td><?php echo $attribute->code; ?></td>
+			<td><?php echo $attribute->backend_type; ?></td>
+			<td><?php echo $attribute->name; ?></td>
+			<td><?php echo $attribute->status;?></td>
+			<td><?php echo $attribute->backend_model; ?></td>
+			<td><?php echo $attribute->input_type; ?></td>
+			<td><a href="<?php echo $this->getModelUrl()->getUrl('edit',null,['attribute_id'=>$attribute->attribute_id]); ?>">EDIT</a></td>
+			<td><a href="<?php echo $this->getModelUrl()->getUrl('delete',null,['attribute_id'=>$attribute->attribute_id]); ?>">Delete</a></td>
+		</tr>
+		<?php endforeach ?>
+	</table>
+</div>

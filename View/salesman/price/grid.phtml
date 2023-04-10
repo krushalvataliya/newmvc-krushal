@@ -1,0 +1,48 @@
+<?php
+$request = $this->getRequest();
+$id = (int)$request->getParam('salesman_id');
+$products = $this->getSalesmanPrice();
+$salesmen = $this->getSalesmen();
+?>
+<form action="<?php echo $this->getModelUrl()->getUrl('update', 'salesman_price', ['salesman_id' => $id]); ?>" method="POST">
+	<table width="50%">
+		<tr>
+			<td>Salesman :
+				<select   class=""  onchange="change(this.value)">
+					<?php foreach ($salesmen->getData() as $salesman): ?>
+					<option value="<?php echo $salesman->salesman_id;?>"<?php if($salesman->salesman_id == $id){ echo "selected";}?>><?php echo $salesman->first_name; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+			<td><input class="btn btn-primary" type="submit" name="button" value="update"></td>
+			<td><input class="btn btn-primary"  type="submit" name="button" value="delete"></td>
+		</tr>
+	</table>
+	<br>
+	<table   border="1px" width="100%">
+		<tr>
+			<th>ID</th>
+			<th>SKU</th>
+			<th>COST</th>
+			<th>PRICE</th>
+			<th>S PRICE</th>
+			<th>REMOVE</th>
+		</tr>
+		<?php foreach ($products->getData() as $product):?>
+		<tr>
+			<td><?php echo $product->product_id; ?></td>
+			<td><?php echo $product->sku; ?></td>
+			<td><?php echo $product->cost; ?></td>
+			<td><?php echo $product->price; ?></td>
+			<td><input type="number" name="sprice[<?php echo $product->product_id?>]" value="<?php echo $product->salesman_price; ?>"></td>
+			<td><input type="checkbox" name="delete_price[<?php echo $product->entity_id; ?>]" value="<?php echo $product->entity_id; ?>"></td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+	<br>
+</form>
+<script type="text/javascript">
+	function change(value){
+window.location.assign('<?php echo $this->getModelUrl()->getUrl('grid'); ?>&salesman_id='+value);
+}
+</script>

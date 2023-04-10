@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<?php $this->createBlock('Html_Head')->render(); ?>
+<body>
+	<table width="100%">
+		<tr rowspan="3"><td colspan="3"><?php $this->getChild('header')->render(); ?></td></tr>
+		<tr rowspan="3" height="50px"><td colspan="3"><?php $this->getChild('message')->render(); ?></td></tr>
+		<tr height="400"><td><?php $this->getChild('left')->render(); ?></td>
+			<td><?php $this->getChild('content')->render(); ?></td>
+			<td><?php $this->getChild('right')->render(); ?></td></tr>
+
+		<tr rowspan="3"><td colspan="3" height="100"><?php $this->getChild('footer')->render(); ?></td></tr>
+	</table>
+
+</body>
+</html>

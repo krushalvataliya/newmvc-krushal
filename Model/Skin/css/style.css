@@ -1,0 +1,40 @@
+@keyframes hideAnimation
+{to
+{
+	visibility: hidden;
+	width: 0px;
+	height: 0px;
+}
+
+}
+
+.success{
+color: #270;
+background-color: #DFF2BF;
+display: block;
+animation: hideAnimation 0s ease-in 3s ;
+animation-fill-mode: forwards;
+text-align-last: center;
+}
+
+.failure
+{
+color: #D8000c;
+background-color: #FFBABA;
+display: block;
+text-align-last: center;
+}
+ 	
+.notice
+{
+color: #9F6000;
+background-color: #FEEFB3;
+display: block;
+text-align-last: center;
+}
+
+.imgsize
+{
+height: 100px;
+width: 100px;
+}

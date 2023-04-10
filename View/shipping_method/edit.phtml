@@ -1,0 +1,29 @@
+<?php
+$shiping_method = $this->getData('shippingMethod');
+?>
+<table>
+  <tr>
+    <td><h3>Edit shiping method<h3></td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
+    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
+      <td><button class="btn btn-primary">save</button></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>NAME</th>
+      <td><input type="text" name="shiping_method[name]" value="<?php echo $shiping_method->name?>"></td>
+    </tr>
+    <tr>
+      <th>AMOUNT</th>
+      <td><input type="number" name="shiping_method[amount]" value="<?php echo $shiping_method->amount?>"></td>
+    </tr>
+    <th> STATUS</th>
+    <td> <select name="shiping_method[status]"   >
+      <?php foreach ($shiping_method->getResource()->getStatusOptions() as $key => $value): ?>
+      <option value="<?php echo $key ?>"name="available" <?php if($shiping_method->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+      <?php endforeach; ?>
+    </select> </td>
+  </tr>
+</form>
+</table>

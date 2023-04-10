@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="Model/Skin/css/style.css">
+	<link rel="stylesheet" href="Model/Skin/css/bootstrap.min.css">
+	<title></title>
+
+</head>
+
+<body>
+	<table width="100%">
+		<tr><td colspan="2"><?php $this->getChild('header')->render(); ?></td></tr>
+		<tr><td colspan="2"><?php $this->getChild('message')->render(); ?></td></tr>
+		<tr height="400"><td><?php $this->getChild('left')->render(); ?></td>
+			<td><?php $this->getChild('content')->render(); ?></td>
+
+		<tr><td colspan="2" height="100"><?php $this->getChild('footer')->render(); ?></td></tr>
+	</table>
+
+</body>
+</html>

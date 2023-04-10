@@ -1,0 +1,36 @@
+<?php
+$admin =$this->getData();
+?>
+<table>
+  <tr>
+    <td><h3>admin<h3></td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
+    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
+      <td><button class="btn btn-primary"> save</button></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th> name</th>
+      <td><input type="text" name="admin[name]" value="<?php echo $admin->name ?>" ></td>
+    </tr>
+    <tr>
+      <th> email</th>
+      <td><input type="email" name="admin[email]" value="<?php echo $admin->email ?>"></td>
+    </tr>
+    <tr>
+      <th> password</th>
+      <td><input type="text" name="admin[password]" value="<?php echo $admin->password ?>"></td>
+    </tr>
+    <tr>
+      <th> STATUS</th>
+      <td> <select name="admin[status]">
+        <?php foreach ($this->data->getResource()->getStatusOptions() as $key => $value): ?>
+        <option value="<?php echo $key ?>"name="available" <?php if($admin->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <?php endforeach; ?>
+        
+      </select> </td>
+    </tr>
+    
+  </form>
+</table>

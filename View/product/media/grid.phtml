@@ -1,0 +1,50 @@
+<?php
+$request = $this->getRequest();
+$media = $this->getMedia();
+?>
+<table>
+  <tr>
+    <td><h3>product media<h3></td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid','product'); ?>">cancel</a> </td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('add','product_media', ['product_id' => $request->getParam('product_id')]); ?>">Add image</a> </td>
+  </tr>
+</table>
+<br>
+<table class="table table-bordered">
+  <tr>
+    <th> IMAGE</th>
+    <th> NAME</th>
+    <th> THUMBNAIL</th>
+    <th> MIDIUM</th>
+    <th> LARGE</th>
+    <th> SMALL</th>
+    <th> GALLARY</th>
+    <th> CREATED_AT </th>
+    <th> DELETE</th>
+  </tr>
+  
+  <form action="<?php echo $this->getModelUrl()->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>" method="POST">
+    <input class="btn btn-primary mx-5 float-end"  type="submit" name="button" value="delete">
+    <input class="btn btn-primary float-end mx-5"  type="submit" name="button" value="update">
+    <br>
+    <br>
+    <br>
+    <?php if (!$media): ?>
+    <td colspan="9" >data not found </td>
+    <?php else:?>
+    <?php foreach ($media->getData() as $result): ?>
+    <tr>
+      <td><img style="height: 100px;width: 100px;" class="img-thumbnail imgsize" src="View/product/media/image/<?php echo $result->img ?>"></td>
+      <td><?php echo $result->filename ?></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="thumbnail" <?php if ($result->thumbnail){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="midium"<?php if ($result->midium){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="large" <?php if ($result->large){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="small" <?php if ($result->small){echo "checked";}?>></td>
+      <td><input type="checkbox" value="<?php echo $result->media_id ?>" name="gallary[]" <?php if ($result->gallary){echo "checked";}?>></td>
+      <td><?php echo $result->created_at ?></td>
+      <td><input type="checkbox" value="<?php echo $result->media_id ?>" name="delete_image[]" ></td>
+    </tr>
+    <?php endforeach; ?>
+    <?php endif;?>
+  </table>
+</form>
