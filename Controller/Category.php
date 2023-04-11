@@ -14,7 +14,7 @@ class Controller_Category extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$add = $layout->createBlock('Category_Edit');
-		$add->getaddData();
+		$add->getAddData();
 		$layout->getChild('content')->addChild('add',$add);
 		$layout->render();
 	}

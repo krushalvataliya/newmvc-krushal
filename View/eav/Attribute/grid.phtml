@@ -27,11 +27,11 @@ $attributes = $this->getCollection();
 			<td><?php echo $attribute->attribute_id;?></td>
 			<td><?php echo $attribute->entity_type_id;?></td>
 			<td><?php echo $attribute->code; ?></td>
-			<td><?php echo $attribute->backend_type; ?></td>
+			<td><?php echo $attribute->getBackendTypeText(); ?></td>
 			<td><?php echo $attribute->name; ?></td>
 			<td><?php echo $attribute->status;?></td>
 			<td><?php echo $attribute->backend_model; ?></td>
-			<td><?php echo $attribute->input_type; ?></td>
+			<td><?php echo $attribute->getInputTypeText(); ?></td>
 			<td><a href="<?php echo $this->getModelUrl()->getUrl('edit',null,['attribute_id'=>$attribute->attribute_id]); ?>">EDIT</a></td>
 			<td><a href="<?php echo $this->getModelUrl()->getUrl('delete',null,['attribute_id'=>$attribute->attribute_id]); ?>">Delete</a></td>
 		</tr>

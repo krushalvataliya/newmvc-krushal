@@ -9,7 +9,7 @@ class Block_Salesman_Edit extends  Block_Core_Template
 		$this->setTemplete('salesman/edit.phtml');	
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$salesman = Ccc::getModel('salesman');
 		$salesmanAddress = Ccc::getModel('salesman_Address');

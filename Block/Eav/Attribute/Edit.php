@@ -9,13 +9,13 @@ class Block_Eav_Attribute_Edit extends Block_Core_Template
 		$this->setTemplete('eav/attribute/edit.phtml');
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$modelEavAttribute = Ccc::getModel('Eav_Attribute');
 		$this->setData(['attribute'=>$modelEavAttribute]);
 	}
 
-	public function getentities()
+	public function getEntities()
 	{
 		$entityTypeModel = Ccc::getModel('entity_type');
 		$sql = "SELECT * FROM `entity_type`";
@@ -29,7 +29,7 @@ class Block_Eav_Attribute_Edit extends Block_Core_Template
 		$options = Ccc::getModel('Eav_Attribute_Option');
 		if ($id)
 		{
-			$sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` = {$id}";
+			$sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` = {$id} ORDER BY `option_id` DESC";
 			$options = $options->fetchAll($sql);
 		}
 		return $options;

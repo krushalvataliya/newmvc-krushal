@@ -1,6 +1,6 @@
 <?php
 $attribute = $this->getData('attribute');
-$entities = $this->getentities();
+$entities = $this->getEntities();
 $options = $this->getOptions();
 ?>
 <div class="modal-body">
@@ -102,6 +102,9 @@ $options = $this->getOptions();
 			else{
 				$('#inputTypeOptionBlock').hide();
 			}
+
+			const backendTypeArray2 = ["textbox", "textarea"];
+
 		});
 		$('#inputTypeSelect').trigger('change');
 	})

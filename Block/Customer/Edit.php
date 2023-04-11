@@ -9,7 +9,7 @@ class Block_Customer_Edit extends  Block_Core_Template
 		$this->setTemplete('customer/edit.phtml');	
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$customer = Ccc::getModel('Customer');
 		$customerAddress = Ccc::getModel('Customer_Address');

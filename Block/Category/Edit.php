@@ -8,7 +8,7 @@ class Block_Category_Edit extends  Block_Core_Template
 		$this->setTemplete('category/edit.phtml');
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$category = Ccc::getModel('Cetegory');
 		$sql = "SELECT * FROM `category` ORDER BY `path` ASC;";

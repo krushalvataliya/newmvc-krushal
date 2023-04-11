@@ -13,7 +13,7 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$grid = $layout->createBlock('Eav_Attribute_Edit');
-		$grid->getaddData();
+		$grid->getAddData();
 		$layout->getChild('content')->addChild('grid',$grid);
 		$layout->render();
 	}

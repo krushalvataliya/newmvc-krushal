@@ -9,7 +9,7 @@ class Block_PaymentMethod_Edit extends  Block_Core_Template
 		$this->setTemplete('payment_method/edit.phtml');	
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$paymentMethods = Ccc::getModel('PaymentMethod');
 		$this->setData(['PaymentMethod'=>$paymentMethods]);	

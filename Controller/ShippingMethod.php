@@ -14,7 +14,7 @@ class Controller_ShippingMethod extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$edit = $layout->createBlock('ShippingMethod_Edit');
-		$edit->getaddData();
+		$edit->getAddData();
 		$layout->getChild('content')->addChild('edit',$edit);
 		$layout->render();
 		

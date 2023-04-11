@@ -9,7 +9,7 @@ class Block_Product_Edit extends  Block_Core_Template
 		$this->setTemplete('product/edit.phtml');	
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$product = Ccc::getModel('Product');
 		$this->setData(['product' => $product]);	

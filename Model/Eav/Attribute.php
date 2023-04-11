@@ -45,5 +45,25 @@ class Model_Eav_Attribute extends Model_Core_Table
 		}
 		return Model_Eav_Attribute_Resource::BACKEND_TYPE_DEFAULT;
 	}
+
+	public function getInputTypeText()
+	{
+		$options = $this->getResource()->getInputTypeOptions();
+		if (array_key_exists($this->input_type, $options))
+		{
+			return $options[$this->input_type];
+		}
+			return $options[ Model_Eav_Attribute_Resource::ATTRIBUTE_OPTION_DEFAULT];
+	}
+
+	public function getBackendTypeText()
+	{
+		$options = $this->getResource()->getBackendTypeOptions();
+		if (array_key_exists($this->backend_type, $options))
+		{
+			return $options[$this->backend_type];
+		}
+			return $options[ Model_Eav_Attribute_Resource::ATTRIBUTE_OPTION_DEFAULT];
+	}
 }
 ?>

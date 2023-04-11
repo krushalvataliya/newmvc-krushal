@@ -13,7 +13,7 @@ class Controller_Salesman extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$edit = $layout->createBlock('Salesman_Edit');
-		$edit->getaddData();
+		$edit->getAddData();
 		$layout->getChild('content')->addChild('edit',$edit);
 		$layout->render();
 	}

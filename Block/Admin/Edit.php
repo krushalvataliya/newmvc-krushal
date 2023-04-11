@@ -9,7 +9,7 @@ class Block_Admin_Edit extends  Block_Core_Template
 		$this->setTemplete('admin/edit.phtml');
 	}
 
-	public function getaddData()
+	public function getAddData()
 	{
 		$modelRowAdmin = Ccc::getModel('admin');
 		$this->setData($modelRowAdmin);

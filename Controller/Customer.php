@@ -13,7 +13,7 @@ class Controller_Customer extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$edit = $layout->createBlock('Customer_Edit');
-		$edit->getaddData();
+		$edit->getAddData();
 		$layout->getChild('content')->addChild('edit',$edit);
 		$layout->render();
 	}
