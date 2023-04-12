@@ -1,28 +1,34 @@
 <?php
-$payment_methods = $this->getCollection();
+$collection = $this->getCollection();
+
 ?>
-<div><div><h3>PAYMENT METHOD</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
-add payment method
+<div><div><h3><?php echo $this->getTitle(); ?></h3></div>
+
+<?php foreach ($this->getButtons() as $key => $button): ?>
+<div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $button['url'] ?>">
+<?php echo $button['title'] ?>
 </a></div></div>
+<?php endforeach ?>
 <table class="table table-bordered">
 <tr>
-  <th> PAYMENT_METHOD_ID</th>
-  <th> NAME</th>
-  <th> STATUS</th>
-  <th> </th>
-  <th> </th>
+  <?php foreach ($this->getColumns() as $key => $column): ?>
+  	<th>
+  		<?php echo $column['title'] ?>
+  	</th>
+  	
+  <?php endforeach ?>
 </tr>
-<?php if (!$payment_methods): ?>
+<?php if (!$collection): ?>
 <td colspan="5" >data not found </td>
 <?php else:?>
 <?php
-foreach ($payment_methods as $payment_method): ?>
+foreach ($collection as $row): ?>
 <tr>
-  <td><?php echo $payment_method->payment_method_id ?></td>
-  <td> <?php echo $payment_method->name ?></td>
-  <td> <?php echo $payment_method->getStatusText() ?></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('edit', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>">edit</a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>?a=delete&c=paymentmethod&payment_method_id=<?php echo $payment_method->payment_method_id ?>">delete<a></td>
+	<?php foreach ($this->getColumns() as $key => $column): ?>
+		<td><?php echo $row->$key ?></td>
+	<?php endforeach ?>
+  <!-- <td><a href="<?php echo $this->getModelUrl()->getUrl('edit', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>">edit</a></td>
+  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>?a=delete&c=paymentmethod&payment_method_id=<?php echo $payment_method->payment_method_id ?>">delete<a></td> -->
 </tr>
 <?php endforeach; ?>
 <?php endif;?>

@@ -58,7 +58,7 @@ class Block_Core_Grid extends Block_Core_Template
 
     public function getColumn($key)
     {
-    	if($key ,$this->_columns)
+    	if(array_key_exists($key ,$this->_columns))
     	{
     		return $this->_columns[$key];
     	}
@@ -91,7 +91,7 @@ class Block_Core_Grid extends Block_Core_Template
 
     public function getAction($key)
     {
-    	if($key ,$this->_actions)
+    	if(array_key_exists($key ,$this->_actions))
     	{
     		return $this->_actions[$key];
     	}
@@ -124,7 +124,7 @@ class Block_Core_Grid extends Block_Core_Template
 
     public function getButton($key)
     {
-    	if($key ,$this->_buttons)
+    	if(array_key_exists($key ,$this->_buttons))	
     	{
     		return $this->_buttons[$key];
     	}

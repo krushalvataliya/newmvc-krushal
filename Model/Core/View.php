@@ -60,6 +60,11 @@ class Model_Core_View
         return Ccc::getModel('Core_Request');
     }
 
+    public function getUrl($a=null,$c=null, array $perameters=null,$reset = false)
+    {
+       return Ccc::getModel('Core_url')->getUrl($a,$c,$perameters,$reset);
+    }
+
 }
 
  ?>
