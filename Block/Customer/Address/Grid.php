@@ -18,4 +18,15 @@ class Block_Customer_Address_Grid extends  Block_Core_Template
 		return $customerAddress;
 	}
 
+	public function getBillingAddress()
+	{
+		return Ccc::getModel('Customer')->getBillingAddress();
+	}
+
+	public function getShippingAddress()
+	{
+		return Ccc::getModel('Customer')->getShippingAddress();
+	}
+
+
 }

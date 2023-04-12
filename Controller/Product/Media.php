@@ -71,34 +71,35 @@ class Controller_Product_Media extends Controller_Core_Action
 			$small = (int)$request->getPost('small');
 
 			$modeltMedia =Ccc::getModel('Product_Media_Resource');
-			$resetValue = ['thumbnail' => 0, 'base' => 0 ,'midium' => 0 ,'large' => 0, 'small' => 0, 'gallary' => 0];
+			$resetValue = ['gallary' => 0];
 			$result =$modeltMedia->update($resetValue, ['product_id' => $productId]);
 			
-			$modelProductMedia =Ccc::getModel('Product_Media');
+			$modelProduct =Ccc::getModel('Product');
 			
-			$setThumbnail = ['thumbnail' => 1,'media_id' => $thumbnail];
-			if(!$modelProductMedia->setData($setThumbnail)->save())
+			$setThumbnail = ['thumbnail_id' => $thumbnail,'product_id' => $productId];
+			if(!$modelProduct->setData($setThumbnail)->save())
 			{
 				throw new Exception("thumbnail not updated.", 1);
 			}
 			
-			$setMidium = ['midium' => 1,'media_id' => $midium];
-			if(!$modelProductMedia->setData($setMidium)->save())
+			$setMidium = ['midium_id' => $midium,'product_id' => $productId];
+			if(!$modelProduct->setData($setMidium)->save())
 			{
 				throw new Exception("midium not updated.", 1);
 			}
 			
-			$setLarge = ['large' => 1,'media_id' => $large];
-			if(!$modelProductMedia->setData($setLarge)->save())
+			$setLarge = ['large_id' =>  $large,'product_id' => $productId];
+			if(!$modelProduct->setData($setLarge)->save())
 			{
 				throw new Exception("large not updated.", 1);
 			}
 			
-			$setSmall = ['small' => 1,'media_id' => $small];
-			if(!$modelProductMedia->setData($setSmall)->save())
+			$setSmall = ['small_id' => $small,'product_id' => $productId];
+			if(!$modelProduct->setData($setSmall)->save())
 			{
 				throw new Exception("small not updated.", 1);
 			}
+			$modelProductMedia =Ccc::getModel('Product_Media');
 			if($gallaryId)
 			{
 				foreach ($gallaryId as $key => $value)

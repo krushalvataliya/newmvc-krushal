@@ -1,5 +1,5 @@
 <?php
-$payment_methods = $this->getPaymentMethods();
+$payment_methods = $this->getCollection();
 ?>
 <div><div><h3>PAYMENT METHOD</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
 add payment method
@@ -16,7 +16,7 @@ add payment method
 <td colspan="5" >data not found </td>
 <?php else:?>
 <?php
-foreach ($payment_methods->getData() as $payment_method): ?>
+foreach ($payment_methods as $payment_method): ?>
 <tr>
   <td><?php echo $payment_method->payment_method_id ?></td>
   <td> <?php echo $payment_method->name ?></td>

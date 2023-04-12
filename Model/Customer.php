@@ -27,4 +27,44 @@ class Model_Customer extends Model_Core_Table
 			return $statuses[ Model_Customer_Resource::STATUS_DEFAULT];
 	}
 
+	public function getAddresses()
+	{
+		$sql = "SELECT * FROM `customer_address` where `customer_id` = 3386;";
+		$modelAddress = Ccc::getModel('Customer_Address');
+		$addresses = $modelAddress->fetchAll($sql);
+		return $addresses;
+	}
+
+	public function getBillingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('customer_id');
+		$address = Ccc::getModel('Customer_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `customers` WHERE `customer_id` = {$id} ";
+		$customer = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = {$customer->billing_address_id};";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
+
+	public function getShippingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('customer_id');
+		$address = Ccc::getModel('Customer_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `customers` WHERE `customer_id` = {$id} ";
+		$customer = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = {$customer->shiping_address_id};";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
+
 }

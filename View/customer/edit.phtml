@@ -1,6 +1,7 @@
 <?php
 $customer = $this->getData('customer');
-$address  = $this->getData('customerAddress');
+$address  = $customer->getShippingAddress();
+$address2  = $customer->getBillingAddress();
 ?>
 <table>
   <tr>
@@ -43,8 +44,57 @@ $address  = $this->getData('customerAddress');
       </select> </td>
     </tr>
     <tr>
+      <td>shipping address as billing address</td>
+      <td><input type="checkbox" id="sameaddress" name="sameaddress" value="1"  <?php if($address->address_id == $address2->address_id){echo 'checked';}?>></td>
+    </tr>
+    <tr>
       <td>address</td>
     </tr>
     <?php require 'View/customer/address/edit.phtml' ?>
+
+    <div class="showBillingAddresss" style="border:0px ; display: none;">
+      <tr class="showBillingAddresss">billing address</tr>
+     <table class="showBillingAddresss" class="table table-bordered">
+      <?php require_once 'View/customer/address/edit2.phtml' ?>
+      </table>
+    </div>
   </form>
 </table>
+
+<script type="text/javascript">
+  $(document).ready(function (){
+  $('input[type="checkbox"]').click(function()
+  {
+    if($(this).prop("checked") == true)
+    {
+      $('.showBillingAddresss').hide();
+    }
+    else if($(this).prop("checked") == false)
+    {
+       $('.showBillingAddresss').show();
+    }
+  });
+
+    if($("#sameaddress").is(":checked"))
+    {
+      $('.showBillingAddresss').hide();
+    }
+  });
+
+
+
+
+
+  // function check(obj) {
+  //   if($(obj).is(":checked"))
+  //     {
+  //         $('.showBillingAddresss').hide();
+  //               console.log("check fn");
+  //     }
+  //     else
+  //     {
+  //         $('.showBillingAddresss').show();
+  //               console.log("check fn2");
+  //     }
+  // }
+</script>

@@ -1,7 +1,9 @@
 <?php
-$address = $this->getCustomerAddress();
+$address = $this->getBillingAddress();
+$address2 = $this->getShippingAddress();
 ?>
 <div><h3>CUSTOMER ADDRESS</h3></div>
+<div><h4>BILLING ADDRESS</h4></div>
 <table class="table table-bordered">
   <tr>
     <th>ADDRESS_ID</th>
@@ -10,7 +12,12 @@ $address = $this->getCustomerAddress();
     <th>STATE</th>
     <th>COUNTRY</th>
     <th>ZIP_CODE</th>
+    <th>&nbsp;</th>
   </tr>
+  <?php if (!$address->getData()): ?>
+    <td colspan="7" >data not found </td>
+
+    <?php else: ?>
   <tr>
     <td><?php echo $address->address_id ?> </td>
     <td><?php echo $address->address ?></td>
@@ -18,5 +25,35 @@ $address = $this->getCustomerAddress();
     <td><?php echo $address->state ?></td>
     <td><?php echo $address->country ?></td>
     <td><?php echo $address->zip_code ?></td>
+  </tr>
+  <?php endif ?>
+</table>
+
+<div><h4>SHIPPING ADDRESS </h4></div>
+<table class="table table-bordered">
+  <tr>
+    <th>ADDRESS_ID</th>
+    <th>ADDRESS</th>
+    <th>CITY</th>
+    <th>STATE</th>
+    <th>COUNTRY</th>
+    <th>ZIP_CODE</th>
+    <th>DELETE</th>
+  </tr>
+  <tr>
+    <?php if (!$address2->getData()): ?>
+    <td colspan="7" >data not found </td>
+
+    <?php elseif($address->address_id == $address2->address_id): ?>
+      <td colspan="7" >Shipping address and billing address are same. </td>
+    <?php else: ?>
+    <td><?php echo $address2->address_id ?> </td>
+    <td><?php echo $address2->address ?></td>
+    <td><?php echo $address2->city ?></td>
+    <td><?php echo $address2->state ?></td>
+    <td><?php echo $address2->country ?></td>
+    <td><?php echo $address2->zip_code ?></td>
+    <td><a href="<?php echo $this->getModelUrl()->getUrl('delete','customer_address',['address_id'=>$address2->address_id]);?>">delete</a> </td>
+  <?php endif ?>
   </tr>
 </table>
