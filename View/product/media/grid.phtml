@@ -1,8 +1,6 @@
 <?php
 $request = $this->getRequest();
 $media = $this->getMedia();
-echo "<pre>";
-$id = $media->getData();
 ?>
 <table>
   <tr>
@@ -38,10 +36,10 @@ $id = $media->getData();
     <tr>
       <td><img style="height: 100px;width: 100px;" class="img-thumbnail imgsize" src="View/product/media/image/<?php echo $result->img ?>"></td>
       <td><?php echo $result->filename ?></td>
-      <td><input type="radio" value="<?php echo $result->media_id ?>" name="thumbnail" <?php if ($result->media_id == $id[0]->getThumbnail()){echo "checked";}?>></td>
-      <td><input type="radio" value="<?php echo $result->media_id ?>" name="midium"<?php if ($result->media_id == $id[0]->getMidium()){echo "checked";}?>></td>
-      <td><input type="radio" value="<?php echo $result->media_id ?>" name="large" <?php if ($result->media_id == $id[0]->getLarge()){echo "checked";}?>></td>
-      <td><input type="radio" value="<?php echo $result->media_id ?>" name="small" <?php if ($result->media_id == $id[0]->getSmall()){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="thumbnail" <?php if ($result->media_id == $result->getThumbnail()){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="midium"<?php if ($result->media_id == $result->getMidium()){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="large" <?php if ($result->media_id == $result->getLarge()){echo "checked";}?>></td>
+      <td><input type="radio" value="<?php echo $result->media_id ?>" name="small" <?php if ($result->media_id == $result->getSmall()){echo "checked";}?>></td>
       <td><input type="checkbox" value="<?php echo $result->media_id ?>" name="gallary[]" <?php if ($result->gallary){echo "checked";}?>></td>
       <td><?php echo $result->created_at ?></td>
       <td><input type="checkbox" value="<?php echo $result->media_id ?>" name="delete_image[]" ></td>

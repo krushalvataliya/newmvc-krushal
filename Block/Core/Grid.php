@@ -132,16 +132,16 @@ class Block_Core_Grid extends Block_Core_Template
     }
     protected function _prepareColumns()
     {
-    	
+        return $this;
     }
 
     protected function _prepareActions()
     {
-    	
+        return $this;
     }
     protected function _prepareButtons()
     {
-    	
+        return $this;
     }
 
 }

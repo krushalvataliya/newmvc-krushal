@@ -1,6 +1,5 @@
 <?php
 $collection = $this->getCollection();
-
 ?>
 <div><div><h3><?php echo $this->getTitle(); ?></h3></div>
 
@@ -12,10 +11,10 @@ $collection = $this->getCollection();
 <table class="table table-bordered">
 <tr>
   <?php foreach ($this->getColumns() as $key => $column): ?>
-  	<th>
-  		<?php echo $column['title'] ?>
-  	</th>
-  	
+  	<th><?php echo $column['title']; ?></th>
+  <?php endforeach ?>
+  <?php foreach ($this->getActions() as $key => $action): ?>
+	<th><?php echo $action['title']; ?></th>  	
   <?php endforeach ?>
 </tr>
 <?php if (!$collection): ?>
@@ -25,10 +24,11 @@ $collection = $this->getCollection();
 foreach ($collection as $row): ?>
 <tr>
 	<?php foreach ($this->getColumns() as $key => $column): ?>
-		<td><?php echo $row->$key ?></td>
+		<td><?php echo $this->getColumnValue($row,$key) ?></td>
 	<?php endforeach ?>
-  <!-- <td><a href="<?php echo $this->getModelUrl()->getUrl('edit', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>">edit</a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete', null, ['payment_method_id' => $payment_method->payment_method_id]); ?>?a=delete&c=paymentmethod&payment_method_id=<?php echo $payment_method->payment_method_id ?>">delete<a></td> -->
+	<?php foreach ($this->getActions() as $key => $action): ?>
+ 	<td><a href="<?php $method = $action['method']; echo $this->$method($row,$key); ?>"><?php echo $action['title'] ?></a></td>
+	<?php endforeach ?>
 </tr>
 <?php endforeach; ?>
 <?php endif;?>
