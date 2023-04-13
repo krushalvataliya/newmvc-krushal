@@ -5,9 +5,6 @@ class Block_Category_Grid extends  Block_Core_Grid
 	{
 		parent::__construct();
 		$this->setTitle('Manage categories');
-		$this->_prepareColumns();
-		$this->_prepareActions();
-		$this->_prepareButtons();
 	}
 
 	protected function _prepareColumns()

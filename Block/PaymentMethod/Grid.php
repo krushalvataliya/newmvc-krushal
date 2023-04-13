@@ -5,9 +5,6 @@ class Block_PaymentMethod_Grid extends  Block_Core_Grid
 	{
 		parent::__construct();
 		$this->setTitle('Manage payment Method');
-		$this->_prepareColumns();
-		$this->_prepareActions();
-		$this->_prepareButtons();
 	}
 
 	protected function _prepareColumns()

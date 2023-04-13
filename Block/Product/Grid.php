@@ -6,9 +6,6 @@ class Block_Product_Grid extends  Block_Core_Grid
 	{
 		parent::__construct();
 		$this->setTitle('Manage product');
-		$this->_prepareColumns();
-		$this->_prepareActions();
-		$this->_prepareButtons();
 	}
 
 	protected function _prepareColumns()
