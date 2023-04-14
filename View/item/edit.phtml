@@ -1,0 +1,9 @@
+<!-- <?php print_r($this);?> -->
+<table class="table table-bordered">
+<tr>
+<?php foreach ($this->getAttributes() as $key => $value): ?>
+	<tr><th><?php echo$value->name; ?></th>
+	<td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->render();?></td><tr>
+<?php endforeach ?>
+</tr>
+</table>

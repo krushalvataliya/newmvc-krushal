@@ -14,7 +14,7 @@ class Model_Core_View
     
 	public function render()
 	{
-		require_once "View".DS.$this->getTemplete();
+		require "View".DS.$this->getTemplete();
 	}	
 
     public function getTemplete()

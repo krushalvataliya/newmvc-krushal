@@ -1,0 +1,7 @@
+<?php 
+echo "<pre>";
+print_r($this);
+if($this->getAttribute()->input_type == 'textbox')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_Text')->render();
+}
