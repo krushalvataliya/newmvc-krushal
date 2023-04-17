@@ -16,8 +16,8 @@ $payment_method = $this->getData('PaymentMethod');
         <th>NAME</th>
         <td><input type="text" name="payment_method[name]" value="<?php echo $payment_method->name ?>"></td>
       </tr>
-      <th> STATUS</th>
-      <td> <select name="payment_method[status]"   >
+      <th>STATUS</th>
+      <td> <select name="payment_method[status]" >
         <?php foreach ($payment_method->getResource()->getStatusOptions() as $key => $value): ?>
         <option value="<?php echo $key ?>"name="available" <?php if($payment_method->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>

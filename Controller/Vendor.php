@@ -50,8 +50,22 @@ class Controller_Vendor extends Controller_Core_Action
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage($e->getMessage() ,  Model_Core_Message::FAILURE);
-			// return $this->redirect('grid', null, null, true);
+			return $this->redirect('grid', null, null, true);
 		}
+	}
+
+	protected function _saveVendor()
+	{
+		$request = $this->getRequest();
+		$vendor = $request->getPost('vendor');
+		$id=(int)$request->getParam('vendor_id');
+		if($id)
+		{
+			$vendor['vendor_id'] = $id;
+		}
+		$modelVendor =Ccc::getModel('vendor');
+		$insertVendor = $modelVendor->setData($vendor)->save();
+		return $insertVendor;
 	}
 
 	public function saveAction()
@@ -63,43 +77,79 @@ class Controller_Vendor extends Controller_Core_Action
 			{
 				throw new Exception("invalid Request.", 1);
 			}
-			$vendor = $request->getPost('vendor');
+			$sameaddress = $request->getPost('sameaddress');
+			
+			$modelVendor =Ccc::getModel('vendor');
+			$id=(int)$request->getParam('vendor_id');
 			$vendorAddress = $request->getPost('address');
-
-			$modelVendor =Ccc::getModel('Vendor');
+			$vendorAddress2 = $request->getPost('address2');
 			$modelVendorAddress =Ccc::getModel('Vendor_Address');
 
-			if($id=(int)$request->getParam('vendor_id'))
+			if($id)
 			{
+				$updeteVendor['vendor_id'] = $id;
+				$vendorAddress['vendor_id'] = $id;
+				$vendorAddress2['vendor_id'] = $id;
 				$vendorRow = $modelVendor->load($id);
 				if(!$vendorRow)
 				{
 					throw new Exception("invalid id.", 1);
 				}
-				$vendor['vendor_id'] = $id;
-				$sql = "SELECT * FROM `vendor_address` WHERE `vendor_id`= {$id}";
-				$vendorAddressRow = $modelVendorAddress->fetchRow($sql);
-				if(!$vendorAddressRow)
+				$shippingAddress =  $vendorRow->getShippingAddress();
+				$billingAddress =  $vendorRow->getShippingAddress();
+				if ($vendorRow->shiping_address_id)
 				{
-					throw new Exception("invalid vendor address.", 1);
+					$vendorAddress['address_id'] = $vendorRow->shiping_address_id;
 				}
-				$vendorAddress['address_id'] = $vendorAddressRow->address_id;
+				if ($vendorRow->billing_address_id != $vendorRow->shiping_address_id )
+				{
+					$vendorAddress2['address_id'] = $vendorRow->billing_address_id;
+				}
 			}
-			$insertvendor = $modelVendor->setData($vendor)->save();
-			if (!$insertvendor)
-			{
+
+			$insertVendor = $this->_saveVendor();
+			if (!$insertVendor) {
 				throw new Exception("vendor not inserted.", 1);
 			}
-
 			if(!$id)
 			{
-			$vendorAddress['vendor_id'] = $insertvendor;
+				$updeteVendor['vendor_id'] = $insertVendor->vendor_id;
+				$vendorAddress['vendor_id'] = $insertVendor->vendor_id;
+				$vendorAddress2['vendor_id'] = $insertVendor->vendor_id;
+			$insertVendorAddress = $modelVendorAddress->setData($vendorAddress)->save();
+			$updeteVendor['shiping_address_id'] = $insertVendorAddress->address_id;
 			}
-			$insertvendorAddress = $modelVendorAddress->setData($vendorAddress)->save();
-			if (!$insertvendor) {
-				throw new Exception("vendor Address not inserted.", 1);
+			if($sameaddress && !$id)
+			{
+				unset($vendorAddress2);
+				$updeteVendor['billing_address_id'] = $insertVendorAddress->address_id;
+			}
+			else if(!$sameaddress && $id)
+			{
+				$insertVendorAddress2 = $modelVendorAddress->setData($vendorAddress2)->save();
+				$updeteVendor['shiping_address_id'] = $shippingAddress->address_id;
+				if($shippingAddress->address_id == $billingAddress->address_id && $insertVendorAddress2->address_id >1)
+				{
+					$updeteVendor['billing_address_id'] = $insertVendorAddress2->address_id;
+				}
+			}
+			else if($sameaddress && $id)
+			{
+				unset($vendorAddress2);
+				$updeteVendor['shiping_address_id'] = $shippingAddress->address_id;
+				$updeteVendor['billing_address_id'] = $shippingAddress->address_id;
+			}
+			else if(!$sameaddress && !$id)
+			{
+				$updeteVendor['shiping_address_id'] = $insertVendorAddress->address_id;
+				$insertVendorAddress2 = $modelVendorAddress->setData($vendorAddress2)->save();
+				$updeteVendor['billing_address_id'] = $insertVendorAddress2->address_id;
 			}
 
+			if (!$insertVendor) {
+				throw new Exception("vendor Address not inserted.", 1);
+			}
+				$insertVendor = $modelVendor->setData($updeteVendor)->save();
 			$this->getMessage()->addMessage('vendor saved successfully.',  Model_Core_Message::SUCCESS);
 		}
 		catch (Exception $e)

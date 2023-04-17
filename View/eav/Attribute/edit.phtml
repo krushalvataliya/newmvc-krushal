@@ -70,7 +70,8 @@ $options = $this->getOptions();
 					<?php if ($options): ?>
 					<?php foreach ($options->getData() as $option): ?>
 					<tr>
-						<td><input type="text" name="option[exist][<?php echo $option->option_id; ?>]" value="<?php echo $option->name ?>" ></td>
+						<td><input type="text" name="old_option[<?php echo $option->option_id; ?>][name]" value="<?php echo $option->name ?>" ></td>
+						<td><input type="text" name="old_option[<?php echo $option->option_id; ?>][position]" value="<?php echo $option->position ?>" ></td>
 						<td><input type="button" onclick="removeOption(this)" name="remove" value="REMOVE"></td>
 					</tr>
 					<?php endforeach ?>
@@ -82,16 +83,21 @@ $options = $this->getOptions();
 	<table style="display:none">
 		<tbody id="inputTypeOptionDefault">
 			
-			<td><input type="text" name="option[new][]"></td>
+			<td><input type="text" name="new_option[name]" id="newname"></td>
+			<td><input type="text" name="new_option[position]" id="newop"></td>
 			<td><input type="button" name="remove" onclick="removeOption(this)" value="REMOVE"></td>
 			
 		</tbody>
 	</table>
 </div>
 <script type="text/javascript">
+			var key = 0;
 	$(document).ready(function (){
 		$("#addOption").click(function(){
+			$("#newname").attr('name',"new_option["+key+"][name]" );
+			$("#newop").attr('name', "new_option["+key+"][position]");
 			$('#inputTypeOptionTable').prepend($('#inputTypeOptionDefault').html());
+			key++;
 		});
 		$('#inputTypeSelect').change(function (){
 			var SelectedInputType = $(this);

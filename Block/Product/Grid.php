@@ -97,7 +97,7 @@ class Block_Product_Grid extends  Block_Core_Grid
 		$modelProduct = Ccc::getModel('Product');
 		$sql = "SELECT * FROM `products`";
 		$products =$modelProduct->fetchAll($sql);
-		return $products->getData();
+		return $products;
 	}
 
 }

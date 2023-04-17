@@ -26,14 +26,14 @@ class Model_core_Adapter{
     public function fetchPairs($query){
       $result =$this->connect()->query($query);
       if(!$result){
-         return false;
+         return null;
       }
       $result = $result->fetch_all();
       $collumn1 = array_column($result, '0');
       $collumn2 = array_column($result, '1');
       if(!$collumn2)
       {
-         $collumn2 = array_fill(0, couunt($collumn1), null);
+         $collumn2 = array_fill(0, count($collumn1), null);
       }
       return array_combine($collumn1, $collumn2);
    }
@@ -41,7 +41,7 @@ class Model_core_Adapter{
    public function fetchOne($query){
       $result =$this->connect()->query($query);
       if(!$result){
-         return false;
+         return null;
       }
       $row = $result->fetch_array();
       return (array_key_exists(0, $row)) ? ($row[0]):(null);

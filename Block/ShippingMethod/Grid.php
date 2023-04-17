@@ -75,7 +75,7 @@ class Block_ShippingMethod_Grid extends  Block_Core_Grid
 		$modelShippingMethod = Ccc::getModel('ShippingMethod');
 		$sql = "SELECT * FROM `shiping_methods`";
 		$shippingMethods =$modelShippingMethod->fetchAll($sql);
-		return $shippingMethods->getData();
+		return $shippingMethods;
 	}
 
 }

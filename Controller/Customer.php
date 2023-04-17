@@ -4,17 +4,6 @@ class Controller_Customer extends Controller_Core_Action
 {
 	public function gridAction()
 	{
-
-		$model = Ccc::getModel('customer');
-		// echo "<pre>";
-		// print_r($model->getAddresses());
-		// // print_r($model->getBillingAddress());
-		// // print_r($model->getShippingAddress());
-		// die;
-
-
-
-
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Customer_Grid');
 		$layout->getChild('content')->addChild('grid',$content);
@@ -28,6 +17,7 @@ class Controller_Customer extends Controller_Core_Action
 		$layout->getChild('content')->addChild('edit',$edit);
 		$layout->render();
 	}
+
 	public function editAction()
 	{
 		try
@@ -64,6 +54,20 @@ class Controller_Customer extends Controller_Core_Action
 		}
 	}
 
+	protected function _saveCustomer()
+	{
+		$request = $this->getRequest();
+		$customer = $request->getPost('customer');
+		$id=(int)$request->getParam('customer_id');
+		if($id)
+		{
+			$customer['customer_id'] = $id;
+		}
+		$modelCustomer =Ccc::getModel('Customer');
+		$insertCustomer = $modelCustomer->setData($customer)->save();
+		return $insertCustomer;
+	}
+
 	public function saveAction()
 	{
 		try 
@@ -73,23 +77,17 @@ class Controller_Customer extends Controller_Core_Action
 			{
 				throw new Exception("invalid Request.", 1);
 			}
-			echo "<pre>";
 			$sameaddress = $request->getPost('sameaddress');
-			$customer = $request->getPost('customer');
+			
+			$modelCustomer =Ccc::getModel('Customer');
 			$id=(int)$request->getParam('customer_id');
 			$customerAddress = $request->getPost('address');
 			$customerAddress2 = $request->getPost('address2');
-			if($sameaddress && !$id)
-			{
-				unset($customerAddress2);
-			}
-			$modelCustomer =Ccc::getModel('Customer');
 			$modelCustomerAddress =Ccc::getModel('Customer_Address');
 
 			if($id)
 			{
 				$updeteCustomer['customer_id'] = $id;
-				$customer['customer_id'] = $id;
 				$customerAddress['customer_id'] = $id;
 				$customerAddress2['customer_id'] = $id;
 				$customerRow = $modelCustomer->load($id);
@@ -109,58 +107,50 @@ class Controller_Customer extends Controller_Core_Action
 				}
 			}
 
-			$insertCustomer = $modelCustomer->setData($customer)->save();
+			$insertCustomer = $this->_saveCustomer();
 			if (!$insertCustomer) {
 				throw new Exception("Customer not inserted.", 1);
 			}
-			// echo $insertCustomer.'<br>';
 			if(!$id)
 			{
-				$updeteCustomer['customer_id'] = $insertCustomer;
-				$customerAddress['customer_id'] = $insertCustomer;
-				$customerAddress2['customer_id'] = $insertCustomer;
+				$updeteCustomer['customer_id'] = $insertCustomer->customer_id;
+				$customerAddress['customer_id'] = $insertCustomer->customer_id;
+				$customerAddress2['customer_id'] = $insertCustomer->customer_id;
 			}
 			$insertCustomerAddress = $modelCustomerAddress->setData($customerAddress)->save();
-			echo 'address id = '.$insertCustomerAddress.'fh<br>';
-			$updeteCustomer['shiping_address_id'] = $insertCustomerAddress;
+			$updeteCustomer['shiping_address_id'] = $insertCustomerAddress->address_id;
 			if($sameaddress && !$id)
 			{
-			$this->getMessage()->addMessage('case 1.',  Model_Core_Message::SUCCESS);
 				unset($customerAddress2);
-				$updeteCustomer['billing_address_id'] = $insertCustomerAddress;
+				$updeteCustomer['billing_address_id'] = $insertCustomerAddress->address_id;
 			}
 			else if(!$sameaddress && $id)
 			{
-			$this->getMessage()->addMessage('case 2.',  Model_Core_Message::SUCCESS);
 				$insertCustomerAddress2 = $modelCustomerAddress->setData($customerAddress2)->save();
 				$updeteCustomer['shiping_address_id'] = $shippingAddress->address_id;
-				if($shippingAddress->address_id == $billingAddress->address_id && $insertCustomerAddress2>1)
+				if($shippingAddress->address_id == $billingAddress->address_id && $insertCustomerAddress2->address_id >1)
 				{
-				$updeteCustomer['billing_address_id'] = $insertCustomerAddress2;
+					$updeteCustomer['billing_address_id'] = $insertCustomerAddress2->address_id;
 				}
 			}
 			else if($sameaddress && $id)
 			{
-			$this->getMessage()->addMessage('case 3.',  Model_Core_Message::SUCCESS);
 				unset($customerAddress2);
-				$shippingAddress =  $modelCustomer->getShippingAddress();
-				$billingAddress =  $modelCustomer->getShippingAddress();
 				$updeteCustomer['shiping_address_id'] = $shippingAddress->address_id;
 				$updeteCustomer['billing_address_id'] = $shippingAddress->address_id;
 			}
 			else if(!$sameaddress && !$id)
 			{
-			$this->getMessage()->addMessage('case 4.',  Model_Core_Message::SUCCESS);
-				$updeteCustomer['shiping_address_id'] = $insertCustomerAddress;
+				$updeteCustomer['shiping_address_id'] = $insertCustomerAddress->address_id;
 				$insertCustomerAddress2 = $modelCustomerAddress->setData($customerAddress2)->save();
-				$updeteCustomer['billing_address_id'] = $insertCustomerAddress2;
+				$updeteCustomer['billing_address_id'] = $insertCustomerAddress2->address_id;
 			}
 
 			if (!$insertCustomer) {
 				throw new Exception("Customer Address not inserted.", 1);
 			}
 				$insertCustomer = $modelCustomer->setData($updeteCustomer)->save();
-			// $this->getMessage()->addMessage('Customer saved successfully.',  Model_Core_Message::SUCCESS);
+			$this->getMessage()->addMessage('Customer saved successfully.',  Model_Core_Message::SUCCESS);
 		}
 		catch (Exception $e)
 		{

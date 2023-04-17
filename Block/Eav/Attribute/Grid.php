@@ -93,7 +93,7 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 		$attributes = Ccc::getModel('Eav_Attribute');
 		$sql = "SELECT * FROM `eav_attribute`";
 		$collection = $attributes->fetchAll($sql);
-		return $collection->getData();
+		return $collection;
 	}
 
 	

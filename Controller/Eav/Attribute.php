@@ -64,7 +64,8 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 			$modelEavAttribute = Ccc::getModel('Eav_Attribute');
 			$modelEavAttributeOption = Ccc::getModel('Eav_Attribute_Option');
 
-			$options = $request->getPost('option');
+			$newOptions = $request->getPost('new_option');
+			$oldOptions = $request->getPost('old_option');
 
 			if($id =(int) $request->getParam('attribute_id'))
 			{
@@ -82,14 +83,15 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 					foreach ($existOptions->getData() as $option)
 					{
 						$existOption[$option->option_id] =  $option->name;
-						if(isset($options['exist']))
+						if(isset($oldOptions))
 						{
-							foreach ($options['exist'] as $key => $value)
+							foreach ($oldOptions as $key => $value)
 							{
-								if($option->option_id == $key  && $option->name != $value)
+								if($option->option_id == $key  && ($option->position != $value['position'] || $option->name != $value['name']))
 								{
 									$updateData['option_id'] = $key;
-									$updateData['name'] = $value;
+									$updateData['position'] = $value['position'];
+									$updateData['name'] = $value['name'];
 									$update = $modelEavAttributeOption->setData($updateData)->save(); 
 									if(!$update)
 									{
@@ -99,9 +101,9 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 							}
 						}
 					}
-					if($existOption && isset($options['exist']))
+					if($existOption && isset($oldOptions))
 					{
-						$deleteOptions = array_diff_key($existOption,$options['exist']);
+						$deleteOptions = array_diff_key($existOption,$oldOptions);
 						foreach ($deleteOptions as $optionId => $name)
 						{	
 							$delete = $modelEavAttributeOption->load($optionId)->delete();
@@ -128,14 +130,15 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 			else
 			{
 				$savetAtribute = $modelEavAttribute->setData($postData)->save();
-				$newOption['attribute_id'] = $savetAtribute;
+				$newOption['attribute_id'] = $savetAtribute->attribute_id;
 			}
-			if(isset($options['new']))
+			if(isset($newOptions))
 			{
-				foreach ($options['new'] as $key => $value)
+				foreach ($newOptions as $key => $value)
 				{
 					$modelEavAttributeOption = Ccc::getModel('Eav_Attribute_Option');
-					$newOption['name'] = $value;
+					$newOption['position'] = $value['position'];
+					$newOption['name'] = $value['name'];
 					$save = $modelEavAttributeOption->setData($newOption)->save();
 					if(!$save)
 					{

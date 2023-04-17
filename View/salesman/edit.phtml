@@ -1,55 +1,84 @@
 <?php
 $salesman = $this->getData('salesman');
-$address  = $this->getData('salesmanAddress');?>
-<!DOCTYPE html>
+$address  = $salesman->getShippingAddress();
+$address2  = $salesman->getBillingAddress();
+?>
 <table>
   <tr>
     <td><h3>Edit salesman<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid'); ?>&c=salesman">cancel</a> </td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
     <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
       <td><button class="btn btn-primary">save</button></td>
     </tr>
   </table>
   <table class="table table-bordered">
     <tr>
-      <th> FIRST_NAME</th>
+      <th>FIRST_NAME</th>
       <td><input type="text" name="salesman[first_name]" value="<?php echo $salesman->first_name ?>"></td>
     </tr>
     <tr>
-      <th> LAST_NAME</th>
-      <td><input type="text"  name="salesman[last_name]" value="<?php echo $salesman->last_name ?>"></td>
+      <th>LAST_NAME</th>
+      <td><input type="text" name="salesman[last_name]" value="<?php echo $salesman->last_name ?>"></td>
     </tr>
     <tr>
-      <th> EMAIL</th>
+      <th>EMAIL</th>
       <td><input type="email" name="salesman[email]" value="<?php echo $salesman->email ?>"></td>
     </tr>
     <tr>
-      <th> GENDER</th>
-      <td> <select name="salesman[gender]"   >
-        <option value="male"name="male">male</option>
-        <option value="female"name="female">female</option>
+      <th>GENDER</th>
+      <td> <select name="salesman[gender]" >
+        <option value="male" name="male">male</option>
+        <option value="female" name="female">female</option>
       </select> </td>
     </tr>
     <tr>
-      <th> MOBILE</th>
-      <td><input type="mobile" name="salesman[mobile]" value="<?php echo $salesman->mobile ?>"></td>
+      <th>MOBILE</th>
+      <td><input type="number" name="salesman[mobile]" value="<?php echo $salesman->mobile ?>"></td>
     </tr>
     <tr>
-      <th> STATUS</th>
-      <td> <select name="salesman[status]"   >
+      <th>STATUS</th>
+      <td> <select name="salesman[status]" >
         <?php foreach ($salesman->getResource()->getStatusOptions() as $key => $value): ?>
-        <option value="<?php echo $key ?>"name="available" <?php if($salesman->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <option value="<?php echo $key ?>" <?php if($salesman->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
-        
       </select> </td>
     </tr>
     <tr>
-      <th> COMPANY</th>
+      <th>COMPANY</th>
       <td><input type="text" name="salesman[company]" value="<?php echo $salesman->company ?>"></td>
+    </tr>
+    <tr>
+      <td>shipping address as billing address</td>
+      <td><input type="checkbox" id="sameaddress" name="sameaddress" value="1"  <?php if($address->address_id == $address2->address_id){echo 'checked';}?>></td>
     </tr>
     <tr>
       <td>address</td>
     </tr>
-    <?php require 'View/salesman/address/edit.phtml' ?>
-  </form>
+    <?php require 'View/vendor/address/edit.phtml' ?>
+    <div class="showBillingAddresss" style="border:0px ; display: none;">
+    <tr class="showBillingAddresss">billing address</tr>
+    <table class="showBillingAddresss" class="table table-bordered">
+      <?php require_once 'View/vendor/address/edit2.phtml' ?>
+    </table>
+  </div>
+</form>
 </table>
+<script type="text/javascript">
+$(document).ready(function (){
+$('input[type="checkbox"]').click(function()
+{
+if($(this).prop("checked") == true)
+{
+$('.showBillingAddresss').hide();
+}
+else if($(this).prop("checked") == false)
+{
+$('.showBillingAddresss').show();
+}
+});
+if($("#sameaddress").is(":checked"))
+{
+$('.showBillingAddresss').hide();
+}
+});
+</script>

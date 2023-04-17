@@ -2,34 +2,32 @@
 $collection = $this->getCollection();
 ?>
 <div><div><h3><?php echo $this->getTitle(); ?></h3></div>
-
 <?php foreach ($this->getButtons() as $key => $button): ?>
 <div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $button['url'] ?>">
-<?php echo $button['title'] ?>
+	<?php echo $button['title'] ?>
 </a></div></div>
 <?php endforeach ?>
 <table class="table table-bordered">
-<tr>
-  <?php foreach ($this->getColumns() as $key => $column): ?>
-  	<th><?php echo $column['title']; ?></th>
-  <?php endforeach ?>
-  <?php foreach ($this->getActions() as $key => $action): ?>
-	<th><?php echo $action['title']; ?></th>  	
-  <?php endforeach ?>
-</tr>
-<?php if (!$collection): ?>
-<td colspan="5" >data not found </td>
-<?php else:?>
-<?php
-foreach ($collection as $row): ?>
-<tr>
-	<?php foreach ($this->getColumns() as $key => $column): ?>
+	<tr>
+		<?php foreach ($this->getColumns() as $key => $column): ?>
+		<th><?php echo $column['title']; ?></th>
+		<?php endforeach ?>
+		<?php foreach ($this->getActions() as $key => $action): ?>
+		<th><?php echo $action['title']; ?></th>
+		<?php endforeach ?>
+	</tr>
+	<?php if (!$collection):?>
+	<td colspan="13" >data not found </td>
+	<?php else: ?>
+	<?php foreach ($collection->getData() as $row): ?>
+	<tr>
+		<?php foreach ($this->getColumns() as $key => $column): ?>
 		<td><?php echo $this->getColumnValue($row,$key) ?></td>
-	<?php endforeach ?>
-	<?php foreach ($this->getActions() as $key => $action): ?>
- 	<td><a href="<?php $method = $action['method']; echo $this->$method($row,$key); ?>"><?php echo $action['title'] ?></a></td>
-	<?php endforeach ?>
-</tr>
-<?php endforeach; ?>
-<?php endif;?>
+		<?php endforeach ?>
+		<?php foreach ($this->getActions() as $key => $action): ?>
+		<td><a href="<?php $method = $action['method']; echo $this->$method($row,$key); ?>"><?php echo $action['title'] ?></a></td>
+		<?php endforeach ?>
+	</tr>
+	<?php endforeach; ?>
+	<?php endif;?>
 </table>

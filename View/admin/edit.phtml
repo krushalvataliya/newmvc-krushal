@@ -11,19 +11,19 @@ $admin =$this->getData();
   </table>
   <table class="table table-bordered">
     <tr>
-      <th> name</th>
+      <th>name</th>
       <td><input type="text" name="admin[name]" value="<?php echo $admin->name ?>" ></td>
     </tr>
     <tr>
-      <th> email</th>
+      <th>email</th>
       <td><input type="email" name="admin[email]" value="<?php echo $admin->email ?>"></td>
     </tr>
     <tr>
-      <th> password</th>
+      <th>password</th>
       <td><input type="text" name="admin[password]" value="<?php echo $admin->password ?>"></td>
     </tr>
     <tr>
-      <th> STATUS</th>
+      <th>STATUS</th>
       <td> <select name="admin[status]">
         <?php foreach ($this->data->getResource()->getStatusOptions() as $key => $value): ?>
         <option value="<?php echo $key ?>"name="available" <?php if($admin->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
