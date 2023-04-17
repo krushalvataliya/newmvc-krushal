@@ -1,7 +1,30 @@
 <?php 
-echo "<pre>";
-print_r($this);
 if($this->getAttribute()->input_type == 'textbox')
 {
-	$this->getLayout()->createBlock('Eav_Attribute_inputType_Text')->render();
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_Text')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
+}
+
+if($this->getAttribute()->input_type == 'textarea')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_TextArea')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
+}
+
+if($this->getAttribute()->input_type == 'select')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_Select')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
+}
+
+if($this->getAttribute()->input_type == 'multiselect')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_MultiSelect')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
+}
+
+if($this->getAttribute()->input_type == 'radio')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_Radio')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
+}
+
+if($this->getAttribute()->input_type == 'checkbox')
+{
+	$this->getLayout()->createBlock('Eav_Attribute_inputType_CheckBox')->setAttribute($this->getAttribute())->setRow($this->getRow())->render();
 }

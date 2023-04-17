@@ -29,7 +29,7 @@ class Block_Eav_Attribute_Edit extends Block_Core_Template
 		$options = Ccc::getModel('Eav_Attribute_Option');
 		if ($id)
 		{
-			$sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` = {$id} ORDER BY `option_id` DESC";
+			$sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` = {$id} ORDER BY `position` DESC";
 			$options = $options->fetchAll($sql);
 		}
 		return $options;

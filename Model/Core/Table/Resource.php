@@ -85,6 +85,25 @@ class Model_Core_Table_Resource
 		return $result;
 
 	}
+	// public function insertUpdateOnDuplicate($data,$uniqueColumns)
+	// {
+	// 	if(is_array($uniqueColumns))
+	// 	{
+	// 	$key =  implode('`,`', array_keys($data));
+	// 	$value =  implode('\',\'', $data);
+	// 	}
+
+	// 	if(is_array($data))
+	// 	{
+	// 	$key =  implode('`,`', array_keys($data));
+	// 	$value =  implode('\',\'', $data);
+	// 	}
+	// 	$sql = 
+	// 	echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
+	// 	$result = $this->getAdapter()->insert($sql);
+	// 	return $result;
+
+	// }
 
 	public function update($data,$condition)
 	{

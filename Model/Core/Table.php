@@ -128,8 +128,7 @@ class Model_Core_Table
             return $result;
         }
         $insertId = $this->getResource()->insert($this->data);
-        // return $this->load($insertId);
-        return $insertId;
+        return $this->load($insertId);
     }
 
     public function delete()

@@ -78,14 +78,15 @@ class Controller_Cart extends Controller_Core_Action
 				throw new Exception("invalid Request.", 1);
 			}
 			$data = $request->getPost();
-			$sql = "SELECT * FROM `cart` WHERE `shiping_method_id` = {$data['shiping_method_id']}";
+			echo $id = $data['shiping_method_id'];
+			echo $sql = "SELECT * FROM `cart` WHERE `shiping_method_id` = '{$id}'";
 			$modelCart =Ccc::getModel('cart');
 			$result =$modelCart->fetchRow($sql);
 				$cart = new model_Cart();
 			if(!$result->getData())
 			{
 				$modelCart =Ccc::getModel('cart');
-				$sql = "SELECT * FROM `shiping_methods`WHERE `shiping_method_id` = {$data['shiping_method_id']}";
+				echo $sql = "SELECT * FROM `shiping_methods`WHERE `shiping_method_id` = '{$id}'";
 				$method =$modelCart->fetchRow($sql);
 				$modelCart =Ccc::getModel('cart');
 				$data['shiping_amount'] = $method->amount;
@@ -93,7 +94,6 @@ class Controller_Cart extends Controller_Core_Action
 				if(!$result)
 				{
 					throw new Exception("method not saved.", 1);
-					
 				}
 			}
 			else
@@ -102,13 +102,12 @@ class Controller_Cart extends Controller_Core_Action
 				$result =$cart->setData($data)->save();
 			}
 			$this->getMessage()->addMessage('method saved successfully.',  Model_Core_Message::SUCCESS);
-
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('method not saved.',  Model_Core_Message::FAILURE);
 		}
-		return $this->redirect('grid','cart',['shipping_method_id'=>$data['shipping_method_id']]);
+		return $this->redirect('grid','cart',['shipping_method_id'=>$id],false);
 
 	}
 

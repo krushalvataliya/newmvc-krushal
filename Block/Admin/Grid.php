@@ -4,7 +4,7 @@ class Block_Admin_Grid extends  Block_Core_Grid
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setTitle('Manage payment Method');
+		$this->setTitle('Manage Admin');
 	}
 
 	protected function _prepareColumns()
@@ -75,7 +75,7 @@ class Block_Admin_Grid extends  Block_Core_Grid
 		$modelProduct = Ccc::getModel('admin');
 		$sql = "SELECT * FROM `admins`";
 		$admins =$modelProduct->fetchAll($sql);
-		return $admins->getData();
+		return $admins;
 	}
 
 }

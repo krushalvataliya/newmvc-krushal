@@ -53,6 +53,20 @@ class Controller_Salesman extends Controller_Core_Action
 		}
 	}
 
+	protected function _saveSalesman()
+	{
+		$request = $this->getRequest();
+		$salesman = $request->getPost('salesman');
+		$id=(int)$request->getParam('salesman_id');
+		if($id)
+		{
+			$salesman['salesman_id'] = $id;
+		}
+		$modelSalesman =Ccc::getModel('Salesman');
+		$insertSalesman = $modelSalesman->setData($salesman)->save();
+		return $insertSalesman;
+	}
+
 	public function saveAction()
 	{
 		try 
@@ -62,43 +76,79 @@ class Controller_Salesman extends Controller_Core_Action
 			{
 				throw new Exception("invalid Request.", 1);
 			}
-			$salesman = $request->getPost('salesman');
-			$salesmanAddress = $request->getPost('address');
-
+			$sameaddress = $request->getPost('sameaddress');
+			
 			$modelSalesman =Ccc::getModel('Salesman');
+			$id=(int)$request->getParam('salesman_id');
+			$salesmanAddress = $request->getPost('address');
+			$salesmanAddress2 = $request->getPost('address2');
 			$modelSalesmanAddress =Ccc::getModel('Salesman_Address');
 
-			if($id=(int)$request->getParam('salesman_id'))
+			if($id)
 			{
+				$updeteSalesman['salesman_id'] = $id;
+				$salesmanAddress['salesman_id'] = $id;
+				$salesmanAddress2['salesman_id'] = $id;
 				$salesmanRow = $modelSalesman->load($id);
 				if(!$salesmanRow)
 				{
 					throw new Exception("invalid id.", 1);
 				}
-				$salesman['salesman_id'] = $id;
-				$sql = "SELECT * FROM `salesman_address` WHERE `salesman_id`= {$id}";
-				$salesmanAddressRow = $modelSalesmanAddress->fetchRow($sql);
-				if(!$salesmanAddressRow)
+				$shippingAddress =  $salesmanRow->getShippingAddress();
+				$billingAddress =  $salesmanRow->getShippingAddress();
+				if ($salesmanRow->shiping_address_id)
 				{
-					throw new Exception("invalid salesman address.", 1);
+					$salesmanAddress['address_id'] = $salesmanRow->shiping_address_id;
 				}
-				$salesmanAddress['address_id'] = $salesmanAddressRow->address_id;
+				if ($salesmanRow->billing_address_id != $salesmanRow->shiping_address_id )
+				{
+					$salesmanAddress2['address_id'] = $salesmanRow->billing_address_id;
+				}
 			}
 
-			$insertsalesman = $modelSalesman->setData($salesman)->save();
-			if (!$insertsalesman) {
+			$insertSalesman = $this->_saveSalesman();
+			if (!$insertSalesman) {
 				throw new Exception("salesman not inserted.", 1);
 			}
-
 			if(!$id)
 			{
-			$salesmanAddress['salesman_id'] = $insertsalesman;
+				$updeteSalesman['salesman_id'] = $insertSalesman->salesman_id;
+				$salesmanAddress['salesman_id'] = $insertSalesman->salesman_id;
+				$salesmanAddress2['salesman_id'] = $insertSalesman->salesman_id;
 			}
-			$insertsalesmanAddress = $modelSalesmanAddress->setData($salesmanAddress)->save();
-			if (!$insertsalesman) {
-				throw new Exception("salesman Address not inserted.", 1);
+			$insertSalesmanAddress = $modelSalesmanAddress->setData($salesmanAddress)->save();
+			$updeteSalesman['shiping_address_id'] = $insertSalesmanAddress->address_id;
+			if($sameaddress && !$id)
+			{
+				unset($salesmanAddress2);
+				$updeteSalesman['billing_address_id'] = $insertSalesmanAddress->address_id;
+			}
+			else if(!$sameaddress && $id)
+			{
+				$insertSalesmanAddress2 = $modelSalesmanAddress->setData($salesmanAddress2)->save();
+				$updeteSalesman['shiping_address_id'] = $shippingAddress->address_id;
+				if($shippingAddress->address_id == $billingAddress->address_id && $insertSalesmanAddress2->address_id >1)
+				{
+					$updeteSalesman['billing_address_id'] = $insertSalesmanAddress2->address_id;
+				}
+			}
+			else if($sameaddress && $id)
+			{
+				unset($salesmanAddress2);
+				$updeteSalesman['shiping_address_id'] = $shippingAddress->address_id;
+				$updeteSalesman['billing_address_id'] = $shippingAddress->address_id;
+			}
+			else if(!$sameaddress && !$id)
+			{
+				$updeteSalesman['shiping_address_id'] = $insertSalesmanAddress->address_id;
+				$insertSalesmanAddress2 = $modelSalesmanAddress->setData($salesmanAddress2)->save();
+				$updeteSalesman['billing_address_id'] = $insertSalesmanAddress2->address_id;
 			}
 
+			if (!$insertSalesman) {
+				throw new Exception("salesman Address not inserted.", 1);
+			}
+				$insertSalesman = $modelSalesman->setData($updeteSalesman)->save();
 			$this->getMessage()->addMessage('salesman saved successfully.',  Model_Core_Message::SUCCESS);
 		}
 		catch (Exception $e)
@@ -106,7 +156,7 @@ class Controller_Salesman extends Controller_Core_Action
 			$this->getMessage()->addMessage('salesman not saved.',  Model_Core_Message::FAILURE);
 		}
 		
-		return $this->redirect('grid', null, null, true);
+		// return $this->redirect('grid', null, null, true);
 	}
 
 	public function deleteAction()

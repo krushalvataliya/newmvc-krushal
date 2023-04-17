@@ -29,7 +29,9 @@ class Model_Customer extends Model_Core_Table
 
 	public function getAddresses()
 	{
-		$sql = "SELECT * FROM `customer_address` where `customer_id` = 3386;";
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('customer_id');
+		$sql = "SELECT * FROM `customer_address` where `customer_id` = '{$id}';";
 		$modelAddress = Ccc::getModel('Customer_Address');
 		$addresses = $modelAddress->fetchAll($sql);
 		return $addresses;
@@ -42,10 +44,10 @@ class Model_Customer extends Model_Core_Table
 		$address = Ccc::getModel('Customer_Address');
 		if($id)
 		{
-		$sql = "SELECT * FROM `customers` WHERE `customer_id` = {$id} ";
+		$sql = "SELECT * FROM `customers` WHERE `customer_id` = '{$id}' ";
 		$customer = $this->fetchRow($sql);
 
-		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = {$customer->billing_address_id};";
+		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = '{$customer->billing_address_id}';";
 		$address = $address->fetchRow($sql);
 		}
 		return $address;
@@ -58,10 +60,10 @@ class Model_Customer extends Model_Core_Table
 		$address = Ccc::getModel('Customer_Address');
 		if($id)
 		{
-		$sql = "SELECT * FROM `customers` WHERE `customer_id` = {$id} ";
+		$sql = "SELECT * FROM `customers` WHERE `customer_id` = '{$id}' ";
 		$customer = $this->fetchRow($sql);
 
-		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = {$customer->shiping_address_id};";
+		$sql = "SELECT * FROM `customer_address` WHERE `address_id` = '{$customer->shiping_address_id}';";
 		$address = $address->fetchRow($sql);
 		}
 		return $address;

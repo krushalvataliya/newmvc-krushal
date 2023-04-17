@@ -12,15 +12,15 @@ $media = $this->getMedia();
 <br>
 <table class="table table-bordered">
   <tr>
-    <th> IMAGE</th>
-    <th> NAME</th>
-    <th> THUMBNAIL</th>
-    <th> MIDIUM</th>
-    <th> LARGE</th>
-    <th> SMALL</th>
-    <th> GALLARY</th>
-    <th> CREATED_AT </th>
-    <th> DELETE</th>
+    <th>IMAGE</th>
+    <th>NAME</th>
+    <th>THUMBNAIL</th>
+    <th>MIDIUM</th>
+    <th>LARGE</th>
+    <th>SMALL</th>
+    <th>GALLARY</th>
+    <th>CREATED_AT </th>
+    <th>DELETE</th>
   </tr>
   
   <form action="<?php echo $this->getModelUrl()->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>" method="POST">

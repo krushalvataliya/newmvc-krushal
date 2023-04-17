@@ -78,7 +78,7 @@ class Block_item_Grid extends  Block_Core_Grid
 		$modelitem = Ccc::getModel('item');
 		$sql = "SELECT * FROM `item`";
 		$items =$modelitem->fetchAll($sql);
-		return $items->getData();
+		return $items;
 	}
 
 }

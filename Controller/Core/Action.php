@@ -35,7 +35,7 @@ class Controller_Core_Action
 	public function redirect($a=null,$c=null, array $perameters=null,$reset = false,$url=null)
 	{
 		if($url == null){
-			$url = $this->getModelUrl()->getUrl($a,$c,$parameters,$reset);
+			$url = $this->getModelUrl()->getUrl($a,$c,$perameters,$reset);
 		}
 		header("location: {$url}");
 		exit();

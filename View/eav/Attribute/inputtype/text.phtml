@@ -1,1 +1,4 @@
-<input type="text" name="attribute[<?php echo $value->name; ?>]" value="">
+<?php $attribute = $this->getAttribute()  ?>
+<?php $row = $this->getRow();?>
+<?php $id = $attribute->attribute_id ?>
+<input type="text" name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId() ?>]" value="<?php echo $row->$id; ?>">

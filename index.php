@@ -20,6 +20,11 @@ class Ccc
 		return new $className();
 	}
 
+	public static function log($data,$filName = 'system.log',$newFile = false)
+	{
+		return self::getSingleton('Core_Log')->log($data,$filName ,$newFile);
+	}
+
 	public static function getSingleton($className)
 	{
 		$className = 'Model_'.$className;
@@ -30,10 +35,19 @@ class Ccc
 		$GLOBALS[$className] = new $classname();
 		return $GLOBALS[$className];
 	}
+	public function getBaseDir($subDir = null)
+	{
+		$dir = getCwd();
+		if($subDir)
+		{
+			$dir = $dir.$subDir;
+		}
+		return $dir;
+	}
 
 	public function register($key,$value)
 	{
-			$GLOBALS[$key] = $value;
+		$GLOBALS[$key] = $value;
 	}
 
 	public function getRegistry($key)

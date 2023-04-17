@@ -26,6 +26,48 @@ class Model_Vendor extends Model_Core_Table
 		}
 			return $statuses[ Model_Vendor_Resource::STATUS_DEFAULT];
 	}
+
+	public function getAddresses()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('vendor_id');
+		$sql = "SELECT * FROM `vendor_address` where `vendor_id` = '{$id}';";
+		$modelAddress = Ccc::getModel('Vendor_Address');
+		$addresses = $modelAddress->fetchAll($sql);
+		return $addresses;
+	}
+
+	public function getBillingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('vendor_id');
+		$address = Ccc::getModel('Vendor_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `vendors` WHERE `vendor_id` = '{$id}' ";
+		$vendor = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `vendor_address` WHERE `address_id` = '{$vendor->billing_address_id}';";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
+
+	public function getShippingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('vendor_id');
+		$address = Ccc::getModel('Vendor_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `vendors` WHERE `vendor_id` = '{$id}' ";
+		$vendor = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `vendor_address` WHERE `address_id` = '{$vendor->shiping_address_id}';";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
 }
 
 ?>

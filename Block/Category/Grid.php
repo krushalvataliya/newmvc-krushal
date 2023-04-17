@@ -75,6 +75,6 @@ class Block_Category_Grid extends  Block_Core_Grid
 		$modelRowCetegory = Ccc::getModel('Cetegory');
 		$sql = "SELECT * FROM `category` WHERE category_id > 1 ORDER BY `path` ASC;";
 		$categories = $modelRowCetegory->fetchAll($sql);	
-		return $categories->getData();
+		return $categories;
 	}
 }

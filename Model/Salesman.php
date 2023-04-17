@@ -26,6 +26,48 @@ class Model_Salesman extends Model_Core_Table
 		}
 			return $statuses[ Model_Salesman_Resource::STATUS_DEFAULT];
 	}
+
+	public function getAddresses()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('salesman_id');
+		$sql = "SELECT * FROM `salesman_address` where `salesman_id` = '{$id}';";
+		$modelAddress = Ccc::getModel('Salesman_Address');
+		$addresses = $modelAddress->fetchAll($sql);
+		return $addresses;
+	}
+
+	public function getBillingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('salesman_id');
+		$address = Ccc::getModel('Salesman_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `salesman` WHERE `salesman_id` = '{$id}' ";
+		$salesman = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `salesman_address` WHERE `address_id` = '{$salesman->billing_address_id}';";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
+
+	public function getShippingAddress()
+	{
+		$request = Ccc::getModel('Core_Request');
+		$id = $request->getParam('salesman_id');
+		$address = Ccc::getModel('Salesman_Address');
+		if($id)
+		{
+		$sql = "SELECT * FROM `salesman` WHERE `salesman_id` = '{$id}' ";
+		$salesman = $this->fetchRow($sql);
+
+		$sql = "SELECT * FROM `salesman_address` WHERE `address_id` = '{$salesman->shiping_address_id}';";
+		$address = $address->fetchRow($sql);
+		}
+		return $address;
+	}
 }
 
 ?>

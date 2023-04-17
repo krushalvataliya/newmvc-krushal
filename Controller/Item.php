@@ -41,7 +41,6 @@ class Controller_Item extends Controller_Core_Action
 			}
 			$layout = $this->getLayout();
 			$content = $layout->createBlock('item_Edit');
-			$content->setData(['item' => $item]);
 			$layout->getChild('content')->addChild('edit',$content);
 			$layout->render();
 		}
@@ -65,9 +64,16 @@ class Controller_Item extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('item');
+			$postData = $request->getPost();
+			echo '<pre>';
+			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
-				throw new Exception("no data posted.", 1);
+				throw new Exception("item data not posted.", 1);
+			}
+			if(!$attributeData)
+			{
+				throw new Exception("attribute data not posted.", 1);
 			}
 
 			$modelRowitem = Ccc::getModel('item');
@@ -81,11 +87,46 @@ class Controller_Item extends Controller_Core_Action
 				$postData['item_id'] =$itemRow->item_id ;
 			}
 			$modelRowitem->setData($postData);
-			$result =$modelRowitem->save();
-			if(!$result)
+			$item =$modelRowitem->save();
+			print_r($item);
+			if(!$item)
 			{
 				throw new Exception("unable to save item", 1);
 				
+			}
+
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("item_{$backendType}")->setPrimaryKey('value_id');
+					if($id)
+					{
+						$sql = "SELECT * FROM `item_{$backendType}` WHERE `attribute_id` = '{$attributeId}' AND `entity_id` = '{$id}' ";
+						Ccc::log($sql);
+						$attributeValue = $resource->fetchRow($sql);
+						if(!$attributeValue)
+						{
+							throw new Exception("unable to fetch data.", 1);
+						}
+						$model->value_id = $attributeValue['value_id'];
+					}
+					else
+					{
+						$model->entity_id = $item->getId();
+					}
+					$model->attribute_id = $attributeId;
+					$model->value = $v;
+					if(!$model->save())
+					{
+						throw new Exception("item's attribute not saved.", 1);
+					}
+				}
 			}
 			$this->getMessage()->addMessage('item saved successfully.',  Model_Core_Message::SUCCESS);
 

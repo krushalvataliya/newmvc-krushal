@@ -1,14 +1,14 @@
 <?php 
 
-class Block_Eav_Attribute_inputType_Text extends Block_Core_Template
+class Block_Eav_Attribute_inputType_CheckBox extends Block_Core_Template
 {
 	protected $_attribute = null;
-    protected $_row = null;
+	protected $_row = null;
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setTemplete('eav/attribute/inputtype/text.phtml');
+		$this->setTemplete('eav/attribute/inputtype/checkbox.phtml');
 	}
 
     public function getAttribute()
@@ -22,6 +22,7 @@ class Block_Eav_Attribute_inputType_Text extends Block_Core_Template
 
         return $this;
     }
+    
 
     public function getRow()
     {

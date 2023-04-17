@@ -30,9 +30,12 @@ class Block_Cart_Grid extends  Block_Core_Template
 		$sql = "SELECT * FROM `cart_item`";
 		$cartItems =$modelCartItem->fetchall($sql);
 		$total = 0;
-		foreach ($cartItems->getData() as $cartItem)
+		if($cartItems)
 		{
-			$total += ($cartItem->price * $cartItem->quantity);
+			foreach ($cartItems->getData() as $cartItem)
+			{
+				$total += ($cartItem->price * $cartItem->quantity);
+			}
 		}
 		
 		return $total;		

@@ -36,14 +36,14 @@ $product = $this->getData('product');
     </tr>
     <tr>
       <th>STATUS</th>
-      <td><select name="product[status]"   >
+      <td><select name="product[status]" >
         <?php foreach ($product->getResource()->getStatusOptions() as $key => $value): ?>
         <option value="<?php echo $key ?>"<?php if($product->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
       </select></td>
     </tr>
     <tr>
-      <th> COLOR</th>
+      <th>COLOR</th>
       <td><select name="product[color]"   value="<?php echo $color?>" >
         <option value="red"name="Available">red</option>
         <option value="green"name="unavailable">green</option>
@@ -51,7 +51,7 @@ $product = $this->getData('product');
       </select></td>
     </tr>
     <tr>
-      <th> MATERIAL</th>
+      <th>MATERIAL</th>
       <td><input type="text" name="product[material]" value="<?php echo $product->material;?>"></td>
     </tr>
   </form>
