@@ -46,12 +46,12 @@ class Ccc
 		return $dir;
 	}
 
-	public function register($key,$value)
+	public static function register($key,$value)
 	{
 		$GLOBALS[$key] = $value;
 	}
 
-	public function getRegistry($key)
+	public static function getRegistry($key)
 	{
 		if(array_key_exists($key,$GLOBALS))
 		{

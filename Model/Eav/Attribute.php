@@ -87,7 +87,7 @@ class Model_Eav_Attribute extends Model_Core_Table
     		$sourceModel = "Eav_Attribute_Option_Source";
     	}
         $modelEavAttributeOption = Ccc::getModel($sourceModel);
-        $sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` ='{$this->attribute_id}' ORDER BY `position` ASC";
+       echo  $sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` ='{$this->attribute_id}' ORDER BY `position` ASC";
         return Ccc::getModel($sourceModel)->setAttribute($this)->getOptions();
     }
 }

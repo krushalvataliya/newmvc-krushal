@@ -13,7 +13,7 @@ class Model_Core_Session
 	{
 		if (session_status() != PHP_SESSION_ACTIVE)
 		{
-		session_start();
+			session_start();
 		}
 		return $this;
 	}

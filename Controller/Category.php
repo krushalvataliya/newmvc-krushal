@@ -88,7 +88,8 @@ class Controller_Category extends Controller_Core_Action
 				throw new Exception("invalid Request.", 1);
 			}
 
-			$postData = $request->getPost('category');	
+			$postData = $request->getPost('category');
+			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
 				throw new Exception("no data posted.", 1);
@@ -104,6 +105,7 @@ class Controller_Category extends Controller_Core_Action
 				$postData['category_id'] =$categoryRow->category_id ;
 				$postData['path'] =$categoryRow->path ;
 			}
+			$postData['entity_type_id'] = Model_Cetegory::ENTITY_TYPE_ID ;
 			$category = $modelRowCategory->setData($postData);
 			$result =$modelRowCategory->save();
 
@@ -113,9 +115,31 @@ class Controller_Category extends Controller_Core_Action
 			}
 			if(!$id)
 			{
-			$category->category_id = $result;
+			$category->category_id = $result->category_id;
 			}
 			$category->updatePath();
+
+			$entityId = ($id) ? ($id) : ($result->getId());
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("category_{$backendType}")->setPrimaryKey('value_id');
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
+					{
+						throw new Exception("Category's Attribute not inserted.", 1);
+						
+					}
+				}
+			}
 			$this->getMessage()->addMessage('Category saved successfully.',  Model_Core_Message::SUCCESS);
 		}
 		catch (Exception $e)

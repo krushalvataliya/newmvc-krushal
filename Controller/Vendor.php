@@ -64,6 +64,7 @@ class Controller_Vendor extends Controller_Core_Action
 			$vendor['vendor_id'] = $id;
 		}
 		$modelVendor =Ccc::getModel('vendor');
+		$vendor['entity_type_id'] = Model_Vendor::ENTITY_TYPE_ID ;
 		$insertVendor = $modelVendor->setData($vendor)->save();
 		return $insertVendor;
 	}
@@ -81,6 +82,7 @@ class Controller_Vendor extends Controller_Core_Action
 			
 			$modelVendor =Ccc::getModel('vendor');
 			$id=(int)$request->getParam('vendor_id');
+			$attributeData = $request->getPost('attribute');
 			$vendorAddress = $request->getPost('address');
 			$vendorAddress2 = $request->getPost('address2');
 			$modelVendorAddress =Ccc::getModel('Vendor_Address');
@@ -148,6 +150,28 @@ class Controller_Vendor extends Controller_Core_Action
 
 			if (!$insertVendor) {
 				throw new Exception("vendor Address not inserted.", 1);
+			}
+
+			$entityId = ($id) ? ($id) : ($insertVendor->getId());
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("vendor_{$backendType}")->setPrimaryKey('value_id');
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
+					{
+						throw new Exception("vendor's Attribute not inserted.", 1);
+						
+					}
+				}
 			}
 				$insertVendor = $modelVendor->setData($updeteVendor)->save();
 			$this->getMessage()->addMessage('vendor saved successfully.',  Model_Core_Message::SUCCESS);

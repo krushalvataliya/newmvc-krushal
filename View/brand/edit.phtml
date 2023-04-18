@@ -1,0 +1,26 @@
+<?php
+$brand = $this->getRow();
+?>
+<table>
+  <tr>
+    <td><h3>Edit brand<h3></td>
+    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
+    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
+      <td><button class="btn btn-primary"> save</button></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>NAME</th>
+      <td><input type="text" name="brand[name]" value="<?php echo $brand->name;?>"></td>
+    </tr>
+    <tr>
+      <th>DESCROPTION</th>
+      <td><textarea type="text" name="brand[description]" ><?php echo $brand->description;?></textarea></td>
+    </tr>
+    <tr>
+      <th>IMAGE</th>
+      <td><input type="text" name="brand[image]" value="<?php echo $brand->image;?>"></td>
+    </tr>
+  </form>
+</table>

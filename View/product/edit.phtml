@@ -1,5 +1,5 @@
 <?php
-$product = $this->getData('product');
+$row = $this->getData('product');
 ?>
 <table>
   <tr>
@@ -12,39 +12,39 @@ $product = $this->getData('product');
   <table class="table table-bordered">
     <tr>
       <th>NAME</th>
-      <td><input type="text" name="product[name]" value="<?php echo $product->name;?>"></td>
+      <td><input type="text" name="product[name]" value="<?php echo $row->name;?>"></td>
     </tr>
     <tr>
       <th>SKU</th>
-      <td><input type="text" name="product[sku]" value="<?php echo $product->sku;?>"></td>
+      <td><input type="text" name="product[sku]" value="<?php echo $row->sku;?>"></td>
     </tr>
     <tr>
       <th>COST</th>
-      <td><input type="number" name="product[cost]" value="<?php echo $product->cost;?>"></td>
+      <td><input type="number" name="product[cost]" value="<?php echo $row->cost;?>"></td>
     </tr>
     <tr>
       <th>PRICE</th>
-      <td><input type="number" name="product[price]" value="<?php echo $product->price;?>"></td>
+      <td><input type="number" name="product[price]" value="<?php echo $row->price;?>"></td>
     </tr>
     <tr>
       <th>QUANTITY</th>
-      <td><input type="number" name="product[quantity]" value="<?php echo $product->quantity;?>"></td>
+      <td><input type="number" name="product[quantity]" value="<?php echo $row->quantity;?>"></td>
     </tr>
     <tr>
       <th>DESCRIPTION</th>
-      <td><input type="text" name="product[description]" value="<?php echo $product->description;?>"></td>
+      <td><input type="text" name="product[description]" value="<?php echo $row->description;?>"></td>
     </tr>
     <tr>
       <th>STATUS</th>
       <td><select name="product[status]" >
-        <?php foreach ($product->getStatusOptions() as $key => $value): ?>
-        <option value="<?php echo $key ?>"<?php if($product->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+        <option value="<?php echo $key ?>"<?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
       </select></td>
     </tr>
     <tr>
       <th>COLOR</th>
-      <td><select name="product[color]"   value="<?php echo $color?>" >
+      <td><select name="product[color]" value="<?php echo $color?>" >
         <option value="red"name="Available">red</option>
         <option value="green"name="unavailable">green</option>
         <option value="blue"name="unavailable">blue</option>
@@ -52,7 +52,15 @@ $product = $this->getData('product');
     </tr>
     <tr>
       <th>MATERIAL</th>
-      <td><input type="text" name="product[material]" value="<?php echo $product->material;?>"></td>
+      <td><input type="text" name="product[material]" value="<?php echo $row->material;?>"></td>
+    </tr>
+    <tr>
+      <?php if ($this->getAttributes()): ?>
+      <?php foreach ($this->getAttributes() as $key => $value): ?>
+      <tr><th><?php echo$value->name; ?></th>
+      <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
+      <?php endforeach ?>
+      <?php endif ?>
     </tr>
   </form>
 </table>

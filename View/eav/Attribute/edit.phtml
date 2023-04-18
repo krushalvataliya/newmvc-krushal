@@ -13,7 +13,7 @@ $options = $this->getOptions();
 				<td>Entity Type</td>
 				<td><select  name="attribute[entity_type_id]">
 					<?php foreach ($entities->getData() as $entity): ?>
-					<option value="<?php echo $entity->entity_type_id ?>"><?php echo $entity->name; ?></option>
+					<option value="<?php echo $entity->entity_type_id ?>" <?php  if( $entity->entity_type_id == $attribute->entity_type_id ){echo 'selected';} ?> ><?php echo $entity->name; ?></option>
 					<?php endforeach ?>
 				</select></td>
 			</tr>

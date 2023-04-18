@@ -65,6 +65,7 @@ class Controller_Product extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('product');
+			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
 				throw new Exception("no data posted.", 1);
@@ -80,12 +81,35 @@ class Controller_Product extends Controller_Core_Action
 				}
 				$postData['product_id'] =$productRow->product_id ;
 			}
+			$postData['entity_type_id'] = Model_Product::ENTITY_TYPE_ID ;
 			$modelRowProduct->setData($postData);
 			$result =$modelRowProduct->save();
 			if(!$result)
 			{
 				throw new Exception("unable to save product", 1);
 				
+			}
+
+			$entityId = ($id) ? ($id) : ($result->getId());
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("product_{$backendType}")->setPrimaryKey('value_id');
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
+					{
+						throw new Exception("product's Attribute not inserted", 1);
+						
+					}
+				}
 			}
 			$this->getMessage()->addMessage('product saved successfully.',  Model_Core_Message::SUCCESS);
 

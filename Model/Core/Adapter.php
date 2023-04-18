@@ -49,7 +49,7 @@ class Model_core_Adapter{
 
    public function fetchRow($query){
    	$result =$this->connect()->query($query);
-   	if($result->num_rows == 0){
+   	if(!$result){
    		return null;
    	}
    		return $result->fetch_assoc();
@@ -85,7 +85,7 @@ class Model_core_Adapter{
       if(!$result){
          return false;
       }
-         return $result->fetch_assoc();
+         return true;
    }
 
 }

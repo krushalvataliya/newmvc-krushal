@@ -1,7 +1,7 @@
 <?php
-$vendor = $this->getData('vendor');
-$address  = $vendor->getShippingAddress();
-$address2  = $vendor->getBillingAddress();
+$row = $this->getData('vendor');
+$address  = $row->getShippingAddress();
+$address2  = $row->getBillingAddress();
 ?>
 <table>
   <tr>
@@ -14,15 +14,15 @@ $address2  = $vendor->getBillingAddress();
   <table class="table table-bordered">
     <tr>
       <th>FIRST_NAME</th>
-      <td><input type="text" name="vendor[first_name]" value="<?php echo $vendor->first_name ?>"></td>
+      <td><input type="text" name="vendor[first_name]" value="<?php echo $row->first_name ?>"></td>
     </tr>
     <tr>
       <th>LAST_NAME</th>
-      <td><input type="text" name="vendor[last_name]" value="<?php echo $vendor->last_name ?>"></td>
+      <td><input type="text" name="vendor[last_name]" value="<?php echo $row->last_name ?>"></td>
     </tr>
     <tr>
       <th>EMAIL</th>
-      <td><input type="email" name="vendor[email]" value="<?php echo $vendor->email ?>"></td>
+      <td><input type="email" name="vendor[email]" value="<?php echo $row->email ?>"></td>
     </tr>
     <tr>
       <th>GENDER</th>
@@ -33,19 +33,19 @@ $address2  = $vendor->getBillingAddress();
     </tr>
     <tr>
       <th>MOBILE</th>
-      <td><input type="number" name="vendor[mobile]" value="<?php echo $vendor->mobile ?>"></td>
+      <td><input type="number" name="vendor[mobile]" value="<?php echo $row->mobile ?>"></td>
     </tr>
     <tr>
       <th>STATUS</th>
       <td> <select name="vendor[status]" >
-        <?php foreach ($vendor->getStatusOptions() as $key => $value): ?>
-        <option value="<?php echo $key ?>" <?php if($vendor->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+        <option value="<?php echo $key ?>" <?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
       </select> </td>
     </tr>
     <tr>
       <th>COMPANY</th>
-      <td><input type="text" name="vendor[company]" value="<?php echo $vendor->company ?>"></td>
+      <td><input type="text" name="vendor[company]" value="<?php echo $row->company ?>"></td>
     </tr>
     <tr>
       <td>shipping address as billing address</td>
@@ -62,7 +62,17 @@ $address2  = $vendor->getBillingAddress();
       <?php require_once 'View/vendor/address/edit2.phtml' ?>
       </table>
     </div>
+    <tr>
+      <?php if ($this->getAttributes()): ?>
+        
+<?php foreach ($this->getAttributes() as $key => $value): ?>
+  <tr><th><?php echo$value->name; ?></th>
+  <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
+<?php endforeach ?> 
+      <?php endif ?>
+</tr>
   </form>
+
 </table>
 
 <script type="text/javascript">
