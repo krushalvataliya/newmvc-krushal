@@ -64,6 +64,8 @@ class Block_Admin_Grid extends  Block_Core_Grid
 
 	public function getColumnValue($row, $key)
 	{
+			echo "<pre>";
+			print_r($row);
 		if ($key == 'status') {
 			return $row->getStatusText();
 		}

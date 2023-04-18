@@ -30,8 +30,8 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 		$this->addColumn('status',[
 			'title' =>'STATUS'
 		]);	
-		$this->addColumn('backend_model',[
-			'title' =>'BACKEND_MODEL'
+		$this->addColumn('source_model',[
+			'title' =>'SOURCE MODEL'
 		]);
 		$this->addColumn('input_type',[
 			'title' =>'INPUT_TYPE'

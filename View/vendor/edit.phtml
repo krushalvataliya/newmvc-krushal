@@ -38,7 +38,7 @@ $address2  = $vendor->getBillingAddress();
     <tr>
       <th>STATUS</th>
       <td> <select name="vendor[status]" >
-        <?php foreach ($vendor->getResource()->getStatusOptions() as $key => $value): ?>
+        <?php foreach ($vendor->getStatusOptions() as $key => $value): ?>
         <option value="<?php echo $key ?>" <?php if($vendor->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
       </select> </td>

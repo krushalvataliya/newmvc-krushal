@@ -84,11 +84,12 @@ class Controller_Item extends Controller_Core_Action
 				{
 					throw new Exception("invalid id", 1);
 				}
-				$postData['item_id'] =$itemRow->item_id ;
+				$postData['item_id'] = $itemRow->item_id ;
 			}
 			$modelRowitem->setData($postData);
+			$postData['entity_type_id'] = Model_Item::ENTITY_TYPE_ID ; 
+
 			$item =$modelRowitem->save();
-			print_r($item);
 			if(!$item)
 			{
 				throw new Exception("unable to save item", 1);
@@ -105,25 +106,14 @@ class Controller_Item extends Controller_Core_Action
 					}
 					$model = Ccc::getModel('Core_Table');
 					$resource = $model->getResource()->setTableName("item_{$backendType}")->setPrimaryKey('value_id');
-					if($id)
+					$entityId = ($id) ? ($id) : ($item->getId());
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
 					{
-						$sql = "SELECT * FROM `item_{$backendType}` WHERE `attribute_id` = '{$attributeId}' AND `entity_id` = '{$id}' ";
-						$attributeValue = $resource->fetchRow($sql);
-						if(!$attributeValue)
-						{
-							throw new Exception("unable to fetch data.", 1);
-						}
-						$model->value_id = $attributeValue['value_id'];
-					}
-					else
-					{
-						$model->entity_id = $item->getId();
-					}
-					$model->attribute_id = $attributeId;
-					$model->value = $v;
-					if(!$model->save())
-					{
-						throw new Exception("item's attribute not saved.", 1);
+						throw new Exception("item's attribute not inserted or updated.", 1);
+						
 					}
 				}
 			}
@@ -135,7 +125,7 @@ class Controller_Item extends Controller_Core_Action
 			$this->getMessage()->addMessage('item not saved.',  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
+		// return $this->redirect('grid', null, null, true);
 
 	}
 
