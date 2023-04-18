@@ -53,7 +53,7 @@ class Model_Core_Table_Resource
 	{
 		if($query == null)
 		{
-		$query ="SELECT * FROM `{$this->getResourceName()}`";
+			$query ="SELECT * FROM `{$this->getResourceName()}`";
 		}
 
 		return $this->getAdapter()->fetchAll($query);
@@ -76,8 +76,8 @@ class Model_Core_Table_Resource
 	{	
 		if(is_array($data))
 		{
-		$key =  implode('`,`', array_keys($data));
-		$value =  implode('\',\'', $data);
+			$key =  implode('`,`', array_keys($data));
+			$value =  implode('\',\'', $data);
 		}
 
 		echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
@@ -85,43 +85,42 @@ class Model_Core_Table_Resource
 		return $result;
 
 	}
-	// public function insertUpdateOnDuplicate($data,$uniqueColumns)
-	// {
-	// 	if(is_array($uniqueColumns))
-	// 	{
-	// 	$key =  implode('`,`', array_keys($data));
-	// 	$value =  implode('\',\'', $data);
-	// 	}
 
-	// 	if(is_array($data))
-	// 	{
-	// 	$key =  implode('`,`', array_keys($data));
-	// 	$value =  implode('\',\'', $data);
-	// 	}
-	// 	$sql = 
-	// 	echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
-	// 	$result = $this->getAdapter()->insert($sql);
-	// 	return $result;
+	public function insertUpdateOnDuplicate($data,$uniqueColumns)
+	{
+		$key =  implode('`,`', array_keys($data));
+		$value =  implode('\',\'', $data);
 
-	// }
+		$updateValue = array_diff($data,$uniqueColumns);
+
+		foreach ($updateValue as $key1 => $value1)
+		{
+			$values [] =" `{$key1}` = '{$value1}'" ;
+		}
+		echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}') ON DUPLICATE KEY UPDATE ".implode(',', $values);
+		$result = $this->getAdapter()->insert($sql);
+		return $result;
+
+	}
 
 	public function update($data,$condition)
 	{
-			foreach($data as $key => $value)
-			{
-				$values [] =" `{$key}` = '{$value}'" ;
-			}
+		foreach($data as $key => $value)
+		{
+			$values [] =" `{$key}` = '{$value}'" ;
+		}
 		if(!is_array($condition))
 		{
-		echo $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
+			echo $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
 		}
 		$and = [];
 		if(is_array($condition))
 		{
-			foreach ($condition as $key => $value) {
-			$and [] =" `{$key}` = '{$value}'" ;
+			foreach ($condition as $key => $value)
+			{
+				$and [] =" `{$key}` = '{$value}'" ;
 			}
-		echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
+			echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
 
 		}
 		$result = $this->getAdapter()->update($sql);
@@ -136,7 +135,7 @@ class Model_Core_Table_Resource
 			$and [] =" `{$key}` = '{$value}'" ;
 			}
 
-		echo $sql = "DELETE FROM `{$this->tableName}` WHERE ".implode('AND', $and) ;
+			echo $sql = "DELETE FROM `{$this->tableName}` WHERE ".implode('AND', $and) ;
 		}
 		else
 		{

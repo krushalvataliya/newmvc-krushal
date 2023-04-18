@@ -20,7 +20,7 @@ $shiping_method = $this->getData('shippingMethod');
     </tr>
     <th>STATUS</th>
     <td> <select name="shiping_method[status]" >
-      <?php foreach ($shiping_method->getResource()->getStatusOptions() as $key => $value): ?>
+      <?php foreach ($shiping_method->getStatusOptions() as $key => $value): ?>
       <option value="<?php echo $key ?>"name="available" <?php if($shiping_method->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
       <?php endforeach; ?>
     </select> </td>

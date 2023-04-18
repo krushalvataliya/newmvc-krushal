@@ -13,9 +13,13 @@ class Block_item_Grid extends  Block_Core_Grid
 		$this->addColumn('item_id',
 		['title' =>'ITEM_ID']
 		);	
-		$this->addColumn('item_id',
-		['title' =>'ENTITY_ID']
-		);	
+		$this->addColumn('name',
+		['title' =>'NAME']
+		);
+		$this->addColumn('type',
+		['title' =>'TYPE']
+		);
+
 		$this->addColumn('sku',
 		['title' =>'SKU']
 		);
@@ -76,7 +80,10 @@ class Block_item_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelitem = Ccc::getModel('item');
-		$sql = "SELECT * FROM `item`";
+		$sql = "SELECT I.*, IVName.`value` as name , IVType.`value` as type FROM `item` I
+		LEFT JOIN `item_varchar` IVName ON I.`item_id` = IVName.`entity_id` AND IVName.`attribute_id`= 38
+		LEFT JOIN `item_varchar` IVType ON I.`item_id` = IVType.`entity_id` AND IVType.`attribute_id`= 40";
+
 		$items =$modelitem->fetchAll($sql);
 		return $items;
 	}
