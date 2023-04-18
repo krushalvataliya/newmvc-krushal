@@ -32,15 +32,16 @@ class Ccc
 			return $GLOBALS[$className];
 		}
 
-		$GLOBALS[$className] = new $classname();
+		$GLOBALS[$className] = new $className();
 		return $GLOBALS[$className];
 	}
-	public function getBaseDir($subDir = null)
+	public static function getBaseDir($subDir = null)
 	{
 		$dir = getCwd();
 		if($subDir)
 		{
-			$dir = $dir.$subDir;
+			$dirName = $dir.$subDir;
+			return $dirName;
 		}
 		return $dir;
 	}

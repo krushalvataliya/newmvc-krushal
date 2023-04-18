@@ -28,4 +28,10 @@ class Model_Item extends Model_Core_Table
 		}
 			return $statuses[ Model_Product_Resource::STATUS_DEFAULT];
 	}
+
+	public function getAttributeValue($attribute)
+	{
+		$sql = "SELECT `value` FROM `item_{$attribute->backend_type}` WHERE `entity_id` = '{$this->getId()}' AND `attribute_id` = '{$attribute->getId()}' ";
+		return $this->getResource()->getAdapter()->fetchOne($sql);
+	}
 }

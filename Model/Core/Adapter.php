@@ -17,15 +17,15 @@ class Model_core_Adapter{
 
    public function fetchAll($query){
    	$result =$this->connect()->query($query);
-   	if(!$result){
-   		return false;
+   	if($result->num_rows == 0){
+   		return null;
    	}
    		return $result->fetch_all(MYSQLI_ASSOC);
    }
 
     public function fetchPairs($query){
       $result =$this->connect()->query($query);
-      if(!$result){
+      if($result->num_rows == 0){
          return null;
       }
       $result = $result->fetch_all();
@@ -40,7 +40,7 @@ class Model_core_Adapter{
 
    public function fetchOne($query){
       $result =$this->connect()->query($query);
-      if(!$result){
+      if($result->num_rows == 0){
          return null;
       }
       $row = $result->fetch_array();
@@ -49,8 +49,8 @@ class Model_core_Adapter{
 
    public function fetchRow($query){
    	$result =$this->connect()->query($query);
-   	if(!$result){
-   		return false;
+   	if($result->num_rows == 0){
+   		return null;
    	}
    		return $result->fetch_assoc();
    }
