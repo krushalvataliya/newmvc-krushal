@@ -1,4 +1,3 @@
 <?php $attribute = $this->getAttribute()  ?>
 <?php $row = $this->getRow();?>
-<?php $id = $attribute->attribute_id ?>
-<textarea  name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId(); ?>]" rows="5"><?php echo $row->$id; ?></textarea>
+<textarea  name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId(); ?>]" rows="5"><?php echo $row->getAttributeValue($attribute); ?></textarea>

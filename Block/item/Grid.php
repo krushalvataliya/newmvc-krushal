@@ -13,7 +13,7 @@ class Block_item_Grid extends  Block_Core_Grid
 		$this->addColumn('item_id',
 		['title' =>'ITEM_ID']
 		);	
-		$this->addColumn('entity_id',
+		$this->addColumn('item_id',
 		['title' =>'ENTITY_ID']
 		);	
 		$this->addColumn('sku',

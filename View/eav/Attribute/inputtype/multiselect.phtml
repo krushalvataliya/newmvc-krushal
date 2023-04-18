@@ -1,7 +1,6 @@
 <?php $attribute = $this->getAttribute(); ?>
 <?php $row = $this->getRow()  ?>
-<?php $id = $attribute->attribute_id; ?>
-<?php $ids=explode(',', $row->$id) ?>
+<?php $ids=explode(',', $row->getAttributeValue($attribute)) ?>
 <select name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId() ?>][]" multiple>
 <?php foreach ($attribute->getOptions() as $key => $option): ?>
   <option value="<?php echo $option->option_id; ?>" <?php if(in_array($option->option_id, $ids)){echo 'selected';} ?>><?php echo $option->name; ?></option>

@@ -1,7 +1,6 @@
 <?php $attribute = $this->getAttribute(); ?>
 <?php $row = $this->getRow();?>
-<?php $id = $attribute->attribute_id ?>
 <?php foreach ($attribute->getOptions() as $key => $option): ?>
-	<input type="radio" name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId() ?>]" value="<?php echo $option->option_id; ?>" <?php if($row->$id == $option->option_id){echo 'checked';} ?> >
+	<input type="radio" name="attribute[<?php echo $attribute->backend_type ?>][<?php echo $attribute->getId() ?>]" value="<?php echo $option->option_id; ?>" <?php if($row->getAttributeValue($attribute) == $option->option_id){echo 'checked';} ?> >
 <label><?php echo $option->name; ?></label><br>
 <?php endforeach ?>

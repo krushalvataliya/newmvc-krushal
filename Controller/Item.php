@@ -32,7 +32,7 @@ class Controller_Item extends Controller_Core_Action
 				
 			}
 			$modelitem = Ccc::getModel('item');
-			$sql = "SELECT * FROM `items` WHERE `item_id`= {$itemId}";
+			$sql = "SELECT * FROM `item` WHERE `item_id`= {$itemId}";
 			$item =$modelitem->fetchRow($sql);
 			if(!$item)
 			{
@@ -41,6 +41,7 @@ class Controller_Item extends Controller_Core_Action
 			}
 			$layout = $this->getLayout();
 			$content = $layout->createBlock('item_Edit');
+			$content->setData(['item' => $item]);
 			$layout->getChild('content')->addChild('edit',$content);
 			$layout->render();
 		}
@@ -64,7 +65,6 @@ class Controller_Item extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('item');
-			$postData = $request->getPost();
 			echo '<pre>';
 			$attributeData = $request->getPost('attribute');
 			if(!$postData)
@@ -108,7 +108,6 @@ class Controller_Item extends Controller_Core_Action
 					if($id)
 					{
 						$sql = "SELECT * FROM `item_{$backendType}` WHERE `attribute_id` = '{$attributeId}' AND `entity_id` = '{$id}' ";
-						Ccc::log($sql);
 						$attributeValue = $resource->fetchRow($sql);
 						if(!$attributeValue)
 						{
