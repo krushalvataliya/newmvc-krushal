@@ -16,8 +16,11 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 	protected function _prepareColumns()
 	{	
 		$this->addColumn('attribute_id',[
-			'title' =>'ADMIN_ID'
+			'title' =>'ATTRIBUTE ID'
 		]);	
+		$this->addColumn('entity_type_id',[
+			'title' =>'ENTITY TYPE'
+		]);
 		$this->addColumn('code',[
 			'title' =>'CODE'
 		]);
@@ -35,9 +38,6 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 		]);
 		$this->addColumn('input_type',[
 			'title' =>'INPUT_TYPE'
-		]);
-		$this->addColumn('updated_at',[
-			'title' =>'UPDATED_AT'
 		]);
 		return parent::_prepareColumns();
 	}
@@ -85,6 +85,10 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 		if ($key == 'input_type') {
 			return $row->getInputTypeText();
 		}
+		if ($key == 'entity_type_id') {
+			return $row->getEntityName();
+		}
+
 		return $row->$key;
 	}
 

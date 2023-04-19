@@ -98,7 +98,7 @@ class Model_Core_Table_Resource
 			$values [] =" `{$key1}` = '{$value1}'" ;
 		}
 		echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}') ON DUPLICATE KEY UPDATE ".implode(',', $values);
-		$result = $this->getAdapter()->insert($sql);
+		$result = $this->getAdapter()->query($sql);
 		return $result;
 
 	}

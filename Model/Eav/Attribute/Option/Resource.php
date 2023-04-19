@@ -12,6 +12,7 @@ class Model_Eav_Attribute_Option_Resource extends Model_Core_Table_Resource
 		$this->setPrimaryKey('option_id');
 	}
 
+
 }
 
  ?>

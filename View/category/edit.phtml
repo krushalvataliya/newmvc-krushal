@@ -1,5 +1,5 @@
 <?php
-$category = $this->getData('category');
+$row = $this->getData('category');
 $categoriesData = $this->getData('categoriesData');
 ?>
 <table>
@@ -14,29 +14,39 @@ $categoriesData = $this->getData('categoriesData');
     <form action="insert_category.php" method="GET">
       <tr> <th>PARENT CATEGORY</th>
       <td><select name="category[parent_id]" >
+        <?php if ($categoriesData): ?>
         <?php foreach ($categoriesData->getData() as $singleCategory): ?>
         <option value="<?php echo $singleCategory->category_id;?>"
-          <?php if ($category->parent_id == $singleCategory->category_id)
+          <?php if ($row->parent_id == $singleCategory->category_id)
           { echo "selected";}?> >
           <?php echo $singleCategory->getPathName();?>
         </option>
         <?php endforeach; ?>
+        <?php endif ?>
       </select> </td></tr>
       <tr>
         <th>NAME</th>
-        <td><input type="text" name="category[name]" value="<?php echo $category->name ?>"></td>
+        <td><input type="text" name="category[name]" value="<?php echo $row->name ?>"></td>
       </tr>
       <tr>
         <th>STATUS</th>
         <td> <select name="category[status]" >
-          <?php foreach ($category->getStatusOptions() as $key => $value): ?>
-          <option value="<?php echo $key ?>" <?php if($category->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+          <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+          <option value="<?php echo $key ?>" <?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
           <?php endforeach; ?>
         </select> </td>
       </tr>
       <tr>
         <th>DESCRIPTION</th>
-        <td><input type="text" name="category[description]" value="<?php echo $category->description ?>"></td>
+        <td><input type="text" name="category[description]" value="<?php echo $row->description ?>"></td>
+      </tr>
+      <tr>
+        <?php if ($this->getAttributes()): ?>
+        <?php foreach ($this->getAttributes() as $key => $value): ?>
+        <tr><th><?php echo $value->name; ?></th>
+        <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
+        <?php endforeach ?>
+        <?php endif ?>
       </tr>
     </form>
   </table>

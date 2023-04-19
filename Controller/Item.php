@@ -86,8 +86,8 @@ class Controller_Item extends Controller_Core_Action
 				}
 				$postData['item_id'] = $itemRow->item_id ;
 			}
-			$modelRowitem->setData($postData);
 			$postData['entity_type_id'] = Model_Item::ENTITY_TYPE_ID ; 
+			$modelRowitem->setData($postData);
 
 			$item =$modelRowitem->save();
 			if(!$item)
@@ -96,6 +96,7 @@ class Controller_Item extends Controller_Core_Action
 				
 			}
 
+			$entityId = ($id) ? ($id) : ($item->getId());
 			foreach ($attributeData as $backendType => $value)
 			{
 				foreach ($value as $attributeId => $v)
@@ -106,13 +107,12 @@ class Controller_Item extends Controller_Core_Action
 					}
 					$model = Ccc::getModel('Core_Table');
 					$resource = $model->getResource()->setTableName("item_{$backendType}")->setPrimaryKey('value_id');
-					$entityId = ($id) ? ($id) : ($item->getId());
 					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
 					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
 					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
 					if(!$insertUpdate)
 					{
-						throw new Exception("item's attribute not inserted or updated.", 1);
+						throw new Exception("item's Attribute not inserted", 1);
 						
 					}
 				}
@@ -122,10 +122,10 @@ class Controller_Item extends Controller_Core_Action
 		}
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('item not saved.',  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 
-		// return $this->redirect('grid', null, null, true);
+		return $this->redirect('grid', null, null, true);
 
 	}
 

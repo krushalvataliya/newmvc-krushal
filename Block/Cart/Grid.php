@@ -10,8 +10,10 @@ class Block_Cart_Grid extends  Block_Core_Template
 
 	public function getCartDetails()
 	{
+		$request = $this->getRequest();
+		$id =(int) $request->getParam('customer_id');
 		$modelCart =Ccc::getModel('cart');
-		$sql = "SELECT C.product_id, P.name, P.sku,P.price, C.quantity  FROM `cart_item` C JOIN `products` P ON C.product_id = P.product_id";
+		$sql = "SELECT C.product_id, P.name, P.sku,P.price, C.quantity  FROM `cart_item` C JOIN `products` P ON C.product_id = P.product_id WHERE `customer_id` = '{$id}'";
 		$cartDetails =$modelCart->fetchall($sql);
 		return $cartDetails;		
 	}
@@ -26,8 +28,10 @@ class Block_Cart_Grid extends  Block_Core_Template
 
 	public function getTotal()
 	{
+		$request = $this->getRequest();
+		$id =(int) $request->getParam('customer_id');
 		$modelCartItem =Ccc::getModel('cart_item');
-		$sql = "SELECT * FROM `cart_item`";
+		$sql = "SELECT * FROM `cart_item` WHERE `customer_id` = '{$id}'";
 		$cartItems =$modelCartItem->fetchall($sql);
 		$total = 0;
 		if($cartItems)
@@ -51,14 +55,11 @@ class Block_Cart_Grid extends  Block_Core_Template
 	public function getselectedShippingMethod()
 	{
 		$request = $this->getRequest();
+		$id =(int) $request->getParam('customer_id');
 		$modelCart =Ccc::getModel('cart');
 		$selectedShippingMethod = [];
-		$id =(int) $request->getParam('shipping_method_id');
-		if (isset($id)) {
-			$sql = "SELECT * FROM `cart` where `shiping_method_id` = {$id}";
-			$selectedShippingMethod =$modelCart->fetchRow($sql);
-		}
-		return $selectedShippingMethod;
+		$sql = "SELECT * FROM `cart` WHERE `customer_id` = {$id};";
+		return $selectedShippingMethod =$modelCart->fetchRow($sql);
 	}
 
 }

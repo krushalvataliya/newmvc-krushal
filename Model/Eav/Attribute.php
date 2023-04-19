@@ -79,6 +79,12 @@ class Model_Eav_Attribute extends Model_Core_Table
 			return $options[ Model_Eav_Attribute_Resource::ATTRIBUTE_OPTION_DEFAULT];
 	}
 
+	public function getEntityName()
+	{
+		$sql = "SELECT `name` FROM `entity_type` WHERE `entity_type_id` = '{$this->entity_type_id}' ";
+		return $this->getResource()->getAdapter()->fetchOne($sql);
+	}
+
 	 public function getOptions()
     {
     	$sourceModel = $this->source_model;

@@ -64,6 +64,7 @@ class Controller_Customer extends Controller_Core_Action
 			$customer['customer_id'] = $id;
 		}
 		$modelCustomer =Ccc::getModel('Customer');
+		$customer['entity_type_id'] = Model_Customer::ENTITY_TYPE_ID ;
 		$insertCustomer = $modelCustomer->setData($customer)->save();
 		return $insertCustomer;
 	}
@@ -78,6 +79,7 @@ class Controller_Customer extends Controller_Core_Action
 				throw new Exception("invalid Request.", 1);
 			}
 			$sameaddress = $request->getPost('sameaddress');
+			$attributeData = $request->getPost('attribute');
 			
 			$modelCustomer =Ccc::getModel('Customer');
 			$id=(int)$request->getParam('customer_id');
@@ -148,6 +150,28 @@ class Controller_Customer extends Controller_Core_Action
 
 			if (!$insertCustomer) {
 				throw new Exception("Customer Address not inserted.", 1);
+			}
+
+			$entityId = ($id) ? ($id) : ($insertCustomer->getId());
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("customer_{$backendType}")->setPrimaryKey('value_id');
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
+					{
+						throw new Exception("Customer's Attribute not inserted.", 1);
+						
+					}
+				}
 			}
 				$insertCustomer = $modelCustomer->setData($updeteCustomer)->save();
 			$this->getMessage()->addMessage('Customer saved successfully.',  Model_Core_Message::SUCCESS);
