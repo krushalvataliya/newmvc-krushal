@@ -18,7 +18,7 @@ class Block_Product_Edit extends  Block_Core_Template
 	public function getAttributes()
 	{
 		$modelAttribute = Ccc::getModel('Eav_Attribute');
-		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` = 1";
+		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` = ".Model_Product::ENTITY_TYPE_ID;
 		$attributes = $modelAttribute->fetchAll($sql);
 		if($attributes)
 		{

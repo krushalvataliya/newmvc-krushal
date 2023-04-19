@@ -30,10 +30,7 @@ $row = $this->getData('product');
       <th>QUANTITY</th>
       <td><input type="number" name="product[quantity]" value="<?php echo $row->quantity;?>"></td>
     </tr>
-    <tr>
-      <th>DESCRIPTION</th>
-      <td><input type="text" name="product[description]" value="<?php echo $row->description;?>"></td>
-    </tr>
+    
     <tr>
       <th>STATUS</th>
       <td><select name="product[status]" >
@@ -41,18 +38,6 @@ $row = $this->getData('product');
         <option value="<?php echo $key ?>"<?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
       </select></td>
-    </tr>
-    <tr>
-      <th>COLOR</th>
-      <td><select name="product[color]" value="<?php echo $color?>" >
-        <option value="red"name="Available">red</option>
-        <option value="green"name="unavailable">green</option>
-        <option value="blue"name="unavailable">blue</option>
-      </select></td>
-    </tr>
-    <tr>
-      <th>MATERIAL</th>
-      <td><input type="text" name="product[material]" value="<?php echo $row->material;?>"></td>
     </tr>
     <tr>
       <?php if ($this->getAttributes()): ?>

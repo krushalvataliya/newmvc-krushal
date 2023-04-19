@@ -33,7 +33,7 @@ $total =$this->getTotal();
 			<select name="shiping_method_id">
 				<option>select</option>
 				<?php foreach ($methods->getData() as $method):?>
-				<option value="<?php echo $method->shiping_method_id;?>" <?php if(isset($_GET['shipping_method_id'])) {if($request->getParam('shipping_method_id') == $method->shiping_method_id ){echo "selected";}} ?>  ><?php echo $method->name.'-$'.$method->amount.'.00'; ?></option>
+				<option value="<?php echo $method->shiping_method_id;?>" <?php {if( $selected_method->shiping_method_id == $method->shiping_method_id ){echo "selected";}} ?>  ><?php echo $method->name.'-$'.$method->amount.'.00'; ?></option>
 				<?php endforeach; ?>
 			</select>
 		</tr>
@@ -92,7 +92,7 @@ $total =$this->getTotal();
 </table>
 <div style="text-align: right;float: right;">
 	<table class="table table-bordered">
-		<?php if($request->getParam('shipping_method_id') != null && $selected_method != null): ?>
+		<?php if($selected_method != null): ?>
 		<tr >
 			<th>SUB TOTAL</th>
 			<td><?php echo $total;?></td>
@@ -116,7 +116,7 @@ $total =$this->getTotal();
 		</tr>
 		<tr>
 			<th>SHIPPING AMOUNT</th>
-			<td>Please select shipping method</td>
+			<td></td>
 		</tr>
 		<tr>
 			<th>TAX ()</th>

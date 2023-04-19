@@ -23,7 +23,7 @@ class Block_Core_Template extends Model_Core_View
         return null;
     }
 
-    public function ToHtml()
+    public function toHtml()
     {
         ob_start();
         $this->render();

@@ -39,8 +39,8 @@ class Controller_Brand extends Controller_Core_Action
 				
 			}
 			$layout = $this->getLayout();
-			Ccc::register('brand',$brand);
 			$content = $layout->createBlock('Brand_Edit');
+			$content->setId($brandId);
 			$layout->getChild('content')->addChild('edit',$content);
 			$layout->render();
 		}
@@ -64,10 +64,18 @@ class Controller_Brand extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('brand');
+			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
 				throw new Exception("no data posted.", 1);
 			}
+			$targetDir = "View/brand/image/";
+			$file = basename($_FILES["fileToUpload"]["name"]);
+			$fileArray = explode('.', $file);
+			$targetName='IMG_'.time().'.'.$fileArray[1];
+			$targetFile = $targetDir .$targetName;
+			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile);
+			$postData['image'] =  $targetName;
 
 			$modelRowbrand = Ccc::getModel('Brand');
 			if($id = (int)$request->getParam('brand_id'))
@@ -77,8 +85,14 @@ class Controller_Brand extends Controller_Core_Action
 				{
 					throw new Exception("invalid id", 1);
 				}
+				if($file == null)
+				{
+					$postData['image'] =  $brandRow->image;
+				}
 				$postData['brand_id'] =$brandRow->brand_id ;
 			}
+			$postData['entity_type_id'] = Model_Brand::ENTITY_TYPE_ID ;
+
 			$modelRowbrand->setData($postData);
 			$result =$modelRowbrand->save();
 			if(!$result)
@@ -86,6 +100,28 @@ class Controller_Brand extends Controller_Core_Action
 				throw new Exception("unable to save brand", 1);
 				
 			}
+			$entityId = ($id) ? ($id) : ($result->getId());
+			foreach ($attributeData as $backendType => $value)
+			{
+				foreach ($value as $attributeId => $v)
+				{
+					if(is_array($v))
+					{
+						$v = implode(',', $v);
+					}
+					$model = Ccc::getModel('Core_Table');
+					$resource = $model->getResource()->setTableName("brand_{$backendType}")->setPrimaryKey('value_id');
+					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+					if(!$insertUpdate)
+					{
+						throw new Exception("brand's Attribute not inserted.", 1);
+						
+					}
+				}
+			}
+
 			$this->getMessage()->addMessage('brand saved successfully.',  Model_Core_Message::SUCCESS);
 
 		}

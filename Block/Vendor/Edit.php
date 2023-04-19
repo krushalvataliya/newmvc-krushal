@@ -19,7 +19,7 @@ class Block_Vendor_Edit extends  Block_Core_Template
 	public function getAttributes()
 	{
 		$modelAttribute = Ccc::getModel('Eav_Attribute');
-		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` = 3";
+		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` = ".Model_Vendor::ENTITY_TYPE_ID;
 		$attributes = $modelAttribute->fetchAll($sql);
 		if($attributes)
 		{

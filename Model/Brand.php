@@ -7,6 +7,7 @@ class Model_Brand extends Model_Core_Table
 	const STATUS_ACTIVE_LBL = 'Active';
 	const STATUS_INACTIVE_LBL = 'Inactive';
 	const STATUS_DEFAULT  = 1;
+	const ENTITY_TYPE_ID = 7;
 	
 	public function getStatusOptions()
 	{
@@ -39,6 +40,11 @@ class Model_Brand extends Model_Core_Table
 			return $statuses[$this->status];
 		}
 			return $statuses[ Model_Brand::STATUS_DEFAULT];
+	}
+	public function getAttributeValue($attribute)
+	{
+		$sql = "SELECT `value` FROM `brand_{$attribute->backend_type}` WHERE `entity_id` = '{$this->getId()}' AND `attribute_id` = '{$attribute->getId()}' ";
+		return $this->getResource()->getAdapter()->fetchOne($sql);
 	}
 }
 ?>

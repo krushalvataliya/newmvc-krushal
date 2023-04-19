@@ -36,6 +36,10 @@ class Block_Customer_Grid extends  Block_Core_Grid
 
 	protected function _prepareActions()
 	{
+		$this->addAction('grid',
+			['title' =>'view address',
+			'method'=> 'getAddressUrl'
+		]);
 		$this->addAction('edit',
 			['title' =>'edit',
 			'method'=> 'getEditUrl'
@@ -44,7 +48,10 @@ class Block_Customer_Grid extends  Block_Core_Grid
 			['title' =>'delete',
 			'method'=> 'getDeleteUrl'
 		]);
-		return parent::_prepareActions();
+		$this->addAction('grid1',
+			['title' =>'cart',
+			'method'=> 'getCartUrl'
+		]);
 	}
 
 	protected  function _prepareButtons()
@@ -66,7 +73,17 @@ class Block_Customer_Grid extends  Block_Core_Grid
 		return $this->geturl($key, null,['customer_id'=>$row->getid()],true);
 	}
 
-			public function getColumnValue($row, $key)
+	public function getAddressUrl($row, $key)
+	{
+		return $this->geturl($key, 'customer_address',['customer_id'=>$row->getid()],true);
+	}
+
+	public function getCartUrl($row, $key)
+	{
+		return $this->geturl('grid', 'cart',['customer_id'=>$row->getid()],true);
+	}
+
+	public function getColumnValue($row, $key)
 	{
 		if ($key == 'status') {
 			return $row->getStatusText();

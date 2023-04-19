@@ -79,6 +79,12 @@ class Model_Eav_Attribute extends Model_Core_Table
 			return $options[ Model_Eav_Attribute_Resource::ATTRIBUTE_OPTION_DEFAULT];
 	}
 
+	public function getEntityName()
+	{
+		$sql = "SELECT `name` FROM `entity_type` WHERE `entity_type_id` = '{$this->entity_type_id}' ";
+		return $this->getResource()->getAdapter()->fetchOne($sql);
+	}
+
 	 public function getOptions()
     {
     	$sourceModel = $this->source_model;
@@ -87,7 +93,7 @@ class Model_Eav_Attribute extends Model_Core_Table
     		$sourceModel = "Eav_Attribute_Option_Source";
     	}
         $modelEavAttributeOption = Ccc::getModel($sourceModel);
-       echo  $sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` ='{$this->attribute_id}' ORDER BY `position` ASC";
+        $sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` ='{$this->attribute_id}' ORDER BY `position` ASC";
         return Ccc::getModel($sourceModel)->setAttribute($this)->getOptions();
     }
 }

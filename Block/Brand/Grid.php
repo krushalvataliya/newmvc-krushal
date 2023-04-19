@@ -22,12 +22,6 @@ class Block_Brand_Grid extends  Block_Core_Grid
 		$this->addColumn('image',
 		['title' =>'IMAGE']
 		);	
-		$this->addColumn('created_at',
-		['title' =>'CREATED AT']
-		);	
-		$this->addColumn('updated_at',
-			['title' =>'UPDATED AT']
-		);
 		return parent::_prepareColumns();
 	}
 
@@ -72,6 +66,10 @@ class Block_Brand_Grid extends  Block_Core_Grid
 	{
 		if ($key == 'status') {
 			return $row->getStatusText();
+		}
+		if($key == 'image')
+		{
+			return "<img style=\"height: 100px;width: 100px;\" class=\"img-thumbnail imgsize\" src=\"View/brand/image/$row->image\">";
 		}
 		return $row->$key;
 	}

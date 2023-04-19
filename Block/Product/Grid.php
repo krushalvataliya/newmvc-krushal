@@ -34,12 +34,7 @@ class Block_Product_Grid extends  Block_Core_Grid
 		$this->addColumn('status',
 		['title' =>'STATUS']
 		);	
-		$this->addColumn('color',
-		['title' =>'COLOR']
-		);	
-		$this->addColumn('material',
-			['title' =>'MATERIAL']
-		);
+		
 		return parent::_prepareColumns();
 	}
 
@@ -95,7 +90,8 @@ class Block_Product_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelProduct = Ccc::getModel('Product');
-		$sql = "SELECT * FROM `products`";
+		$sql = "SELECT P.*,PVDesc.`value` as description FROM `products`P
+		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66";
 		$products =$modelProduct->fetchAll($sql);
 		return $products;
 	}

@@ -20,7 +20,7 @@ class Block_Category_Edit extends  Block_Core_Template
 	public function getAttributes()
 	{
 		$modelAttribute = Ccc::getModel('Eav_Attribute');
-		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` = 4";
+		$sql = "SELECT * FROM `eav_attribute` WHERE `entity_type_id` =".Model_Cetegory::ENTITY_TYPE_ID;
 		$attributes = $modelAttribute->fetchAll($sql);
 		if($attributes)
 		{

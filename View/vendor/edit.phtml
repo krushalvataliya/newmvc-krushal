@@ -48,6 +48,15 @@ $address2  = $row->getBillingAddress();
       <td><input type="text" name="vendor[company]" value="<?php echo $row->company ?>"></td>
     </tr>
     <tr>
+      <?php if ($this->getAttributes()): ?>
+        
+<?php foreach ($this->getAttributes() as $key => $value): ?>
+  <tr><th><?php echo$value->name; ?></th>
+  <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
+<?php endforeach ?> 
+      <?php endif ?>
+</tr>
+    <tr>
       <td>shipping address as billing address</td>
       <td><input type="checkbox" id="sameaddress" name="sameaddress" value="1"  <?php if($address->address_id == $address2->address_id){echo 'checked';}?>></td>
     </tr>
@@ -62,15 +71,7 @@ $address2  = $row->getBillingAddress();
       <?php require_once 'View/vendor/address/edit2.phtml' ?>
       </table>
     </div>
-    <tr>
-      <?php if ($this->getAttributes()): ?>
-        
-<?php foreach ($this->getAttributes() as $key => $value): ?>
-  <tr><th><?php echo$value->name; ?></th>
-  <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
-<?php endforeach ?> 
-      <?php endif ?>
-</tr>
+    
   </form>
 
 </table>
