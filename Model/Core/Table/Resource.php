@@ -110,20 +110,26 @@ class Model_Core_Table_Resource
 			$values [] =" `{$key}` = '{$value}'" ;
 		}
 		if(!is_array($condition))
-		{
-			echo $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
-		}
 		$and = [];
+		{
+			// $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
+			$and[0] = " `{$this->primaryKey}` = '{$condition}' " ;
+		}
 		if(is_array($condition))
 		{
 			foreach ($condition as $key => $value)
 			{
 				$and [] =" `{$key}` = '{$value}'" ;
 			}
-			echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
 
 		}
+		  echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
 		$result = $this->getAdapter()->update($sql);
+		if(!$result)
+		{
+			echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values)." WHERE ".implode('AND', $and) ;
+			$result = $this->getAdapter()->update($sql);
+		}
 		return $result;
 	}
 
