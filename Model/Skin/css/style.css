@@ -1,4 +1,4 @@
-@keyframes hideAnimation
+@keyframes hide
 {to
 {
 	visibility: hidden;
@@ -12,7 +12,7 @@
 color: #270;
 background-color: #DFF2BF;
 display: block;
-animation: hideAnimation 0s ease-in 3s ;
+animation: hide 0s ease-in 3s ;
 animation-fill-mode: forwards;
 text-align-last: center;
 }

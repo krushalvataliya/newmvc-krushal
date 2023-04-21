@@ -80,7 +80,7 @@ class Block_Customer_Grid extends  Block_Core_Grid
 
 	public function getCartUrl($row, $key)
 	{
-		return $this->geturl('grid', 'cart',['customer_id'=>$row->getid()],true);
+		return $this->geturl('grid', 'quote',['customer_id'=>$row->getid()],true);
 	}
 
 	public function getColumnValue($row, $key)
