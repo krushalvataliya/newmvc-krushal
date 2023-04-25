@@ -6,15 +6,15 @@ class Controller_Product_Media extends Controller_Core_Action
 	{
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Product_Media_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$content = $content->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 	}
 	function addAction()
 	{
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Product_Media_Add');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$content = $content->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 	}
 	function insertAction()
 	{
@@ -35,8 +35,8 @@ class Controller_Product_Media extends Controller_Core_Action
 			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile);
 			$media['img'] = $targetName;
 			$media['product_id'] = $productId;
-			$modelProductMedia =Ccc::getModel('Product_Media')->setData($media);
 
+			$modelProductMedia =Ccc::getModel('Product_Media')->setData($media);
 			$insert=$modelProductMedia->save();
 			if(!$insert)
 			{
@@ -44,12 +44,15 @@ class Controller_Product_Media extends Controller_Core_Action
 			}
 
 			$this->getMessage()->addMessage('Media inserted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$content = $layout->createBlock('Product_Media_Grid');
+			$content = $content->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 		}
 		catch (Exception $e) {
 			$this->getMessage()->addMessage('Media not inserted.',  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid','product_media',['product_id'-> $productId]);		
 	}
 	
 	function updateAction()
@@ -58,10 +61,6 @@ class Controller_Product_Media extends Controller_Core_Action
 		{
 			$request = $this->getRequest();
 			$button = $request->getPost('button');
-			if($button == 'delete')
-			{
-				return $this->deleteAction();
-			}
 			$request = $this->getRequest();
 			$productId =(int)$request->getParam('product_id');
 			$gallaryId = $request->getPost('gallary');
@@ -113,14 +112,15 @@ class Controller_Product_Media extends Controller_Core_Action
 				}
 			}
 			$this->getMessage()->addMessage('Media updeted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$content = $layout->createBlock('Product_Media_Grid');
+			$content = $content->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Media not updeted.',  Model_Core_Message::SUCCESS);
 		}
-
-		return $this->redirect('grid','product_media',['product_id' => $productId]);		
-
 	}
 	
 	function deleteAction()
@@ -134,6 +134,7 @@ class Controller_Product_Media extends Controller_Core_Action
 				throw new Exception("invalid product ID.", 1);
 			}
 			$deleteImageId = $request->getPost('delete_image');
+			Ccc::log($deleteImageId,'data.log');
 			if (!$deleteImageId)
 			{
 				throw new Exception("invalid image Id", 1);
@@ -156,13 +157,17 @@ class Controller_Product_Media extends Controller_Core_Action
 			}
 			}
 			$this->getMessage()->addMessage('Media deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$content = $layout->createBlock('Product_Media_Grid');
+			$content = $content->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$productId,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Media not deleted.',  Model_Core_Message::FAILURE);
+			Ccc::log($_POST,'error.log');
 		}
 
-		return $this->redirect('grid','product_media',['product_id'-> $productId]);		
 	}
 
 }

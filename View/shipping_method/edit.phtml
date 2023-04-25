@@ -1,27 +1,27 @@
 <?php
-$shiping_method = $this->getData('shippingMethod');
+$row = $this->getRow();
 ?>
 <table>
   <tr>
     <td><h3>Edit shiping method<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
-    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
-      <td><button class="btn btn-primary">save</button></td>
+    <td><a  class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
+      <td><button class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('shipping-method').setMethod('post').call()" >save</button></td>
     </tr>
   </table>
+    <form id="shipping-method" action="<?php echo $this->getUrl('save'); ?>" method="POST">
   <table class="table table-bordered">
     <tr>
       <th>NAME</th>
-      <td><input type="text" name="shiping_method[name]" value="<?php echo $shiping_method->name?>"></td>
+      <td><input type="text" name="shiping_method[name]" value="<?php echo $row->name?>"></td>
     </tr>
     <tr>
       <th>AMOUNT</th>
-      <td><input type="number" name="shiping_method[amount]" value="<?php echo $shiping_method->amount?>"></td>
+      <td><input type="number" name="shiping_method[amount]" value="<?php echo $row->amount?>"></td>
     </tr>
     <th>STATUS</th>
     <td> <select name="shiping_method[status]" >
-      <?php foreach ($shiping_method->getStatusOptions() as $key => $value): ?>
-      <option value="<?php echo $key ?>"name="available" <?php if($shiping_method->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+      <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+      <option value="<?php echo $key ?>"name="available" <?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
       <?php endforeach; ?>
     </select> </td>
   </tr>

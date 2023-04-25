@@ -1,16 +1,16 @@
-<?php
-$row = $this->getData('customer');
+  <?php
+$row = $this->getRow();
 $address  = $row->getShippingAddress();
 $address2  = $row->getBillingAddress();
 ?>
 <table>
   <tr>
     <td><h3>Edit customer<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
-    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
-      <td><button class="btn btn-primary">save</button></td>
+    <td><a  class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
+      <td><button class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('customer').setMethod('post').call()" >save</button></td>
     </tr>
   </table>
+    <form id="customer" action="<?php echo $this->getUrl('save'); ?>" method="POST">
   <table class="table table-bordered">
     <tr>
       <th>FIRST_NAME</th>   

@@ -80,7 +80,8 @@ class Model_Core_Table_Resource
 			$value =  implode('\',\'', $data);
 		}
 
-		echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
+		$sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
+		Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->insert($sql);
 		return $result;
 
@@ -97,7 +98,8 @@ class Model_Core_Table_Resource
 		{
 			$values [] =" `{$key1}` = '{$value1}'" ;
 		}
-		echo $sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}') ON DUPLICATE KEY UPDATE ".implode(',', $values);
+		$sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}') ON DUPLICATE KEY UPDATE ".implode(',', $values);
+		Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->query($sql);
 		return $result;
 
@@ -113,7 +115,7 @@ class Model_Core_Table_Resource
 		$and = [];
 		{
 			// $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
-			$and[0] = " `{$this->primaryKey}` = '{$condition}' " ;
+			$and[] = " `{$this->primaryKey}` = '{$condition}' " ;
 		}
 		if(is_array($condition))
 		{
@@ -123,11 +125,13 @@ class Model_Core_Table_Resource
 			}
 
 		}
-		  echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
+	  	$sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
+		  Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->update($sql);
 		if(!$result)
 		{
-			echo $sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values)." WHERE ".implode('AND', $and) ;
+			$sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values)." WHERE ".implode('AND', $and) ;
+			Ccc::log($sql, 'query.log');
 			$result = $this->getAdapter()->update($sql);
 		}
 		return $result;
@@ -141,11 +145,13 @@ class Model_Core_Table_Resource
 			$and [] =" `{$key}` = '{$value}'" ;
 			}
 
-			echo $sql = "DELETE FROM `{$this->tableName}` WHERE ".implode('AND', $and) ;
+			$sql = "DELETE FROM `{$this->tableName}` WHERE ".implode('AND', $and) ;
+			Ccc::log($sql, 'query.log');
 		}
 		else
 		{
-		echo $sql = "DELETE FROM `{$this->tableName}` WHERE `{$this->tableName}`.`{$this->primaryKey}` = '{$condition}'  ";
+		$sql = "DELETE FROM `{$this->tableName}` WHERE `{$this->tableName}`.`{$this->primaryKey}` = '{$condition}'  ";
+		Ccc::log($sql, 'query.log');
 		}
 		$result = $this->getAdapter()->delete($sql);
 		return $result;

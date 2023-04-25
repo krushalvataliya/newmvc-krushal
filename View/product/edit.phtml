@@ -1,51 +1,52 @@
 <?php
-$row = $this->getData('product');
+$row = $this->getRow();
 ?>
 <table>
   <tr>
     <td><h3>Edit Product<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
-    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
-      <td><button class="btn btn-primary"> save</button></td>
-    </tr>
-  </table>
-  <table class="table table-bordered">
+    <td><a class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
+    <td><button id="subtn" class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('product').setMethod('post').call()">save</button></td>
+  </tr>
+</table>
+  <form id="product"  action="" method="POST"  >
+    <table>
     <tr>
       <th>NAME</th>
-      <td><input type="text" name="product[name]" value="<?php echo $row->name;?>"></td>
+      <td><input type="text" id="name" name="product[name]" value="<?php echo $row->name;?>"></td>
     </tr>
     <tr>
       <th>SKU</th>
-      <td><input type="text" name="product[sku]" value="<?php echo $row->sku;?>"></td>
+      <td><input type="text" id="sku" name="product[sku]" value="<?php echo $row->sku;?>"></td>
     </tr>
     <tr>
       <th>COST</th>
-      <td><input type="number" name="product[cost]" value="<?php echo $row->cost;?>"></td>
+      <td><input type="number" id="cost" name="product[cost]" value="<?php echo $row->cost;?>"></td>
     </tr>
     <tr>
       <th>PRICE</th>
-      <td><input type="number" name="product[price]" value="<?php echo $row->price;?>"></td>
+      <td><input type="number" id="price" name="product[price]" value="<?php echo $row->price;?>"></td>
     </tr>
     <tr>
       <th>QUANTITY</th>
-      <td><input type="number" name="product[quantity]" value="<?php echo $row->quantity;?>"></td>
+      <td><input type="number" id="quantity" name="product[quantity]" value="<?php echo $row->quantity;?>"></td>
     </tr>
-    
-    <tr>
-      <th>STATUS</th>
-      <td><select name="product[status]" >
-        <?php foreach ($row->getStatusOptions() as $key => $value): ?>
-        <option value="<?php echo $key ?>"<?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
-        <?php endforeach; ?>
-      </select></td>
-    </tr>
-    <tr>
-      <?php if ($this->getAttributes()): ?>
-      <?php foreach ($this->getAttributes() as $key => $value): ?>
-      <tr><th><?php echo$value->name; ?></th>
-      <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
-      <?php endforeach ?>
-      <?php endif ?>
-    </tr>
-  </form>
+  
+  <tr>
+    <th>STATUS</th>
+    <td><select name="product[status]" >
+      <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+      <option value="<?php echo $key ?>"<?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+      <?php endforeach; ?>
+    </select></td>
+  </tr>
+  <tr>
+    <?php if ($this->getAttributes()): ?>
+    <?php foreach ($this->getAttributes() as $key => $value): ?>
+    <tr><th><?php echo$value->name; ?></th>
+    <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
+    <?php endforeach ?>
+    <?php endif ?>
+  </tr>
 </table>
+
+</form>

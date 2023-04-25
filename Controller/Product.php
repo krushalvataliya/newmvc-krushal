@@ -2,22 +2,26 @@
 
 class Controller_Product extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Product_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Product_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Product_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Product_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -39,16 +43,13 @@ class Controller_Product extends Controller_Core_Action
 				throw new Exception('invalid id', 1);
 				
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Product_Edit');
-			$content->setData(['product' => $product]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			$edit = $this->getLayout()->createBlock('Product_Edit');
+			$edit->setId($productId);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
-			return $this->redirect('grid', null, null, true);
 		}
 
 	}
@@ -57,7 +58,7 @@ class Controller_Product extends Controller_Core_Action
 	public function saveAction()
 	{
 		try 
-		{
+		{	
 			$request = $this->getRequest();
 			if (!$request->isPost())
 			{
@@ -87,7 +88,6 @@ class Controller_Product extends Controller_Core_Action
 			if(!$result)
 			{
 				throw new Exception("unable to save product", 1);
-				
 			}
 
 			$entityId = ($id) ? ($id) : ($result->getId());
@@ -104,23 +104,18 @@ class Controller_Product extends Controller_Core_Action
 					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
 					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
 					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
-					if(!$insertUpdate)
-					{
-						throw new Exception("product's Attribute not inserted", 1);
-						
-					}
 				}
 			}
 			$this->getMessage()->addMessage('product saved successfully.',  Model_Core_Message::SUCCESS);
 
-		}
+			$grid = $this->getLayout()->createBlock('Product_Grid');
+			$grid = $grid->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$grid,'element'=>'content']);
+			}	
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('product not saved.',  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
-
 	}
 
 	public function deleteAction()
@@ -141,13 +136,14 @@ class Controller_Product extends Controller_Core_Action
 				
 			}
 			$this->getMessage()->addMessage('product deleted successfully.',  Model_Core_Message::SUCCESS);
+			$grid = $this->getLayout()->createBlock('Product_Grid');
+			$grid = $grid->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$grid,'element'=>'content']);
 		}
 		catch(Exception $e)
 		{
 			$this->getMessage()->addMessage('product not deleted.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
 
   

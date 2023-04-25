@@ -38,3 +38,11 @@ text-align-last: center;
 height: 100px;
 width: 100px;
 }
+
+.indexB{
+display: flex;
+}
+
+.indexButton{
+margin-left: 5px;
+}

@@ -2,15 +2,17 @@
 $request = $this->getRequest();
 $productId=(int)$request->getParam('product_id');
 ?>
-<form action="<?php echo $this->getModelUrl()->getUrl('insert','product_media',['product_id'=>$productId]); ?>" method="POST" enctype="multipart/form-data">
+<button id="subtn" class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('insert','product_media',['product_id'=>$productId]); ?>').setForm('addimage').setMethod('post').call()">save</button>
+<form id="addimage" action="" method="POST" enctype="multipart/form-data">
   <table class="table table-bordered">
     <tr>
       <th>IMAGE</th>
       <td> <input type="file" name="fileToUpload"></td>
     </tr>
+    <tr>
     <th>IMAGE NAME</th>
-    <td><input type="text" name="media[filename]">
-  </td>
+    <td><input type="text" name="media[filename]"></td>
+    </tr>
   </table>
-  <input type="submit">
 </form>
+  <input type="button" value="submit" onclick="ajax.setUrl('<?php echo $this->getUrl('insert','product_media',['product_id'=>$productId]); ?>').setForm('addimage').setMethod('post').call()">

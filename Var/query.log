@@ -1,0 +1,80 @@
+23-04-25 10:34:38 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('','1','5')
+
+23-04-25 10:34:38 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','36','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:34:38 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','36','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:34:38 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','36','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:34:49 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('','1','5')
+
+23-04-25 10:34:49 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','37','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:34:49 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','37','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:34:49 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','37','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:35:36 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('','1','5')
+
+23-04-25 10:35:36 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','38','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:35:36 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','38','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:35:36 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','38','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:35:39 : DELETE FROM `item` WHERE `item`.`item_id` = '36'  
+
+23-04-25 10:35:40 : DELETE FROM `item` WHERE `item`.`item_id` = '37'  
+
+23-04-25 10:35:40 : DELETE FROM `item` WHERE `item`.`item_id` = '38'  
+
+23-04-25 10:36:05 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('dfafadfas','1','5')
+
+23-04-25 10:36:06 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','39','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:36:06 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('45','39','51') ON DUPLICATE KEY UPDATE  `value` = '51'
+
+23-04-25 10:36:06 : INSERT INTO `item_varchar` (`attribute_id`,`entity_id`,`value`) VALUES ('46','39','55,54') ON DUPLICATE KEY UPDATE  `value` = '55,54'
+
+23-04-25 10:36:06 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','39','this is description') ON DUPLICATE KEY UPDATE  `value` = 'this is description'
+
+23-04-25 10:36:06 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','39','112') ON DUPLICATE KEY UPDATE  `value` = '112'
+
+23-04-25 10:36:18 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('1qq','1','5')
+
+23-04-25 10:36:18 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','40','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:36:18 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','40','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:36:18 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','40','') ON DUPLICATE KEY UPDATE  `value` = ''
+
+23-04-25 10:36:20 : DELETE FROM `item` WHERE `item`.`item_id` = '39'  
+
+23-04-25 10:36:21 : DELETE FROM `item` WHERE `item`.`item_id` = '40'  
+
+23-04-25 10:36:39 : INSERT INTO `item` (`sku`,`status`,`entity_type_id`) VALUES ('rt','2','5')
+
+23-04-25 10:36:39 : INSERT INTO `item_int` (`attribute_id`,`entity_id`,`value`) VALUES ('44','41','48') ON DUPLICATE KEY UPDATE  `value` = '48'
+
+23-04-25 10:36:39 : INSERT INTO `item_text` (`attribute_id`,`entity_id`,`value`) VALUES ('50','41','desc') ON DUPLICATE KEY UPDATE  `value` = 'desc'
+
+23-04-25 10:36:39 : INSERT INTO `item_decimal` (`attribute_id`,`entity_id`,`value`) VALUES ('54','41','desc') ON DUPLICATE KEY UPDATE  `value` = 'desc'
+
+23-04-25 10:50:55 : INSERT INTO `media` (`filename`,`img`,`product_id`) VALUES ('aa','IMG_1682412655.','2565')
+
+23-04-25 10:51:01 : INSERT INTO `media` (`filename`,`img`,`product_id`) VALUES ('aa','IMG_1682412661.','2565')
+
+23-04-25 10:52:48 : INSERT INTO `media` (`product_id`) VALUES ('2565')
+
+23-04-25 11:09:33 : INSERT INTO `media` (`filename`,`img`,`product_id`) VALUES ('aa','IMG_1682413773.','2565')
+
+23-04-25 11:09:37 : INSERT INTO `media` (`filename`,`img`,`product_id`) VALUES ('aa','IMG_1682413777.','2565')
+
+23-04-25 11:10:08 : INSERT INTO `media` (`filename`,`img`,`product_id`) VALUES ('java','IMG_1682413808.','2565')
+
+23-04-25 11:13:24 : UPDATE `media` SET  `gallary` = '0', `updated_at` = current_timestamp() WHERE  `media_id` = 'Array' AND `product_id` = '2565'
+
+23-04-25 11:13:24 : UPDATE `products` SET  `thumbnail_id` = '0', `product_id` = '2565', `updated_at` = current_timestamp() WHERE  `product_id` = '2565' 
+
+23-04-25 11:13:24 : UPDATE `products` SET  `thumbnail_id` = '0', `product_id` = '2565' WHERE  `product_id` = '2565' 
+

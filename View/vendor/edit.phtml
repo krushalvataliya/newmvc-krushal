@@ -1,16 +1,15 @@
 <?php
-$row = $this->getData('vendor');
-$address  = $row->getShippingAddress();
-$address2  = $row->getBillingAddress();
+$row = $this->getRow();
+$address  = $row->getAddress();
 ?>
 <table>
   <tr>
     <td><h3>Edit vendor<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
-    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
-      <td><button class="btn btn-primary">save</button></td>
+    <td><a  class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
+      <td><button class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('vendor').setMethod('post').call()" >save</button></td>
     </tr>
   </table>
+    <form id="vendor" action="" method="POST">
   <table class="table table-bordered">
     <tr>
       <th>FIRST_NAME</th>
@@ -57,42 +56,9 @@ $address2  = $row->getBillingAddress();
       <?php endif ?>
 </tr>
     <tr>
-      <td>shipping address as billing address</td>
-      <td><input type="checkbox" id="sameaddress" name="sameaddress" value="1"  <?php if($address->address_id == $address2->address_id){echo 'checked';}?>></td>
-    </tr>
-    <tr>
       <td>address</td>
     </tr>
     <?php require 'View/vendor/address/edit.phtml' ?>
-
-    <div class="showBillingAddresss" style="border:0px ; display: none;">
-      <tr class="showBillingAddresss">billing address</tr>
-     <table class="showBillingAddresss" class="table table-bordered">
-      <?php require_once 'View/vendor/address/edit2.phtml' ?>
-      </table>
-    </div>
-    
   </form>
 
 </table>
-
-<script type="text/javascript">
-  $(document).ready(function (){
-  $('input[type="checkbox"]').click(function()
-  {
-    if($(this).prop("checked") == true)
-    {
-      $('.showBillingAddresss').hide();
-    }
-    else if($(this).prop("checked") == false)
-    {
-       $('.showBillingAddresss').show();
-    }
-  });
-
-    if($("#sameaddress").is(":checked"))
-    {
-      $('.showBillingAddresss').hide();
-    }
-  });
-</script>

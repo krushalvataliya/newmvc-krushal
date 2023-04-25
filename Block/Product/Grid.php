@@ -59,7 +59,7 @@ class Block_Product_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('product_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}
@@ -91,7 +91,7 @@ class Block_Product_Grid extends  Block_Core_Grid
 	{
 		$modelProduct = Ccc::getModel('Product');
 		$sql = "SELECT P.*,PVDesc.`value` as description FROM `products`P
-		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66";
+		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66 LIMIT 1,10";
 		$products =$modelProduct->fetchAll($sql);
 		return $products;
 	}

@@ -2,21 +2,28 @@
 
 class Controller_Salesman extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Salesman_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Salesman_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
+
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Salesman_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Salesman_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
+	
 	public function editAction()
 	{
 		try
@@ -40,11 +47,11 @@ class Controller_Salesman extends Controller_Core_Action
 			if(!$salesmanAddress)
 			{
 				throw new Exception("Address not found.", 1);
-			}$layout = $this->getLayout();
-			$content = $layout->createBlock('Salesman_Edit');
-			$content->setData(['salesman'=>$salesman,'salesmanAddress'=>$salesmanAddress]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			}
+
+			$edit = $this->getLayout()->createBlock('Salesman_Edit');
+			$edit->setId($id);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -150,13 +157,14 @@ class Controller_Salesman extends Controller_Core_Action
 			}
 				$insertSalesman = $modelSalesman->setData($updeteSalesman)->save();
 			$this->getMessage()->addMessage('salesman saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Salesman_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('salesman not saved.',  Model_Core_Message::FAILURE);
 		}
-		
-		// return $this->redirect('grid', null, null, true);
 	}
 
 	public function deleteAction()
@@ -177,13 +185,15 @@ class Controller_Salesman extends Controller_Core_Action
 				throw new Exception("salesman not deleted", 1);
 			}
 			$this->getMessage()->addMessage('salesman deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Salesman_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('salesman not deleted.',  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
 	}
 }
 

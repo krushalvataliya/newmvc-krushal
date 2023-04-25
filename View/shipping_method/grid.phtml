@@ -1,7 +1,7 @@
 <?php
 $shipping_methods = $this->getShippingMethods();
 ?>
-<div><div><h3>SHIPPING METHOD</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
+<div><div><h3>SHIPPING METHOD</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">
 add shipping method
 </a></div></div>
 <br>
@@ -23,8 +23,8 @@ add shipping method
   <td> <?php echo $shipping_method->name ?> </td>
   <td> <?php echo $shipping_method->amount ?> </td>
   <td> <?php echo $shipping_method->getStatusText() ?> </td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('edit','shippingMethod',['shiping_method_id' => $shipping_method->shiping_method_id]); ?>">edit</a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete','shippingMethod',['shiping_method_id' => $shipping_method->shiping_method_id]); ?>">delete<a></td>
+  <td><a href="<?php echo $this->getUrl('edit','shippingMethod',['shiping_method_id' => $shipping_method->shiping_method_id]); ?>">edit</a></td>
+  <td><a href="<?php echo $this->getUrl('delete','shippingMethod',['shiping_method_id' => $shipping_method->shiping_method_id]); ?>">delete<a></td>
 </tr>
 <?php endforeach; ?>
 <?php endif;?>

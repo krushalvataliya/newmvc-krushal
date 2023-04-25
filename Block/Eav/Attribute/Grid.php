@@ -59,7 +59,7 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 	{
 		$this->addButton('attribute_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}

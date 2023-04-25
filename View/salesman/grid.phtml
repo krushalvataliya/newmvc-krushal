@@ -1,7 +1,7 @@
 <?php
 $salesmen = $this->getSalesmen();
 ?>
-<div><div><h3>SALESMAN</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
+<div><div><h3>SALESMAN</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">
 add salesman
 </a></div></div>
 <table class="table table-bordered">
@@ -33,10 +33,10 @@ foreach ($salesmen->getData() as $salesman): ?>
   <td><?php echo $salesman->mobile ?></td>
   <td><?php echo $salesman->getstatustext() ?></td>
   <td><?php echo $salesman->company ?></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('edit', 'salesman', ['salesman_id' => $salesman->salesman_id]); ?>">edit</a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete', 'salesman', ['salesman_id' => $salesman->salesman_id]); ?>">delete<a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('grid','salesman_address', ['salesman_id' => $salesman->salesman_id]); ?>">view address<a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('grid','salesman_price', ['salesman_id' => $salesman->salesman_id]); ?>">prices<a></td>
+  <td><a href="<?php echo $this->getUrl('edit', 'salesman', ['salesman_id' => $salesman->salesman_id]); ?>">edit</a></td>
+  <td><a href="<?php echo $this->getUrl('delete', 'salesman', ['salesman_id' => $salesman->salesman_id]); ?>">delete<a></td>
+  <td><a href="<?php echo $this->getUrl('grid','salesman_address', ['salesman_id' => $salesman->salesman_id]); ?>">view address<a></td>
+  <td><a href="<?php echo $this->getUrl('grid','salesman_price', ['salesman_id' => $salesman->salesman_id]); ?>">prices<a></td>
 </tr>
 <?php endforeach; ?>
 <?php endif;?>

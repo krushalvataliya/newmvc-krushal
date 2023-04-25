@@ -2,6 +2,7 @@
 
 class Block_Vendor_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -30,6 +31,24 @@ class Block_Vendor_Edit extends  Block_Core_Template
 
 	public function getRow()
 	{
-		return ($this->getData('item'));
+		$vendor = Ccc::getModel('Vendor');
+		if($this->getId())
+		{
+			$vendor = $vendor->load($this->getId());
+		}
+		
+		return $vendor;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
 }

@@ -2,22 +2,27 @@
 
 class Controller_Admin extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Admin_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();	
+		$index = $layout->createBlock('Admin_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Admin_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Admin_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -37,11 +42,10 @@ class Controller_Admin extends Controller_Core_Action
 			{
 				throw new Exception("data not found", 1);
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Admin_Edit');
-			$content->setData($admin);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			
+			$edit = $this->getLayout()->createBlock('Admin_Edit');
+			$edit->setId($adminId);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -84,12 +88,14 @@ class Controller_Admin extends Controller_Core_Action
 				throw new Exception("Error Processing Request", 1);
 			}
 			$this->getMessage()->addMessage('admin saved successfully.',  Model_Core_Message::SUCCESS);
-			}
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Admin_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('admin not saved.',  Model_Core_Message::FAILURE);
 		}
-		return $this->redirect('grid', null, null, true);
 	
 	}
 
@@ -111,13 +117,14 @@ class Controller_Admin extends Controller_Core_Action
 				throw new Exception("Error Processing Request", 1);
 			}
 			$this->getMessage()->addMessage('admin deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Admin_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch(Exception $e)
 		{
 			$this->getMessage()->addMessage('admin not deleted.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
     
 }

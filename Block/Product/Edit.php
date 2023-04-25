@@ -2,6 +2,7 @@
 
 class Block_Product_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -29,6 +30,26 @@ class Block_Product_Edit extends  Block_Core_Template
 
 	public function getRow()
 	{
-		return ($this->getData('item'));
+		$product = Ccc::getModel('Product');
+		if($this->getId())
+		{
+			$product =$product->load($this->getId());
+		}
+
+		return $product;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
+
+    
 }

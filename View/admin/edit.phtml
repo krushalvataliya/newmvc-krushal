@@ -1,32 +1,32 @@
 <?php
-$admin =$this->getData();
+$row = $this->getRow();
 ?>
 <table>
   <tr>
     <td><h3>admin<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid',null,null,true); ?>">cancel</a> </td>
-    <form action="<?php echo $this->getModelUrl()->getUrl('save'); ?>" method="POST">
-      <td><button class="btn btn-primary"> save</button></td>
+    <td><a  class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
+      <td><button class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('admin').setMethod('post').call()" > save</button></td>
     </tr>
   </table>
+    <form id="admin" action="<?php echo $this->getUrl('save'); ?>" method="POST">
   <table class="table table-bordered">
     <tr>
       <th>name</th>
-      <td><input type="text" name="admin[name]" value="<?php echo $admin->name ?>" ></td>
+      <td><input type="text" name="admin[name]" value="<?php echo $row->name ?>" ></td>
     </tr>
     <tr>
       <th>email</th>
-      <td><input type="email" name="admin[email]" value="<?php echo $admin->email ?>"></td>
+      <td><input type="email" name="admin[email]" value="<?php echo $row->email ?>"></td>
     </tr>
     <tr>
       <th>password</th>
-      <td><input type="text" name="admin[password]" value="<?php echo $admin->password ?>"></td>
+      <td><input type="text" name="admin[password]" value="<?php echo $row->password ?>"></td>
     </tr>
     <tr>
       <th>STATUS</th>
       <td> <select name="admin[status]">
-        <?php foreach ($admin->getStatusOptions() as $key => $value): ?>
-        <option value="<?php echo $key ?>"name="available" <?php if($admin->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
+        <?php foreach ($row->getStatusOptions() as $key => $value): ?>
+        <option value="<?php echo $key ?>"name="available" <?php if($row->getstatus() == $key){ echo 'selected'; } ?>><?php echo $value ?></option>
         <?php endforeach; ?>
         
       </select> </td>

@@ -2,6 +2,7 @@
 
 class Block_Item_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -25,7 +26,25 @@ class Block_Item_Edit extends  Block_Core_Template
 
 	public function getRow()
 	{
-		return ($this->getData('item'));
+		$item = Ccc::getModel('Item');
+		if($this->getId())
+		{
+			$item = $item->load($this->getId());
+		}
+		
+		return $item;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
 
 }

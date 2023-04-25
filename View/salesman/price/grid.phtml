@@ -4,7 +4,6 @@ $id = (int)$request->getParam('salesman_id');
 $products = $this->getSalesmanPrice();
 $salesmen = $this->getSalesmen();
 ?>
-<form action="<?php echo $this->getModelUrl()->getUrl('update', 'salesman_price', ['salesman_id' => $id]); ?>" method="POST">
 	<table width="50%">
 		<tr>
 			<td>Salesman :
@@ -14,11 +13,12 @@ $salesmen = $this->getSalesmen();
 					<?php endforeach; ?>
 				</select>
 			</td>
-			<td><input class="btn btn-primary" type="submit" name="button" value="update"></td>
-			<td><input class="btn btn-primary"  type="submit" name="button" value="delete"></td>
+			<td><input class="btn btn-primary" onclick="ajax.setUrl('<?php echo $this->getUrl('update', 'salesman_price', ['salesman_id' => $id]); ?>').setForm('salesmanprice').setMethod('post').call()" type="button" name="button" value="update"></td>
+			<td><input class="btn btn-primary" onclick="ajax.setUrl('<?php echo $this->getUrl('delete', 'salesman_price', ['salesman_id' => $id]); ?>').setForm('salesmanprice').setMethod('post').call()"  type="button" name="button" value="delete"></td>
 		</tr>
 	</table>
 	<br>
+<form id="salesmanprice" action="<?php echo $this->getUrl('update', 'salesman_price', ['salesman_id' => $id]); ?>" method="POST">
 	<table   border="1px" width="100%">
 		<tr>
 			<th>ID</th>
@@ -43,6 +43,6 @@ $salesmen = $this->getSalesmen();
 </form>
 <script type="text/javascript">
 	function change(value){
-window.location.assign('<?php echo $this->getModelUrl()->getUrl('grid'); ?>&salesman_id='+value);
+window.location.assign('<?php echo $this->getUrl('grid'); ?>&salesman_id='+value);
 }
 </script>

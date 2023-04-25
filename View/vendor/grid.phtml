@@ -1,7 +1,7 @@
 <?php
 $vendors = $this->getVendors();
 ?>
-<div><div><h3>VENDOR</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
+<div><div><h3>VENDOR</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">
 add vendor
 </a></div></div>
 <table class="table table-bordered">
@@ -31,9 +31,9 @@ add vendor
   <td><?php echo $vendor->mobile ?></td>
   <td><?php echo $vendor->getstatustext() ?></td>
   <td><?php echo $vendor->company ?></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('edit', 'vendor', ['vendor_id' => $vendor->vendor_id]); ?>">edit</a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('delete', 'vendor', ['vendor_id' => $vendor->vendor_id]); ?>">delete<a></td>
-  <td><a href="<?php echo $this->getModelUrl()->getUrl('grid', 'vendor_address', ['vendor_id' => $vendor->vendor_id]); ?>">view address<a></td>
+  <td><a href="<?php echo $this->getUrl('edit', 'vendor', ['vendor_id' => $vendor->vendor_id]); ?>">edit</a></td>
+  <td><a href="<?php echo $this->getUrl('delete', 'vendor', ['vendor_id' => $vendor->vendor_id]); ?>">delete<a></td>
+  <td><a href="<?php echo $this->getUrl('grid', 'vendor_address', ['vendor_id' => $vendor->vendor_id]); ?>">view address<a></td>
 </tr>
 <?php endforeach; ?>
 <?php endif;?>

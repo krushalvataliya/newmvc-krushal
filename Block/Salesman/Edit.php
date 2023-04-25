@@ -2,6 +2,7 @@
 
 class Block_Salesman_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -9,10 +10,26 @@ class Block_Salesman_Edit extends  Block_Core_Template
 		$this->setTemplete('salesman/edit.phtml');	
 	}
 
-	public function getAddData()
+	public function getRow()
 	{
-		$salesman = Ccc::getModel('salesman');
-		$salesmanAddress = Ccc::getModel('salesman_Address');
-		$this->setData(['salesman'=>$salesman,'salesmanAddress'=>$salesmanAddress]);		
+		$salesman = Ccc::getModel('Salesman');
+		if($this->getId())
+		{
+			$salesman = $salesman->load($this->getId());
+		}
+		
+		return $salesman;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
 }

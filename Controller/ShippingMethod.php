@@ -2,23 +2,29 @@
 
 class Controller_ShippingMethod extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	public function gridAction()
 	{	
 		$layout = $this->getLayout();
-		$grid = $layout->createBlock('ShippingMethod_Grid');
-		$layout->getChild('content')->addChild('grid',$grid);
-		$layout->render();
+		$index = $layout->createBlock('ShippingMethod_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 	}
+
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('ShippingMethod_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
-		
+		$add = $this->getLayout()->createBlock('ShippingMethod_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
+	
 	public function editAction()
 	{
 		try
@@ -36,11 +42,9 @@ class Controller_ShippingMethod extends Controller_Core_Action
 				throw new Exception("invalid shiping_method id.", 1);
 				
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('ShippingMethod_Edit');
-			$content->setData(['shippingMethod'=>$shipingMethod]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			$edit = $this->getLayout()->createBlock('ShippingMethod_Edit');
+			$edit->setId($id);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -70,14 +74,15 @@ class Controller_ShippingMethod extends Controller_Core_Action
 			}
 
 			$this->getMessage()->addMessage("Shipping Method deleted successfully.",  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('ShippingMethod_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage("Shipping Method not deleted.",  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
 	
    public function saveAction()
@@ -115,14 +120,14 @@ class Controller_ShippingMethod extends Controller_Core_Action
 				
 			}
 			$this->getMessage()->addMessage('shiping_method saved successfully.',  Model_Core_Message::SUCCESS);
-
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('ShippingMethod_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('shiping_method not saved.',  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 
 	}
 

@@ -5,7 +5,7 @@ print_r($products);
 die;
 ?>
 <div><div><h3>PRODUCT</h3></div><div style="margin-left:640px;margin-top: 15px;">
-<a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
+<a  class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">
 	add product
 </a></div></div>
 <br>
@@ -40,9 +40,9 @@ die;
 		<td><?php echo $product->getstatustext(); ?></td>
 		<td><?php echo $product->color; ?></td>
 		<td><?php echo $product->material; ?></td>
-		<td><a href="<?php echo $this->getModelUrl()->getUrl('grid', 'product_media', ['product_id' =>$product->product_id]); ?>">images</a></td>
-		<td><a href="<?php echo $this->getModelUrl()->getUrl('edit', 'product', ['product_id' => $product->product_id]); ?>">edit</a></td>
-		<td><a href="<?php echo $this->getModelUrl()->getUrl('delete','product',['product_id' => $product->product_id]); ?>">delete<a></td>
+		<td><a href="<?php echo $this->getUrl('grid', 'product_media', ['product_id' =>$product->product_id]); ?>">images</a></td>
+		<td><a href="<?php echo $this->getUrl('edit', 'product', ['product_id' => $product->product_id]); ?>">edit</a></td>
+		<td><a href="<?php echo $this->getUrl('delete','product',['product_id' => $product->product_id]); ?>">delete<a></td>
 	</tr>
 	<?php endforeach; ?>
 	<?php endif;?>

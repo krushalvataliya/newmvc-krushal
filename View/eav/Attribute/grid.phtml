@@ -8,7 +8,7 @@ $attributes = $this->getCollection();
 	<table width="100%">
 		<tr>
 			<td><h2>Attribute</h2></td>
-			<td><a class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">Add</a></td>
+			<td><a class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">Add</a></td>
 		</tr>
 	</table>
 	<table class="table table-bordered">
@@ -32,8 +32,8 @@ $attributes = $this->getCollection();
 			<td><?php echo $attribute->status;?></td>
 			<td><?php echo $attribute->backend_model; ?></td>
 			<td><?php echo $attribute->getInputTypeText(); ?></td>
-			<td><a href="<?php echo $this->getModelUrl()->getUrl('edit',null,['attribute_id'=>$attribute->attribute_id]); ?>">EDIT</a></td>
-			<td><a href="<?php echo $this->getModelUrl()->getUrl('delete',null,['attribute_id'=>$attribute->attribute_id]); ?>">Delete</a></td>
+			<td><a href="<?php echo $this->getUrl('edit',null,['attribute_id'=>$attribute->attribute_id]); ?>">EDIT</a></td>
+			<td><a href="<?php echo $this->getUrl('delete',null,['attribute_id'=>$attribute->attribute_id]); ?>">Delete</a></td>
 		</tr>
 		<?php endforeach ?>
 	</table>

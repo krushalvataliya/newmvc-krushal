@@ -1,6 +1,7 @@
 <?php 
 class Block_Category_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -8,13 +9,23 @@ class Block_Category_Edit extends  Block_Core_Template
 		$this->setTemplete('category/edit.phtml');
 	}
 
-	public function getAddData()
+	public function getRow()
 	{
-		$category = Ccc::getModel('Cetegory');
-		$sql = "SELECT * FROM `category` ORDER BY `path` ASC;";
-		$categories = Ccc::getModel('Cetegory')->fetchAll($sql);
-		$this->setData(['category'=>$category,'categoriesData'=>$categories]);
-		return $this;
+		$category = Ccc::getModel('cetegory');
+		if($this->getId())
+		{
+			$category =$category->load($this->getId());
+		}
+
+		return $category;
+	}
+
+	public function getCategoriesData()
+	{
+		$category = Ccc::getModel('cetegory');
+		$sql = "SELECT * FROM `category`";
+		$categories =$category->fetchAll($sql);
+		return $categories;
 	}
 
 	public function getAttributes()
@@ -29,8 +40,15 @@ class Block_Category_Edit extends  Block_Core_Template
 		return null;
 	}
 
-	public function getRow()
-	{
-		return ($this->getData('item'));
-	}
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
 }

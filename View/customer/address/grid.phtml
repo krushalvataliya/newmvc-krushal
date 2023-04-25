@@ -53,7 +53,7 @@ $address2 = $this->getShippingAddress();
     <td><?php echo $address2->state ?></td>
     <td><?php echo $address2->country ?></td>
     <td><?php echo $address2->zip_code ?></td>
-    <td><a href="<?php echo $this->getModelUrl()->getUrl('delete','customer_address',['address_id'=>$address2->address_id]);?>">delete</a> </td>
+    <td><a href="<?php echo $this->getUrl('delete','customer_address',['address_id'=>$address2->address_id]);?>">delete</a> </td>
   <?php endif ?>
   </tr>
 </table>

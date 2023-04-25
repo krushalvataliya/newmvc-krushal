@@ -58,7 +58,6 @@ class Model_quote extends Model_Core_Table
 
 	public function getCustomers()
 	{
-		$id =(int)$this->getSession()->get('customer_id');
 		$modelCustomer = Ccc::getModel('Customer');
 		$sql = "SELECT * FROM `customers`";
 		$customer =$modelCustomer->fetchall($sql);

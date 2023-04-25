@@ -47,7 +47,7 @@ class Block_Admin_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('admin_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}
