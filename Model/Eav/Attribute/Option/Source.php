@@ -14,9 +14,16 @@ class Model_Eav_Attribute_Option_Source extends Model_Eav_Attribute_Option
 
 	public function getOptions()
 	{
+		if($this->getAttribute()->getid())
+		{
 		$sql = "SELECT * FROM `eav_attribute_option` WHERE `attribute_id` = '{$this->getAttribute()->getid()}' ORDER BY `position` ASC";
 		$options = $this->fetchAll($sql);
-		return $options->getData();
+			if($options)
+			{
+				return $options->getData();
+			}
+		}
+		return $this;
 	}
 
     public function getAttribute()

@@ -42,7 +42,7 @@ class Block_Brand_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('brand_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}

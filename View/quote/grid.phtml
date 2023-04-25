@@ -33,7 +33,7 @@ $grandTotal =$this->getGrandTotal();
 
 
 <table class="table table-bordered">
-	<form action="<?php echo $this->getModelUrl()->getUrl('addaddress','quote')?>" method="POST">
+	<form id="product" action="<?php echo $this->getUrl('addaddress','quote')?>" method="POST">
 	<tr>
 		<td>
 			<table >
@@ -108,7 +108,7 @@ $grandTotal =$this->getGrandTotal();
 <tr>
 	<td>
 		<div>
-		<form action="<?php echo $this->getModelUrl()->getUrl('addmethod','quote')?>" method="POST">
+		<form id="product" action="<?php echo $this->getUrl('addmethod','quote')?>" method="POST">
 		<table >
 	<tr>Shipping method</tr><br>
 			<?php foreach ($shippingMethods as $value): ?>
@@ -149,7 +149,7 @@ $grandTotal =$this->getGrandTotal();
 
 
 
-	<form action="<?php echo $this->getModelUrl()->getUrl('addproduct','quote')?>" method="POST">
+	<form id="product" action="<?php echo $this->getUrl('addproduct','quote')?>" method="POST">
 	<input type="submit" class="btn btn-primary mx-1" value="add">
 <table class="table table-bordered">
 <tr>
@@ -190,7 +190,7 @@ $grandTotal =$this->getGrandTotal();
 		<td>ROW TOTAL</td>
 		<td>REMOVE</td>
 	</tr>
-	<form action="<?php echo $this->getModelUrl()->getUrl('updateQuantity','quote')?>" method="POST">
+	<form id="product" action="<?php echo $this->getUrl('updateQuantity','quote')?>" method="POST">
 		<input type="submit" class="btn btn-primary mx-1" value="update">
 		<?php if (!$quoteItemDetails): ?>
 		<td colspan="7" >data not found </td>
@@ -204,7 +204,7 @@ $grandTotal =$this->getGrandTotal();
 			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][quantity]" value="<?php echo $detail->quantity?>">  </td>
 			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][discount]" value="<?php echo $detail->discount?>">  </td>
 			<td><?php echo ((int)$detail->price * (int)$detail->quantity)-(int)$detail->discount ?></td>
-			<td><a href="<?php echo $this->getModelUrl()->getUrl('deleteproduct','quote',['product_id'=>$detail->product_id]) ?>">remove</a></td>
+			<td><a href="<?php echo $this->getUrl('deleteproduct','quote',['product_id'=>$detail->product_id]) ?>">remove</a></td>
 		</tr>
 		<?php endforeach; ?>
 		<?php endif ?>
@@ -272,7 +272,7 @@ $grandTotal =$this->getGrandTotal();
 <script type="text/javascript">
 	function change(value){
 		var customerId = value;
-window.location.assign('<?php echo $this->getModelUrl()->getUrl('setid',null,null,true); ?>&customer_id='+value);
+window.location.assign('<?php echo $this->getUrl('setid','quote',null,true); ?>&customer_id='+value);
 }
 $(document).ready(function (){
 $('#sameaddress').click(function()
@@ -291,4 +291,4 @@ if($("#sameaddress").is(":checked"))
 $('.showBillingAddresss').hide();
 }
 });
-</script>
+</script>	

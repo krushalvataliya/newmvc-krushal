@@ -18,7 +18,7 @@ class Block_Core_Template extends Model_Core_View
     {
         if($child = $this->getChild($key))
         {
-            return $child->ToHtml();
+            return $child->toHtml();
         }
         return null;
     }

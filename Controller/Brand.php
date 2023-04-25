@@ -2,21 +2,27 @@
 
 class Controller_Brand extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Brand_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Brand_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Brand_Edit');
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Brand_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -38,11 +44,10 @@ class Controller_Brand extends Controller_Core_Action
 				throw new Exception('invalid id', 1);
 				
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Brand_Edit');
-			$content->setId($brandId);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			
+			$edit = $this->getLayout()->createBlock('Brand_Edit');
+			$edit->setId($brandId);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -123,6 +128,9 @@ class Controller_Brand extends Controller_Core_Action
 			}
 
 			$this->getMessage()->addMessage('brand saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Brand_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 		}
 		catch (Exception $e)
@@ -130,7 +138,6 @@ class Controller_Brand extends Controller_Core_Action
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 
-		// return $this->redirect('grid', null, null, true);
 
 	}
 
@@ -152,13 +159,15 @@ class Controller_Brand extends Controller_Core_Action
 				
 			}
 			$this->getMessage()->addMessage('brand deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Brand_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch(Exception $e)
 		{
 			$this->getMessage()->addMessage('brand not deleted.',  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
 	}
 
   

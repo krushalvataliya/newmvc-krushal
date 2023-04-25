@@ -1,22 +1,28 @@
 <?php 
 class Controller_Eav_Attribute extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+	
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$grid = $layout->createBlock('Eav_Attribute_Grid');
-		$layout->getChild('content')->addChild('grid',$grid);
-		$layout->render();
+		$index = $layout->createBlock('Eav_Attribute_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
-	public function addAction ()
+	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$grid = $layout->createBlock('Eav_Attribute_Edit');
-		$grid->getAddData();
-		$layout->getChild('content')->addChild('grid',$grid);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Eav_Attribute_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
+
 	public function editAction ()
 	{
 		try
@@ -34,17 +40,18 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 			{
 				throw new Exception("data not found.", 1);
 			}
-			$layout = $this->getLayout();
-			$grid = $layout->createBlock('Eav_Attribute_Edit');
-			$grid->setData(['attribute'=>$attribute]);
-			$layout->getChild('content')->addChild('grid',$grid);
-			$layout->render();
+
+			$edit = $this->getLayout()->createBlock('Eav_Attribute_Edit');
+			$edit->setId($id);
+			$edit = $edit->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 			return $this->redirect('grid',null,null,true);
 		}
+		
 	}
 
 	public function saveAction()
@@ -132,14 +139,14 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 				$savetAtribute = $modelEavAttribute->setData($postData)->save();
 				$newOption['attribute_id'] = $savetAtribute->attribute_id;
 			}
-			if(isset($newOptions))
+			if($newOptions['position'] || $newOptions['name'] )
 			{
 				foreach ($newOptions as $key => $value)
 				{
 					$modelEavAttributeOption = Ccc::getModel('Eav_Attribute_Option');
-					$newOption['position'] = $value['position'];
-					$newOption['name'] = $value['name'];
-					$save = $modelEavAttributeOption->setData($newOption)->save();
+					$optionData['position'] =(int)$value['position'];
+					$optionData['name'] = $value['name'];
+					$save = $modelEavAttributeOption->setData($optionData)->save();
 					if(!$save)
 					{
 						throw new Exception("new option not saved.", 1);
@@ -147,13 +154,14 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 				}
 			}
 			$this->getMessage()->addMessage('Atribute saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Eav_Attribute_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Atribute not saved.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid',null,null,true);
 	}
 
 	public function deleteAction()
@@ -173,13 +181,14 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 				throw new Exception("data not deleted.", 1);
 			}
 			$this->getMessage()->addMessage('Attribute deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$grid = $layout->createBlock('Eav_Attribute_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$grid,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Attribute not deleted.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid',null,null,true);
 	}
 
 }

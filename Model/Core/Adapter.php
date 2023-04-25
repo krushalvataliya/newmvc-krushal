@@ -40,11 +40,15 @@ class Model_core_Adapter{
 
    public function fetchOne($query){
       $result =$this->connect()->query($query);
+      if($result)
+      {
       if($result->num_rows == 0){
          return null;
       }
       $row = $result->fetch_array();
       return (array_key_exists(0, $row)) ? ($row[0]):(null);
+      }
+      return null;
    }
 
    public function fetchRow($query){

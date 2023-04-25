@@ -13,13 +13,9 @@ class Block_item_Grid extends  Block_Core_Grid
 		$this->addColumn('item_id',
 		['title' =>'ITEM_ID']
 		);	
-		$this->addColumn('name',
-		['title' =>'NAME']
-		);
 		$this->addColumn('type',
 		['title' =>'TYPE']
 		);
-
 		$this->addColumn('sku',
 		['title' =>'SKU']
 		);
@@ -49,7 +45,7 @@ class Block_item_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('item_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}

@@ -47,7 +47,7 @@ class Model_Core_Request
 
 	public function getActionName()
 	{
-		return $this->getParam('a','grid');
+		return $this->getParam('a','index');
 	}
 
 	public function getControllerName()

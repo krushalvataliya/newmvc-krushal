@@ -10,22 +10,15 @@ class Block_Brand_Edit extends  Block_Core_Template
 		$this->setTemplete('brand/edit.phtml');	
 	}
 
-	public function getAddData()
-	{
-		$brand = Ccc::getModel('brand');
-		$this->setData(['brand' => $product]);	
-	}
 	public function getRow()
 	{
-		$modelbrand = Ccc::getModel('Brand');
+		$brand = Ccc::getModel('Brand');
 		if($this->getId())
 		{
-			$sql = "SELECT * FROM `brand` WHERE `brand_id`= '{$this->getId()}'";
-			$brand =$modelbrand->fetchRow($sql);
-			return $brand;
-			Ccc::log($sql);
+			$brand =$brand->load($this->getId());
 		}
-		return $modelbrand;
+
+		return $brand;
 	}
 
     public function getId()

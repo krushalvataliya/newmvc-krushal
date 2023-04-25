@@ -50,7 +50,7 @@ class Block_Order_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('order', [
 			'title' => 'Add New order',
-			'url' => $this->getUrl('grid', 'quote')
+			'url' => $this->getUrl('quote')
 		]);
 		return parent::_prepareButtons();
 	}

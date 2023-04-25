@@ -2,22 +2,27 @@
 
 class Controller_Item extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+	
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Item_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Item_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('item_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('item_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -39,11 +44,10 @@ class Controller_Item extends Controller_Core_Action
 				throw new Exception('invalid id', 1);
 				
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('item_Edit');
-			$content->setData(['item' => $item]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+
+			$edit = $this->getLayout()->createBlock('Item_Edit');
+			$edit->setId($itemId);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -65,7 +69,6 @@ class Controller_Item extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('item');
-			echo '<pre>';
 			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
@@ -118,6 +121,9 @@ class Controller_Item extends Controller_Core_Action
 				}
 			}
 			$this->getMessage()->addMessage('item saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Item_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 		}
 		catch (Exception $e)
@@ -125,7 +131,6 @@ class Controller_Item extends Controller_Core_Action
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
 
 	}
 
@@ -147,13 +152,14 @@ class Controller_Item extends Controller_Core_Action
 				
 			}
 			$this->getMessage()->addMessage('item deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Item_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch(Exception $e)
 		{
 			$this->getMessage()->addMessage('item not deleted.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
 
   

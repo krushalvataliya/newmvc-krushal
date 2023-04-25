@@ -58,7 +58,7 @@ class Block_Vendor_Grid extends  Block_Core_Grid
 	{
 		$this->addButton('vendor_id', [
 			'title' => 'Add New',
-			'url' => $this->getUrl('add', null)
+			'url' => $this->getUrl('add', null,null,true)
 		]);
 		return parent::_prepareButtons();
 	}

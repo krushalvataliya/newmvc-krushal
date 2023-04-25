@@ -32,6 +32,7 @@ class Model_Core_Session
 
 	public function get($key=null, $value=null)
 	{
+		$this->start();
 		if($key == null)
 		{
 			return $_SESSION;

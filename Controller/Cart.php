@@ -4,6 +4,14 @@
  */
 class Controller_Cart extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	
 	function __construct()
 	{
@@ -15,7 +23,7 @@ class Controller_Cart extends Controller_Core_Action
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Cart_Grid');				
 		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		echo $layout->toHtml();
 	}
 
 	public function addproductAction()

@@ -2,20 +2,25 @@
 
 class Controller_Customer extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Customer_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Customer_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Customer_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Customer_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -41,11 +46,11 @@ class Controller_Customer extends Controller_Core_Action
 			{
 				throw new Exception("Address not found.", 1);
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Customer_Edit');
-			$content->setData(['customer'=>$customer,'customerAddress'=>$customerAddress]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			
+			$edit = $this->getLayout()->createBlock('Customer_Edit');
+			$edit->setId($id);
+			$edit = $edit->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -99,7 +104,7 @@ class Controller_Customer extends Controller_Core_Action
 				}
 				$shippingAddress =  $customerRow->getShippingAddress();
 				$billingAddress =  $customerRow->getShippingAddress();
-				if ($customerRow->shiping_address_id)
+				if ($customerRow->shiping_address_id)	
 				{
 					$customerAddress['address_id'] = $customerRow->shiping_address_id;
 				}
@@ -131,7 +136,7 @@ class Controller_Customer extends Controller_Core_Action
 				$insertCustomerAddress2 = $modelCustomerAddress->setData($customerAddress2)->save();
 				$updeteCustomer['shiping_address_id'] = $shippingAddress->address_id;
 				if($shippingAddress->address_id == $billingAddress->address_id && $insertCustomerAddress2->address_id >1)
-				{
+ 					{
 					$updeteCustomer['billing_address_id'] = $insertCustomerAddress2->address_id;
 				}
 			}
@@ -175,13 +180,15 @@ class Controller_Customer extends Controller_Core_Action
 			}
 				$insertCustomer = $modelCustomer->setData($updeteCustomer)->save();
 			$this->getMessage()->addMessage('Customer saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Customer_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Customer not saved.',  Model_Core_Message::FAILURE);
 		}
 		
-		return $this->redirect('grid', null, null, true);
 	}
 
 	public function deleteAction()
@@ -201,13 +208,15 @@ class Controller_Customer extends Controller_Core_Action
 				throw new Exception("Customer not deleted", 1);
 			}
 			$this->getMessage()->addMessage('Customer deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Customer_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('Customer not deleted.',  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
 	}
 }
 

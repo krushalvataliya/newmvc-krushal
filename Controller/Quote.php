@@ -4,6 +4,14 @@
  */
 class Controller_Quote extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	
 	function __construct()
 	{
@@ -16,14 +24,14 @@ class Controller_Quote extends Controller_Core_Action
 		$customerId=$request->getParam('customer_id');
 		$this->getSession()->start()->set('customer_id',$customerId );
 		return $this->redirect('grid','quote',null,true);
-	}
+	}	
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Quote_Grid');				
 		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		echo $layout->toHtml();
 	}
 
 	public function addproductAction()
@@ -75,7 +83,6 @@ class Controller_Quote extends Controller_Core_Action
 					if(!$result2)
 					{
 						throw new Exception("product not updated in cart.", 1);
-						
 					}
 				}
 			}
@@ -87,7 +94,7 @@ class Controller_Quote extends Controller_Core_Action
 			$this->getMessage()->addMessage('product not saved in cart.',  Model_Core_Message::FAILURE);
 		}
 
-		// return $this->redirect('grid','quote');
+		return $this->redirect('grid','quote');
 	}
 
 	public function addMethodAction()

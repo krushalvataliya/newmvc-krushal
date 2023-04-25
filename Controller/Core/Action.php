@@ -7,6 +7,7 @@ class Controller_Core_Action
 	public $message = null;
 	public $view = null;
 	protected $layout = null;
+	protected $_response = null;
 
 
 	public function getRequest()
@@ -134,6 +135,29 @@ class Controller_Core_Action
         $this->layout = $layout;
 
         return $this;
+    }
+
+    public function setResponse($_response)
+    {
+        $this->_response = $_response;
+        return $this;
+    }
+
+    public function getResponse()
+    {
+    	if ($this->_response)
+    	{
+        	return $this->_response;
+    	}
+    	$response = Ccc::getModel('Core_Response');
+    	$response->setController($this);
+    	$this->setResponse($response);
+    	return $response;
+    }
+    public function renderLayout()
+    {
+    	$layout = $this->getLayout()->toHtml();
+    	$this->getResponse()->setBody($layout);
     }
 }
 ?>

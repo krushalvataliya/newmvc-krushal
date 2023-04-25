@@ -54,7 +54,7 @@ class Model_Customer extends Model_Core_Table
 	public function getBillingAddress()
 	{
 		$request = Ccc::getModel('Core_Request');
-		$id = $request->getParam('customer_id');
+		$id = $this->customer_id;
 		$address = Ccc::getModel('Customer_Address');
 		if($id)
 		{
@@ -70,7 +70,7 @@ class Model_Customer extends Model_Core_Table
 	public function getShippingAddress()
 	{
 		$request = Ccc::getModel('Core_Request');
-		$id = $request->getParam('customer_id');
+		$id = $this->customer_id; 	 	
 		$address = Ccc::getModel('Customer_Address');
 		if($id)
 		{

@@ -2,6 +2,7 @@
 
 class Block_Admin_Edit extends  Block_Core_Template
 {
+	protected $_id = null;
 	
 	public function __construct()
 	{
@@ -9,10 +10,26 @@ class Block_Admin_Edit extends  Block_Core_Template
 		$this->setTemplete('admin/edit.phtml');
 	}
 
-	public function getAddData()
+	public function getRow()
 	{
-		$modelRowAdmin = Ccc::getModel('admin');
-		$this->setData($modelRowAdmin);
-		return $this;
+		$admin = Ccc::getModel('admin');
+		if($this->getId())
+		{
+			$admin =$admin->load($this->getId());
+		}
+		
+		return $admin;
 	}
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
 }

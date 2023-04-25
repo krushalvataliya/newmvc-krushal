@@ -2,22 +2,34 @@
 
 class Controller_Order extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('order_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Order_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+	}
+
+	public function quoteAction()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Quote_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('order_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Order_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -39,11 +51,10 @@ class Controller_Order extends Controller_Core_Action
 				throw new Exception('invalid id', 1);
 				
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('order_Edit');
-			$content->setData(['order' => $order]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+
+			$edit = $this->getLayout()->createBlock('Order_Edit');
+			$edit->setId($orderId);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -112,15 +123,15 @@ class Controller_Order extends Controller_Core_Action
 				}
 			}
 			$this->getMessage()->addMessage('order saved successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Order_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('order not saved.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
-
 	}
 
 	public function deleteAction()
@@ -141,13 +152,14 @@ class Controller_Order extends Controller_Core_Action
 				
 			}
 			$this->getMessage()->addMessage('order deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Order_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch(Exception $e)
 		{
 			$this->getMessage()->addMessage('order not deleted.',  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
 
   

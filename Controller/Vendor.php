@@ -2,21 +2,28 @@
 
 class Controller_Vendor extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Vendor_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Vendor_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
+
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$edit = $layout->createBlock('Vendor_Edit');
-		$edit->getAddData();
-		$layout->getChild('content')->addChild('edit',$edit);
-		$layout->render();
+		$add = $this->getLayout()->createBlock('Vendor_Edit');
+		$add = $add->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$add,'element'=>'content']);
 	}
+	
 	public function editAction()
 	{
 		try
@@ -41,11 +48,10 @@ class Controller_Vendor extends Controller_Core_Action
 			{
 				throw new Exception("Address not found.", 1);
 			}
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Vendor_Edit');
-			$content->setData(['vendor'=>$vendor,'vendorAddress'=>$vendorAddress]);
-			$layout->getChild('content')->addChild('edit',$content);
-			$layout->render();
+			$edit = $this->getLayout()->createBlock('Vendor_Edit');
+			$edit->setId($id);
+			$edit = $edit->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -54,135 +60,82 @@ class Controller_Vendor extends Controller_Core_Action
 		}
 	}
 
-	protected function _saveVendor()
-	{
-		$request = $this->getRequest();
-		$vendor = $request->getPost('vendor');
-		$id=(int)$request->getParam('vendor_id');
-		if($id)
-		{
-			$vendor['vendor_id'] = $id;
-		}
-		$modelVendor =Ccc::getModel('vendor');
-		$vendor['entity_type_id'] = Model_Vendor::ENTITY_TYPE_ID ;
-		$insertVendor = $modelVendor->setData($vendor)->save();
-		return $insertVendor;
-	}
-
 	public function saveAction()
 	{
-		try 
+		try
 		{
 			$request = $this->getRequest();
 			if (!$request->isPost())
 			{
 				throw new Exception("invalid Request.", 1);
 			}
-			$sameaddress = $request->getPost('sameaddress');
-			
-			$modelVendor =Ccc::getModel('vendor');
-			$id=(int)$request->getParam('vendor_id');
-			$attributeData = $request->getPost('attribute');
+			$vendor = $request->getPost('vendor');
 			$vendorAddress = $request->getPost('address');
-			$vendorAddress2 = $request->getPost('address2');
+
+			$modelVendor =Ccc::getModel('Vendor');
 			$modelVendorAddress =Ccc::getModel('Vendor_Address');
 
-			if($id)
+			if($id=(int)$request->getParam('vendor_id'))
 			{
-				$updeteVendor['vendor_id'] = $id;
-				$vendorAddress['vendor_id'] = $id;
-				$vendorAddress2['vendor_id'] = $id;
 				$vendorRow = $modelVendor->load($id);
 				if(!$vendorRow)
 				{
 					throw new Exception("invalid id.", 1);
 				}
-				$shippingAddress =  $vendorRow->getShippingAddress();
-				$billingAddress =  $vendorRow->getShippingAddress();
-				if ($vendorRow->shiping_address_id)
+				$vendor['vendor_id'] = $id;
+				$sql = "SELECT * FROM `vendor_address` WHERE `vendor_id`= {$id}";
+				$vendorAddressRow = $modelVendorAddress->fetchRow($sql);
+				if(!$vendorAddressRow)
 				{
-					$vendorAddress['address_id'] = $vendorRow->shiping_address_id;
+					throw new Exception("invalid vendor address.", 1);
 				}
-				if ($vendorRow->billing_address_id != $vendorRow->shiping_address_id )
-				{
-					$vendorAddress2['address_id'] = $vendorRow->billing_address_id;
-				}
+				$vendorAddress['address_id'] = $vendorAddressRow->address_id;
 			}
 
-			$insertVendor = $this->_saveVendor();
-			if (!$insertVendor) {
+			$insertvendor = $modelVendor->setData($vendor)->save();
+			if (!$insertvendor) {
 				throw new Exception("vendor not inserted.", 1);
 			}
+
 			if(!$id)
 			{
-				$updeteVendor['vendor_id'] = $insertVendor->vendor_id;
-				$vendorAddress['vendor_id'] = $insertVendor->vendor_id;
-				$vendorAddress2['vendor_id'] = $insertVendor->vendor_id;
-			$insertVendorAddress = $modelVendorAddress->setData($vendorAddress)->save();
-			$updeteVendor['shiping_address_id'] = $insertVendorAddress->address_id;
+			$vendorAddress['vendor_id'] = $insertvendor->vendor_id;
 			}
-			if($sameaddress && !$id)
-			{
-				unset($vendorAddress2);
-				$updeteVendor['billing_address_id'] = $insertVendorAddress->address_id;
-			}
-			else if(!$sameaddress && $id)
-			{
-				$insertVendorAddress2 = $modelVendorAddress->setData($vendorAddress2)->save();
-				$updeteVendor['shiping_address_id'] = $shippingAddress->address_id;
-				if($shippingAddress->address_id == $billingAddress->address_id && $insertVendorAddress2->address_id >1)
-				{
-					$updeteVendor['billing_address_id'] = $insertVendorAddress2->address_id;
-				}
-			}
-			else if($sameaddress && $id)
-			{
-				unset($vendorAddress2);
-				$updeteVendor['shiping_address_id'] = $shippingAddress->address_id;
-				$updeteVendor['billing_address_id'] = $shippingAddress->address_id;
-			}
-			else if(!$sameaddress && !$id)
-			{
-				$updeteVendor['shiping_address_id'] = $insertVendorAddress->address_id;
-				$insertVendorAddress2 = $modelVendorAddress->setData($vendorAddress2)->save();
-				$updeteVendor['billing_address_id'] = $insertVendorAddress2->address_id;
-			}
+			$insertvendorAddress = $modelVendorAddress->setData($vendorAddress)->save();
 
-			if (!$insertVendor) {
-				throw new Exception("vendor Address not inserted.", 1);
-			}
-
-			$entityId = ($id) ? ($id) : ($insertVendor->getId());
-			foreach ($attributeData as $backendType => $value)
+			$entityId = ($id) ? ($id) : ($insertvendor->getId());
+			if(isset($attributeData))
 			{
-				foreach ($value as $attributeId => $v)
+				foreach ($attributeData as $backendType => $value)
 				{
-					if(is_array($v))
+					foreach ($value as $attributeId => $v)
 					{
-						$v = implode(',', $v);
-					}
-					$model = Ccc::getModel('Core_Table');
-					$resource = $model->getResource()->setTableName("vendor_{$backendType}")->setPrimaryKey('value_id');
-					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
-					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
-					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
-					if(!$insertUpdate)
-					{
-						throw new Exception("vendor's Attribute not inserted.", 1);
-						
+						if(is_array($v))
+						{
+							$v = implode(',', $v);
+						}
+						$model = Ccc::getModel('Core_Table');
+						$resource = $model->getResource()->setTableName("vendor_{$backendType}")->setPrimaryKey('value_id');
+						$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
+						$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
+						$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
+						if(!$insertUpdate)
+						{
+							throw new Exception("vendor's Attribute not inserted.", 1);
+						}
 					}
 				}
 			}
-				$insertVendor = $modelVendor->setData($updeteVendor)->save();
 			$this->getMessage()->addMessage('vendor saved successfully.',  Model_Core_Message::SUCCESS);
-		}
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Vendor_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+	}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('vendor not saved.',  Model_Core_Message::FAILURE);
 		}
-		
-		return $this->redirect('grid', null, null, true);
-	}
+}
 
 	public function deleteAction()
 	{
@@ -199,16 +152,17 @@ class Controller_Vendor extends Controller_Core_Action
 			$delete = $modelVendor->load($id)->delete();
 			if(!$delete)
 			{
-				throw new Exception("vendor not deleted", 1);
+				throw new Exception("vendor not deleted1", 1);
 			}
 			$this->getMessage()->addMessage('vendor deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Vendor_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('vendor not deleted.',  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 		}
-
-		return $this->redirect('grid', null, null, true);
 	}
 }
 ?>

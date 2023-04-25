@@ -1,22 +1,27 @@
 <?php
 class Controller_Category extends Controller_Core_Action
 {
+	public function indexAction ()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
+
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Category_Grid');
-		$layout->getChild('content')->addChild('grid',$content);
-		$layout->render();
+		$index = $layout->createBlock('Category_Grid')->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		
 	}
 
 	public function addAction()
 	{
-		$layout = $this->getLayout();
-		$add = $layout->createBlock('Category_Edit');
-		$add->getAddData();
-		$layout->getChild('content')->addChild('add',$add);
-		$layout->render();
+		$edit = $this->getLayout()->createBlock('Category_Edit');
+		$edit = $edit->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 	}
 
 	public function editAction()
@@ -40,11 +45,10 @@ class Controller_Category extends Controller_Core_Action
 			{
 				throw new Exception("id not found.", 1);
 			}
-			$layout = $this->getLayout();
-			$edit = $layout->createBlock('Category_Edit');
-			$edit->setData(['category'=>$category,'categoriesData'=>$categories]);
-			$layout->getChild('content')->addChild('edit',$edit);
-			$layout->render();
+			
+			$edit = $this->getLayout()->createBlock('Category_Edit');
+			$edit->setId($id);
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
@@ -70,12 +74,14 @@ class Controller_Category extends Controller_Core_Action
 				throw new Exception("cetegory not deleted.", 1);
 			}
 			$this->getMessage()->addMessage('category deleted successfully.',  Model_Core_Message::SUCCESS);
+			$layout = $this->getLayout();
+			$index = $layout->createBlock('Category_Grid')->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('category not deleted.',  Model_Core_Message::FAILURE);
 		}
-		return $this->redirect('grid', null, null, true);
 	}
 
 	public function saveAction()
@@ -89,6 +95,7 @@ class Controller_Category extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('category');
+			print_r($postData);
 			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
@@ -139,15 +146,18 @@ class Controller_Category extends Controller_Core_Action
 						
 					}
 				}
+			
 			}
 			$this->getMessage()->addMessage('Category saved successfully.',  Model_Core_Message::SUCCESS);
+			$edit = $this->getLayout()->createBlock('Product_Grid');
+			$edit = $edit->toHtml();
+			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);		
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage('category not saved.'.$e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 
-		return $this->redirect('grid', null, null, true);
 	}
 	
 }

@@ -5,8 +5,8 @@ $media = $this->getMedia();
 <table>
   <tr>
     <td><h3>product media<h3></td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('grid','product'); ?>">cancel</a> </td>
-    <td><a class="btn btn-primary mx-2" href="<?php echo $this->getModelUrl()->getUrl('add','product_media', ['product_id' => $request->getParam('product_id')]); ?>">Add image</a> </td>
+    <td><a class="btn btn-primary mx-2"  onclick="ajax.setUrl('<?php echo $this->getUrl('grid','product'); ?>').call()">cancel</a> </td>
+    <td><a class="btn btn-primary mx-2"  onclick="ajax.setUrl('<?php echo $this->getUrl('add','product_media', ['product_id' => $request->getParam('product_id')]); ?>').call()">Add image</a> </td>
   </tr>
 </table>
 <br>
@@ -23,11 +23,9 @@ $media = $this->getMedia();
     <th>DELETE</th>
   </tr>
   
-  <form action="<?php echo $this->getModelUrl()->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>" method="POST">
-    <input class="btn btn-primary mx-5 float-end"  type="submit" name="button" value="delete">
-    <input class="btn btn-primary float-end mx-5"  type="submit" name="button" value="update">
-    <br>
-    <br>
+  <form id="productmedia" action="" method="POST">
+    <input class="btn btn-primary float-end mx-5"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="update">
+    <input class="btn btn-primary mx-5 float-end"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('delete','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="delete">
     <br>
     <?php if (!$media): ?>
     <td colspan="9" >data not found </td>
@@ -46,5 +44,5 @@ $media = $this->getMedia();
     </tr>
     <?php endforeach; ?>
     <?php endif;?>
-  </table>
 </form>
+  </table>

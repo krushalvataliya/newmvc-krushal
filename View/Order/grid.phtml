@@ -6,7 +6,7 @@ $methods = $this->getShippingMethods();
 $selected_method =$this->getselectedShippingMethod();
 $total =$this->getTotal();
 ?>
-<form action="<?php echo $this->getModelUrl()->getUrl('addproduct','cart') ?>" method="POST">
+<form action="<?php echo $this->getUrl('addproduct','cart') ?>" method="POST">
 	<table class="table table-bordered mx-1">
 		<tr>
 			<select name="product[product_id]">
@@ -27,7 +27,7 @@ $total =$this->getTotal();
 		</tr>
 	</table>
 </form>
-<form action="<?php echo $this->getModelUrl()->getUrl('addMethod','cart') ?>" method="POST">
+<form action="<?php echo $this->getUrl('addMethod','cart') ?>" method="POST">
 	<table class="table table-bordered">
 		<tr>
 			<select name="shiping_method_id">
@@ -63,7 +63,7 @@ $total =$this->getTotal();
 		<td>ROW TOTAL</td>
 		<td>REMOVE</td>
 	</tr>
-	<form action="<?php echo $this->getModelUrl()->getUrl('updateQuantity','cart')?>" method="POST">
+	<form action="<?php echo $this->getUrl('updateQuantity','cart')?>" method="POST">
 		<input type="submit" class="btn btn-primary mx-1" value="update">
 		<?php if (!$cart_details): ?>
 		<td colspan="7" >data not found </td>
@@ -76,7 +76,7 @@ $total =$this->getTotal();
 			<td><?php echo $detail->price ?></td>
 			<td> <input type="number" name="quantity[<?php echo $detail->product_id ?>]" value="<?php echo $detail->quantity?>">  </td>
 			<td><?php echo $detail->price * $detail->quantity ?></td>
-			<td><a href="<?php echo $this->getModelUrl()->getUrl('deleteproduct','cart',['product_id'=>$detail->product_id]) ?>">remove</a></td>
+			<td><a href="<?php echo $this->getUrl('deleteproduct','cart',['product_id'=>$detail->product_id]) ?>">remove</a></td>
 		</tr>
 		<?php endforeach; ?>
 		<?php endif ?>

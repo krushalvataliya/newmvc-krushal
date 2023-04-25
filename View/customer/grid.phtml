@@ -1,7 +1,7 @@
 <?php
 $customers = $this->getCustomers();
 ?>
-<div><div><h3>CUSTOMER</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getModelUrl()->getUrl('add'); ?>">
+<div><div><h3>CUSTOMER</h3></div><div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" href="<?php echo $this->getUrl('add'); ?>">
 Add customer
 </a></div></div>
 <table class="table table-bordered">
@@ -29,9 +29,9 @@ Add customer
     <td><?php echo $customer->gender  ?></td>
     <td><?php echo $customer->mobile  ?></td>
     <td><?php echo $customer->getstatustext();    ?></td>
-    <td><a href="<?php echo $this->getModelUrl()->getUrl('edit','customer',['customer_id'=>$customer->customer_id]); ?>">edit</a></td>
-    <td><a href="<?php echo $this->getModelUrl()->getUrl('delete','customer',['customer_id'=>$customer->customer_id]);?>">delete<a></td>
-    <td><a href="<?php echo $this->getModelUrl()->getUrl('grid','customer_address',['customer_id'=>$customer->customer_id]);?>">view address<a></td>
+    <td><a href="<?php echo $this->getUrl('edit','customer',['customer_id'=>$customer->customer_id]); ?>">edit</a></td>
+    <td><a href="<?php echo $this->getUrl('delete','customer',['customer_id'=>$customer->customer_id]);?>">delete<a></td>
+    <td><a href="<?php echo $this->getUrl('grid','customer_address',['customer_id'=>$customer->customer_id]);?>">view address<a></td>
 </tr>
 <?php endforeach; ?>
 <?php endif;?>
