@@ -29,8 +29,10 @@ class Controller_Quote extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$content = $layout->createBlock('Quote_Grid');				
+		$content = $layout->createBlock('Quote_Grid');	
+					
 		$layout->getChild('content')->addChild('grid',$content);
+
 		echo $layout->toHtml();
 	}
 

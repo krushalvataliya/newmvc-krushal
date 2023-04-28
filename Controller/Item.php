@@ -14,7 +14,11 @@ class Controller_Item extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Item_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('Item_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
@@ -42,17 +46,15 @@ class Controller_Item extends Controller_Core_Action
 			if(!$item)
 			{
 				throw new Exception('invalid id', 1);
-				
 			}
-
 			$edit = $this->getLayout()->createBlock('Item_Edit');
 			$edit->setId($itemId);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
-			return $this->redirect('grid', null, null, true);
 		}
 
 	}

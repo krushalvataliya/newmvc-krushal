@@ -13,8 +13,13 @@ class Controller_Order extends Controller_Core_Action
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Order_Grid')->toHtml();
+		$index = $layout->createBlock('Order_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
+
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 

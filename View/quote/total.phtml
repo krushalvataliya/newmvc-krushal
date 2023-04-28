@@ -1,0 +1,53 @@
+<?php 
+$quoteDetails = $this->getQuote()->getQuoteDetails();
+$total =$this->getTotal();
+$grandTotal =$this->getGrandTotal();
+?>
+
+<div style="text-align: right;float: right;">
+<table class="table table-bordered">
+	<?php if($quoteDetails != null): ?>
+	<tr >
+		<th>SUB TOTAL</th>
+		<td><?php echo $total;?></td>
+	</tr>
+	<tr>
+		<th>SHIPPING AMOUNT</th>
+		<td><?php echo $quoteDetails->shiping_amount ?></td>
+	</tr>
+	<tr>
+		<th>TAX (<?php echo $quoteDetails->tax_percent."%" ?>)</th>
+		<td><?php echo $tax = ($total*$quoteDetails->tax_percent)/100;?></td>
+	</tr>
+	<tr>
+		<th>GRAND TOTAL</th>
+		<td><?php echo $grandTotal ?></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="submit" class="btn btn-primary mx-1" value="PLACE ORDER"></td>
+	</tr>
+	<?php else: ?>
+	<tr >
+		<th>SUB TOTAL</th>
+		<td><?php echo $total;?></td>
+	</tr>
+	<tr>
+		<th>SHIPPING AMOUNT</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>TAX ()</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>GRAND TOTAL</th>
+		<td><?php echo $grandTotal;?></td>
+	</tr>
+
+	<tr>
+		<th></th>
+		<td><input type="submit" class="btn btn-primary mx-1" value="PLACE ORDER"></td>
+	</tr>
+	<?php endif; ?>
+</table>
+</div>

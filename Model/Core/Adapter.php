@@ -89,7 +89,12 @@ class Model_core_Adapter{
       if(!$result){
          return false;
       }
-         return true;
+         return $result;
+   }
+
+   public function getMysqli()
+   {
+      return new mysqli($this->serverName, $this->userName, $this->password, $this->databaseName);
    }
 
 }

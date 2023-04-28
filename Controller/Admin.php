@@ -14,7 +14,11 @@ class Controller_Admin extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Admin_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('Admin_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
@@ -45,6 +49,7 @@ class Controller_Admin extends Controller_Core_Action
 			
 			$edit = $this->getLayout()->createBlock('Admin_Edit');
 			$edit->setId($adminId);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)

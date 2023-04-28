@@ -1,0 +1,26 @@
+<?php 
+$products = $this->getQuote()->getProducts();
+?>
+	<form id="product" action="<?php echo $this->getUrl('addproduct','quote')?>" method="POST">
+	<input type="submit" class="btn btn-primary mx-1" value="add">
+<table class="table table-bordered">
+<tr>
+	<td>PRODUCT ID</td>
+	<td>NAME</td>
+	<td>SKU</td>
+	<td>PRICE</td>
+	<td>QUANTITY</td>
+	<td>ADD</td>
+</tr>
+
+<?php foreach ($products->getData() as $product):?>
+	<tr>
+		<td><?php echo $product->product_id ?></td>
+		<td><?php echo $product->name ?></td>
+		<td><?php echo $product->sku ?></td>
+		<td><?php echo $product->price ?></td>
+		<td> <input type="number" name="quantity[<?php echo $product->product_id ?>]" value="" >  </td>
+		<td><input type="checkbox" name="add[<?php echo $product->product_id ?>]" value="<?php echo $product->product_id ?>" ></td>
+	</tr>
+	<?php endforeach; ?>
+</form>

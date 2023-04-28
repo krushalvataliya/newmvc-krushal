@@ -12,8 +12,12 @@ class Controller_Vendor extends Controller_Core_Action
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Vendor_Grid')->toHtml();
+		$index = $layout->createBlock('Vendor_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 

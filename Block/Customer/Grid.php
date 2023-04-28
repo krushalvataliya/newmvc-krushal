@@ -36,10 +36,10 @@ class Block_Customer_Grid extends  Block_Core_Grid
 
 	protected function _prepareActions()
 	{
-		$this->addAction('grid',
-			['title' =>'view address',
-			'method'=> 'getAddressUrl'
-		]);
+		// $this->addAction('grid',
+		// 	['title' =>'view address',
+		// 	'method'=> 'getAddressUrl'
+		// ]);
 		$this->addAction('edit',
 			['title' =>'edit',
 			'method'=> 'getEditUrl'
@@ -47,10 +47,6 @@ class Block_Customer_Grid extends  Block_Core_Grid
 		$this->addAction('delete',
 			['title' =>'delete',
 			'method'=> 'getDeleteUrl'
-		]);
-		$this->addAction('grid1',
-			['title' =>'cart',
-			'method'=> 'getCartUrl'
 		]);
 	}
 
@@ -78,11 +74,6 @@ class Block_Customer_Grid extends  Block_Core_Grid
 		return $this->geturl($key, 'customer_address',['customer_id'=>$row->getid()],true);
 	}
 
-	public function getCartUrl($row, $key)
-	{
-		return $this->geturl('grid', 'quote',['customer_id'=>$row->getid()],true);
-	}
-
 	public function getColumnValue($row, $key)
 	{
 		if ($key == 'status') {
@@ -94,10 +85,26 @@ class Block_Customer_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelCustomer =Ccc::getModel('Customer');
-		$sql = "SELECT * FROM `customers`";
+		$sql = "SELECT COUNT(customer_id) FROM `customers`;";
+		$count =$modelCustomer->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `customers` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$customers =$modelCustomer->fetchall($sql);	
 		return $customers;
 	}
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }
 

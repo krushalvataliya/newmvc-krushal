@@ -19,6 +19,7 @@ class Model_ShippingMethod extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_ShippingMethod_Resource');
+		$this->setCollectionClass('Model_ShippingMethod_Collection');
 	}
 
 	public function getStatus()

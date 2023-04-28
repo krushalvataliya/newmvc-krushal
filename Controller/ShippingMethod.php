@@ -13,7 +13,11 @@ class Controller_ShippingMethod extends Controller_Core_Action
 	public function gridAction()
 	{	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('ShippingMethod_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('ShippingMethod_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 
 	}
@@ -44,6 +48,7 @@ class Controller_ShippingMethod extends Controller_Core_Action
 			}
 			$edit = $this->getLayout()->createBlock('ShippingMethod_Edit');
 			$edit->setId($id);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)

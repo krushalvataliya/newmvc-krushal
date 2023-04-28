@@ -76,12 +76,29 @@ class Block_item_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelitem = Ccc::getModel('item');
+		$sql = "SELECT COUNT(item_id) FROM `item`;";
+		$count =$modelitem->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
 		$sql = "SELECT I.*, IVName.`value` as name , IVType.`value` as type FROM `item` I
 		LEFT JOIN `item_varchar` IVName ON I.`item_id` = IVName.`entity_id` AND IVName.`attribute_id`= 38
-		LEFT JOIN `item_varchar` IVType ON I.`item_id` = IVType.`entity_id` AND IVType.`attribute_id`= 40";
+		LEFT JOIN `item_varchar` IVType ON I.`item_id` = IVType.`entity_id` AND IVType.`attribute_id`= 40 LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 
 		$items =$modelitem->fetchAll($sql);
 		return $items;
 	}
+
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }

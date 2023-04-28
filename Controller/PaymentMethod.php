@@ -13,7 +13,11 @@ class Controller_PaymentMethod extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('PaymentMethod_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('PaymentMethod_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 	
@@ -43,6 +47,7 @@ class Controller_PaymentMethod extends Controller_Core_Action
 			}
 			$edit = $this->getLayout()->createBlock('PaymentMethod_Edit');
 			$edit->setId($id);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)

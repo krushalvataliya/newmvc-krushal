@@ -12,9 +12,13 @@ class Controller_Product extends Controller_Core_Action
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Product_Grid')->toHtml();
-		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+		$grid = $layout->createBlock('Product_Grid');
+		$grid->setRecordPerPage($recordsPerPage);
+		$grid = $grid->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$grid,'element'=>'content']);
 	}
 
 	public function addAction()
@@ -45,6 +49,7 @@ class Controller_Product extends Controller_Core_Action
 			}
 			$edit = $this->getLayout()->createBlock('Product_Edit');
 			$edit->setId($productId);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
@@ -144,6 +149,62 @@ class Controller_Product extends Controller_Core_Action
 		{
 			$this->getMessage()->addMessage('product not deleted.',  Model_Core_Message::FAILURE);
 		}
+	}
+
+	public function importAction()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Core_Layout')->setTemplete('product/importfile.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+		
+	}
+
+	public function savefileAction()
+	{
+		$targetDir = "View/product/db/";
+		$uploadModel =  CCC::getModel('Core_File_Upload');
+		$uploadModel->setPath('csv')
+
+		$file = basename($_FILES["fileToUpload"]["name"]);
+		$fileArray = explode('.', $file);
+		$targetName='db_'.time().'.'.$fileArray[1];
+		$targetFile = $targetDir .$targetName;
+		if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile))
+		{
+		$count = 0;
+			$file = fopen($targetFile, "r");
+			echo "<pre>";
+			while (($row = fgetcsv($file)) !== FALSE)
+			{
+				if(!$count)
+				{
+					$count = $row;
+				}
+				else
+				{
+				 $data = array_combine($count, $row); 
+				}
+				if($data)
+				{
+					$sku = $data['sku'];
+					$modelProduct = Ccc::getModel('Product');
+					echo $sql = "SELECT * FROM `products` WHERE `sku` = '{$sku}'";
+					$product = $modelProduct->fetchrow($sql);
+					if($product->getData)
+					{
+						$data['product_id'] = $product->product_id;
+					}
+				   	 $stmt = $modelProduct->setData($data)->save();
+				}
+			}
+		    return $this->redirect('index');
+		}
+	}
+
+	public function exportAction()
+	{
+		
 	}
 
   

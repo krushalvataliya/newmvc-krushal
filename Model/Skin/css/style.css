@@ -46,3 +46,12 @@ display: flex;
 .indexButton{
 margin-left: 5px;
 }
+
+.pagination-div{
+  width: 100%;
+  padding: 10px;
+  padding-left: 19%;
+}
+.pagination{
+	position: relative;
+}

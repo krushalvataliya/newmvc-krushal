@@ -1,6 +1,13 @@
 <?php 
 class Controller_Product_Media extends Controller_Core_Action
 {
+	function indexAction()
+	{
+		$layout = $this->getLayout();
+		$index = $layout->createBlock('Product_Media_Grid')->setTemplete('core/index.phtml');;
+		$layout->getChild('content')->addChild('index',$index);
+		$this->renderLayout();
+	}
 	
 	function gridAction()
 	{
@@ -43,11 +50,12 @@ class Controller_Product_Media extends Controller_Core_Action
 				throw new Exception("data not inserted.", 1);
 			}
 
-			$this->getMessage()->addMessage('Media inserted successfully.',  Model_Core_Message::SUCCESS);
-			$layout = $this->getLayout();
-			$content = $layout->createBlock('Product_Media_Grid');
-			$content = $content->toHtml();
-			$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
+			// $this->getMessage()->addMessage('Media inserted successfully.',  Model_Core_Message::SUCCESS);
+			// $layout = $this->getLayout();
+			// $content = $layout->createBlock('Product_Media_Grid');
+			// $content = $content->toHtml();
+			// $this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
+			return $this->redirect('index',null,null,true);
 		}
 		catch (Exception $e) {
 			$this->getMessage()->addMessage('Media not inserted.',  Model_Core_Message::FAILURE);
@@ -134,7 +142,6 @@ class Controller_Product_Media extends Controller_Core_Action
 				throw new Exception("invalid product ID.", 1);
 			}
 			$deleteImageId = $request->getPost('delete_image');
-			Ccc::log($deleteImageId,'data.log');
 			if (!$deleteImageId)
 			{
 				throw new Exception("invalid image Id", 1);
@@ -145,7 +152,7 @@ class Controller_Product_Media extends Controller_Core_Action
 			foreach ($deleteImageId as $key => $value)
 			{
 				$imageName =$modelProductMedia->load($value);
-				if(!$modelProductMedia->delete())
+				if(!$imageName->delete())
 				{
 					throw new Exception("Media not deleted", 1);
 				}
@@ -160,11 +167,11 @@ class Controller_Product_Media extends Controller_Core_Action
 			$layout = $this->getLayout();
 			$content = $layout->createBlock('Product_Media_Grid');
 			$content = $content->toHtml();
-			$this->getResponse()->jsonResponse(['html'=>$productId,'element'=>'content']);
+			$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 		}
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('Media not deleted.',  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
 			Ccc::log($_POST,'error.log');
 		}
 

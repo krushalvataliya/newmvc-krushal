@@ -3,6 +3,10 @@ class Block_Core_Template extends Model_Core_View
 {
 	protected $children = [];
     protected $layout = null;
+    protected $_id = null;
+    protected $_quote = null;
+
+
 	
 	public function __construct()
 	{
@@ -72,6 +76,36 @@ class Block_Core_Template extends Model_Core_View
     public function setLayout(Block_Core_Layout $layout)
     {
         $this->layout = $layout;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setId($_id)
+    {
+        $this->_id = $_id;
+
+        return $this;
+    }
+
+    public function getQuote()
+    {
+        if($this->_quote)
+        {
+            return $this->_quote;
+        }
+        $quote = new model_Quote();
+        $this->setQuote($quote);
+        return $quote;
+    }
+
+    public function setQuote($_quote)
+    {
+        $this->_quote = $_quote;
 
         return $this;
     }

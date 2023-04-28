@@ -19,6 +19,7 @@ class Model_Admin extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Admin_Resource');
+		$this->setCollectionClass('Model_Admin_Collection');
 	}
 
 	public function getStatus()

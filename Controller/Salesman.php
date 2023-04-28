@@ -12,8 +12,12 @@ class Controller_Salesman extends Controller_Core_Action
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Salesman_Grid')->toHtml();
+		$index = $layout->createBlock('Salesman_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
@@ -51,6 +55,7 @@ class Controller_Salesman extends Controller_Core_Action
 
 			$edit = $this->getLayout()->createBlock('Salesman_Edit');
 			$edit->setId($id);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)

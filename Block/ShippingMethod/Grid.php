@@ -1,6 +1,7 @@
 <?php 
 class Block_ShippingMethod_Grid extends  Block_Core_Grid
 {
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -73,9 +74,25 @@ class Block_ShippingMethod_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelShippingMethod = Ccc::getModel('ShippingMethod');
-		$sql = "SELECT * FROM `shiping_methods`";
+		$sql = "SELECT COUNT(shiping_method_id) FROM `shiping_methods`;";
+		$count =$modelShippingMethod->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `shiping_methods` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$shippingMethods =$modelShippingMethod->fetchAll($sql);
 		return $shippingMethods;
 	}
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }

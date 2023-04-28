@@ -20,6 +20,7 @@ class Model_Order_Address extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Order_Items_Resource');
+		$this->setCollectionClass('Model_Order_Items_Collection');
 	}
 }
 ?>
