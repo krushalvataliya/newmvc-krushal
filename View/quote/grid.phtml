@@ -1,56 +1,12 @@
-<?php
-$id = $this->getSession()->get('customer_id');
-$customers = $this->getQuote()->getCustomers();
-$customer = $this->getQuote()->getCustomer();
-$products = $this->getQuote()->getProducts();
-$address = $this->getQuote()->getBillingAddress();
-$address2 = $this->getQuote()->getShippingAddress();
-
-$quoteDetails = $this->getQuote()->getQuoteDetails();
-$quoteItemDetails = $this->getQuote()->getQuoteItemDetails();
-$shippingMethods = $this->getQuote()->getShippingMethods();
-$PaymentMethods = $this->getQuote()->getPaymentMethods();
-$total =$this->getTotal();
-$grandTotal =$this->getGrandTotal();
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-$id = $this->getSession()->get('customer_id');
-
-
-$customer = $this->getQuote()->getCustomer();
-$products = $this->getQuote()->getProducts();
-
-
-
-?>
 
 <?php echo$this->getChild('customer')->toHtml(); ?>
+
+<form id="quote" method="POST">
+
 <?php echo$this->getChild('address')->toHtml(); ?>
 <?php echo$this->getChild('method')->toHtml(); ?>
 <?php echo$this->getChild('products')->toHtml(); ?>
 <?php echo$this->getChild('cartItems')->toHtml(); ?>
 <?php echo$this->getChild('total')->toHtml(); ?>
+
+</form>

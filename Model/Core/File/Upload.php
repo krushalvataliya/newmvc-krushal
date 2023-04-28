@@ -6,7 +6,7 @@
 class Model_Core_File_Upload
 {
 	protected $file = null;
-	protected $filePath = 'var';
+	protected $filePath = 'Var';
 	protected $extensions = ['csv'];
 	protected $fileName = null;
 	function __construct()
@@ -25,7 +25,7 @@ class Model_Core_File_Upload
 			$this->setFileName($this->file['name']);
 		}
 		$this->file = $_FILES[$name];
-		move_uploaded_file($this->file["tmp_name"], $this->getPath().DS.$this->getFileName())
+		move_uploaded_file($this->file["tmp_name"], $this->getPath().DS.$this->getFileName());
 	}
 
 
@@ -51,27 +51,16 @@ class Model_Core_File_Upload
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPath()
     {
         return $this->filePath;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFileName()
     {
         return $this->fileName;
     }
 
-    /**
-     * @param mixed $fileName
-     *
-     * @return self
-     */
     public function setFileName($fileName)
     {
         $this->fileName = $fileName;
