@@ -21,6 +21,7 @@ class Model_Brand extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Brand_Resource');
+		$this->setCollectionClass('Model_Brand_Collection');
 	}
 
 	public function getStatus()

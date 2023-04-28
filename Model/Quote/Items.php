@@ -20,6 +20,7 @@ class Model_Quote_Items extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Quote_Items_Resource');
+		$this->setCollectionClass('Model_Quote_Items_Collection');
 	}
 }
 ?>

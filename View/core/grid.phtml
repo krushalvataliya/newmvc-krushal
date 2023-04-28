@@ -1,7 +1,12 @@
 <?php
 $collection = $this->getCollection();
+$pager = $this->getPagerModel();
 ?>
 <div><div><h3><?php echo $this->getTitle(); ?></h3></div>
+
+<div><a  class="btn btn-primary" href="<?php echo $this->getUrl('import'); ?>">Import</a>
+<div><a  class="btn btn-primary" href="<?php echo $this->getUrl('export'); ?>">Export</a>
+
 <?php foreach ($this->getButtons() as $key => $button): ?>
 <div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" onclick="ajax.setUrl('<?php echo $button['url'] ?>').call()">
 	<?php echo $button['title'] ?>
@@ -31,3 +36,5 @@ $collection = $this->getCollection();
 	<?php endforeach; ?>
 	<?php endif;?>
 </table>
+
+<?php echo $this->getLayout()->createBlock('Core_Pager')->setPagerModel($pager)->toHtml(); ?>

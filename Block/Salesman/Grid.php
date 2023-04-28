@@ -47,10 +47,10 @@ class Block_Salesman_Grid extends  Block_Core_Grid
 			['title' =>'delete',
 			'method'=> 'getDeleteUrl'
 		]);
-		$this->addAction('grida',
-			['title' =>'view address',
-			'method'=> 'getAddressUrl'
-		]);
+		// $this->addAction('grida',
+		// 	['title' =>'view address',
+		// 	'method'=> 'getAddressUrl'
+		// ]);
 		$this->addAction('grid',
 			['title' =>'prices',
 			'method'=> 'getPriceUrl'
@@ -97,10 +97,27 @@ class Block_Salesman_Grid extends  Block_Core_Grid
 
 	public function getCollection()
 	{
-		$modelProduct = Ccc::getModel('Salesman');
-		$sql = "SELECT * FROM `salesmen`";
-		$products =$modelProduct->fetchAll($sql);
+		$modelSalesman = Ccc::getModel('Salesman');
+		$sql = "SELECT COUNT(salesman_id) FROM `salesmen`;";
+		$count =$modelSalesman->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `salesmen` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$products =$modelSalesman->fetchAll($sql);
 		return $products;
 	}
+
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }

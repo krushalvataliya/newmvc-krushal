@@ -14,7 +14,11 @@ class Controller_Brand extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Brand_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('Brand_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 
@@ -47,6 +51,7 @@ class Controller_Brand extends Controller_Core_Action
 			
 			$edit = $this->getLayout()->createBlock('Brand_Edit');
 			$edit->setId($brandId);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)
@@ -105,32 +110,11 @@ class Controller_Brand extends Controller_Core_Action
 				throw new Exception("unable to save brand", 1);
 				
 			}
-			$entityId = ($id) ? ($id) : ($result->getId());
-			foreach ($attributeData as $backendType => $value)
-			{
-				foreach ($value as $attributeId => $v)
-				{
-					if(is_array($v))
-					{
-						$v = implode(',', $v);
-					}
-					$model = Ccc::getModel('Core_Table');
-					$resource = $model->getResource()->setTableName("brand_{$backendType}")->setPrimaryKey('value_id');
-					$data = ['attribute_id'=>$attributeId,'entity_id'=> $entityId, 'value' => $v];
-					$uniqueColumns = ['attribute_id'=>$attributeId,'entity_id'=> $entityId];
-					$insertUpdate = $resource->insertUpdateOnDuplicate($data,$uniqueColumns);
-					if(!$insertUpdate)
-					{
-						throw new Exception("brand's Attribute not inserted.", 1);
-						
-					}
-				}
-			}
-
-			$this->getMessage()->addMessage('brand saved successfully.',  Model_Core_Message::SUCCESS);
-			$layout = $this->getLayout();
-			$index = $layout->createBlock('Brand_Grid')->toHtml();
-			$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+			// $this->getMessage()->addMessage('brand saved successfully.',  Model_Core_Message::SUCCESS);
+			// $layout = $this->getLayout();
+			// $index = $layout->createBlock('Brand_Grid')->toHtml();
+			// $this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
+			return $this->redirect('index',null,null,true);
 
 		}
 		catch (Exception $e)

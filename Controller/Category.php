@@ -11,8 +11,12 @@ class Controller_Category extends Controller_Core_Action
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Category_Grid')->toHtml();
+		$index = $layout->createBlock('Category_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 		
 	}
@@ -48,6 +52,7 @@ class Controller_Category extends Controller_Core_Action
 			
 			$edit = $this->getLayout()->createBlock('Category_Edit');
 			$edit->setId($id);
+			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);
 		}
 		catch (Exception $e)

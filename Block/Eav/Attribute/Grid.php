@@ -4,6 +4,10 @@
  */
 class Block_Eav_Attribute_Grid extends Block_Core_Grid
 {
+	protected $PagerModel = null;
+	protected $countRows = null;
+	protected $recordPerPage = 10;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -95,10 +99,64 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 	public function getCollection()
 	{
 		$attributes = Ccc::getModel('Eav_Attribute');
-		$sql = "SELECT * FROM `eav_attribute`";
+		$sql = "SELECT COUNT(attribute_id) FROM `eav_attribute`;";
+		$count = $attributes->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `eav_attribute` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$collection = $attributes->fetchAll($sql);
 		return $collection;
 	}
+	
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
+    
+    public function setPagerModel($PagerModel)
+    {
+        $this->PagerModel = $PagerModel;
+
+        return $this;
+    }
+
+    public function getCountRows()
+    {
+        return $this->countRows;
+    }
+
+    public function setCountRows($countRows)
+    {
+        $this->countRows = $countRows;
+
+        return $this;
+    }
+
+    public function getRecordPerPage()
+    {
+        if($this->recordPerPage)
+        {
+        	return $this->recordPerPage;
+        }
+       return 10;
+    }
+
+    public function setRecordPerPage($recordPerPage)
+    {
+        $this->recordPerPage = $recordPerPage;
+
+        return $this;
+    }
+
+
 
 	
 

@@ -20,6 +20,7 @@ class Model_Product_Media extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Product_Media_Resource');
+		$this->setCollectionClass('Model_Product_Media_Collection');
 	}
 
 	public function getStatus()

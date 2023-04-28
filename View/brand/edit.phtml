@@ -5,11 +5,11 @@ $row = $this->getRow();
   <tr>
     <td><h3>Edit brand<h3></td>
     <td><a  class="btn btn-primary mx-2" onclick="ajax.setUrl('<?php echo $this->getUrl('grid',null,null,true); ?>').call()">cancel</a> </td>
-    <form id="brand" action="<?php echo $this->getUrl('save'); ?>" method="POST" enctype="multipart/form-data">
-      <td><button class="btn btn-primary" type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('brand').setMethod('post').call()" > save</button></td>
     </tr>
   </table>
+    <form id="brand" action="<?php echo $this->getUrl('save'); ?>" method="POST" enctype="multipart/form-data">
   <table class="table table-bordered">
+      <button class="btn btn-primary" type="submit" onclick="ajax.setUrl('<?php echo $this->getUrl('save'); ?>').setForm('brand').setMethod('post').call()" > save</button>
     <tr>
       <th>NAME</th>
       <td><input type="text" name="brand[name]" value="<?php echo $row->name;?>"></td>
@@ -22,13 +22,5 @@ $row = $this->getRow();
       <th>IMAGE</th>
       <td> <input type="file" name="fileToUpload" id = "file" multiple></td>
     </tr>
-    <tr>
-      <?php if ($this->getAttributes()): ?>
-      <?php foreach ($this->getAttributes() as $key => $value): ?>
-      <tr><th><?php echo$value->name; ?></th>
-      <td><?php $this->getLayout()->createBlock("Eav_Attribute_inputType")->setAttribute($value)->setRow($row)->render();?></td><tr>
-      <?php endforeach ?>
-      <?php endif ?>
-    </tr>
-  </form>
 </table>
+  </form>

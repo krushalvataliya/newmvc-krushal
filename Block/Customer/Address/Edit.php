@@ -9,8 +9,4 @@ class Block_Customer_Address_Edit extends  Block_Core_Template
 		$this->setTemplete('customer/address/edit.phtml');	
 	}
 
-	public function prepareData()
-	{
-			
-	}
 }

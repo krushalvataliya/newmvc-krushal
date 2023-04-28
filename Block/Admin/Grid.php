@@ -1,6 +1,7 @@
 <?php 
 class Block_Admin_Grid extends  Block_Core_Grid
 {
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -74,10 +75,27 @@ class Block_Admin_Grid extends  Block_Core_Grid
 
 	public function getCollection()
 	{
-		$modelProduct = Ccc::getModel('admin');
-		$sql = "SELECT * FROM `admins`";
-		$admins =$modelProduct->fetchAll($sql);
+		$modelAdmin = Ccc::getModel('admin');
+		$sql = "SELECT COUNT(admin_id) FROM `admins`;";
+		$count =$modelAdmin->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `admins` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$admins =$modelAdmin->fetchAll($sql);
 		return $admins;
 	}
+
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }

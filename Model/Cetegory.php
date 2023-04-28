@@ -20,6 +20,7 @@ class Model_Cetegory  extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Cetegory_Resource');
+		$this->setCollectionClass('Model_Cetegory_Collection');
 	}
 
 	public function getStatus()

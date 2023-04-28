@@ -20,6 +20,17 @@ class Model_Order extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Order_Resource');
+		$this->setCollectionClass('Model_Order_Collection');
+	}
+
+	public function getStatusText()
+	{
+		$statuses = $this->getStatusOptions();
+		if (array_key_exists($this->status, $statuses))
+		{
+			return $statuses[$this->status];
+		}
+			return $statuses[ Model_Order::STATUS_DEFAULT];
 	}
 }
 ?>

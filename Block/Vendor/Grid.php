@@ -39,10 +39,10 @@ class Block_Vendor_Grid extends  Block_Core_Grid
 
 	protected function _prepareActions()
 	{
-		$this->addAction('view',
-			['title' =>'view address',
-			'method'=> 'getAddressUrl'
-		]);
+		// $this->addAction('view',
+		// 	['title' =>'view address',
+		// 	'method'=> 'getAddressUrl'
+		// ]);
 		$this->addAction('edit',
 			['title' =>'edit',
 			'method'=> 'getEditUrl'
@@ -86,20 +86,29 @@ class Block_Vendor_Grid extends  Block_Core_Grid
 		return $row->$key;
 	}
 
-	public function getCollectionq()
-	{
-		$modelCustomer =Ccc::getModel('Customer');
-		$sql = "SELECT * FROM `customers`";
-		$customers =$modelCustomer->fetchall($sql);	
-		return $customers;
-	}
-
 	public function getCollection()
 	{
 		$modelVendor =Ccc::getModel('Vendor');
-		$sql = "SELECT * FROM `vendors`";
+		$sql = "SELECT COUNT(vendor_id) FROM `vendors`;";
+		$count =$modelVendor->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `vendors` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$vendors =$modelVendor->fetchall($sql);	
 		return $vendors;
 	}
+
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
 
 }

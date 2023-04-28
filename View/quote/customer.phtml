@@ -1,0 +1,22 @@
+<?php $customers = $this->getQuote()->getCustomers();
+$id = $this->getSession()->get('customer_id'); ?>
+<table width="50%" class="table table-bordered">
+	<tr>
+		<td>customer :
+			<select   class=""  onchange="change(this.value)">
+				<?php foreach ($customers as $customer): ?>
+				<option value="<?php echo $customer->customer_id;?>"<?php if($customer->customer_id == $id){$email = $customer->email; $number = $customer->mobile; echo "selected";}?>><?php echo $customer->first_name; ?></option>
+				<?php endforeach; ?>
+			</select>
+		</td>
+		<td>email : <?php echo $email ?></td>
+		<td>number : <?php echo $number ?></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	function change(value){
+		var customerId = value;
+window.location.assign('<?php echo $this->getUrl('setid','quote',null,true); ?>&customer_id='+value);
+}
+</script>

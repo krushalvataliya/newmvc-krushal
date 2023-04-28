@@ -20,6 +20,7 @@ class Model_Vendor extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Vendor_Resource');
+		$this->setCollectionClass('Model_Vendor_Collection');
 	}
 
 	public function getStatus()

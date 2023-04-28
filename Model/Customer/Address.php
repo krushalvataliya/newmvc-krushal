@@ -19,6 +19,7 @@ class Model_Customer_Address extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Customer_Address_Resource');
+		$this->setCollectionClass('Model_Customer_Address_Collection');
 	}
 
 	public function getStatus()

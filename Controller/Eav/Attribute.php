@@ -12,7 +12,11 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 	public function gridAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Eav_Attribute_Grid')->toHtml();
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
+		$index = $layout->createBlock('Eav_Attribute_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 

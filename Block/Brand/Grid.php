@@ -76,10 +76,30 @@ class Block_Brand_Grid extends  Block_Core_Grid
 
 	public function getCollection()
 	{
-		$modelProduct = Ccc::getModel('Brand');
-		$sql = "SELECT * FROM `brand` ORDER BY `name` ASC";
-		$products =$modelProduct->fetchAll($sql);
+		$modelbrand = Ccc::getModel('Brand');
+		$sql = "SELECT COUNT(brand_id) FROM `brand`;";
+		$count =$modelbrand->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `brand` ORDER BY `name` ASC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$products =$modelbrand->fetchAll($sql);
 		return $products;
 	}
+	public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
+    
+    
+
+
 
 }

@@ -1,7 +1,6 @@
 <?php 
 class Block_Product_Grid extends  Block_Core_Grid
 {
-	
 	public function __construct()
 	{
 		parent::__construct();
@@ -71,7 +70,7 @@ class Block_Product_Grid extends  Block_Core_Grid
 
 	public function getDeleteUrl($row, $key)
 	{
-		return $this->geturl($key, null,['product_id'=>$row->getid()],true);
+		return $this->geturl($key, null,['product_id'=>$row->getid()]);
 	}
 
 	public function getMediaUrl($row, $key)
@@ -90,10 +89,15 @@ class Block_Product_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelProduct = Ccc::getModel('Product');
+		$sql = "SELECT COUNT(product_id) FROM `products`;";
+		$count =$modelProduct->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
 		$sql = "SELECT P.*,PVDesc.`value` as description FROM `products`P
-		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66 LIMIT 1,10";
+		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66 LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		Ccc::log($sql,'query.log');
 		$products =$modelProduct->fetchAll($sql);
 		return $products;
 	}
 
+    
 }

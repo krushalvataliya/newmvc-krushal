@@ -2,6 +2,7 @@
 
 class Block_Core_Layout extends Block_Core_Template
 {
+	protected $_session = null;
 	
 	public function __construct()
 	{
@@ -39,4 +40,22 @@ class Block_Core_Layout extends Block_Core_Template
 		$block->setLayout($this);
 		return $block;	
 	}
+
+	public function getSession()
+    {
+        if($this->_session)
+        {
+        	return $this->_session;
+        }
+        $session = Ccc::getModel('Core_Session');
+        $this->setSession($session);
+        return $session;
+    }
+
+    public function setSession($_session)
+    {
+        $this->_session = $_session;
+
+        return $this;
+    }
 }

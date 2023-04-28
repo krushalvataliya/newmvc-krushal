@@ -5,15 +5,19 @@ class Controller_Customer extends Controller_Core_Action
 	public function indexAction ()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');;
+		$index = $layout->createBlock('Core_Layout')->setTemplete('core/index.phtml');
 		$layout->getChild('content')->addChild('index',$index);
 		$this->renderLayout();
 	}
 
 	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$recordsPerPage=(int)$request->getParam('recordsPerPage');	
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Customer_Grid')->toHtml();
+		$index = $layout->createBlock('Customer_Grid');
+		$index->setRecordPerPage($recordsPerPage);
+		$index = $index->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 	public function addAction()
@@ -124,8 +128,11 @@ class Controller_Customer extends Controller_Core_Action
 				$customerAddress['customer_id'] = $insertCustomer->customer_id;
 				$customerAddress2['customer_id'] = $insertCustomer->customer_id;
 			}
+			if(!$id)
+			{
 			$insertCustomerAddress = $modelCustomerAddress->setData($customerAddress)->save();
 			$updeteCustomer['shiping_address_id'] = $insertCustomerAddress->address_id;
+			}
 			if($sameaddress && !$id)
 			{
 				unset($customerAddress2);

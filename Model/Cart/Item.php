@@ -20,6 +20,7 @@ class Model_Cart_Item extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Cart_Item_Resource');
+		$this->setCollectionClass('Model_Cart_Item_Resource');
 	}
 }
 ?>

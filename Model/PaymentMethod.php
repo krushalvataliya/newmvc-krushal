@@ -19,6 +19,7 @@ class Model_PaymentMethod extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_PaymentMethod_Resource');
+		$this->setCollectionClass('Model_PaymentMethod_Collection');
 	}
 
 	public function getStatus()

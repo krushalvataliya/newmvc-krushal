@@ -1,0 +1,92 @@
+<?php 
+$address = $this->getQuote()->getBillingAddress();
+$address2 = $this->getQuote()->getShippingAddress();
+ ?>
+
+<table class="table table-bordered">
+	<form id="product" action="<?php echo $this->getUrl('addaddress','quote')?>" method="POST">
+	<tr>
+		<td>
+			<table >
+				<tr>
+					<th>ADDRESS</th>
+					<input type="number" name="address[customer_address_id]" value="<?php echo $address->address_id ?>" hidden>
+					<td><input type="text" name="address[address]" value="<?php echo $address->address ?>"></td>
+				</tr>
+				<tr>
+					<th>CITY</th>
+					<td><input type="text" name="address[city]" value="<?php echo $address->city ?>"></td>
+				</tr>
+				<tr>
+					<th>STATE</th>
+					<td><input type="text" name="address[state]" value="<?php echo $address->state ?>"></td>
+				</tr>
+				<tr>
+					<th>COUNTRY</th>
+					<td><input type="text" name="address[country]" value="<?php echo $address->country ?>"></td>
+				</tr>
+				<tr>
+					<th>ZIP_CODE</th>
+					<td><input type="number" name="address[zip_code]" value="<?php echo $address->zip_code ?>"></td>
+				</tr>
+
+				<tr>
+					<td><input type="checkbox" name="savetoaddressbook" id="savetobook" value="1" >
+					<label>save to address book</label><br></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="markasshippinng	" id="sameaddress" value="1" checked> 
+					<label>mark as shipping</label><br></td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table class="showBillingAddresss">
+				<input type="number" name="address2[customer_address_id]" value="<?php echo $address2->address_id ?>" hidden>	
+				<tr> <th>SHIPPING ADDRESS </th></tr>
+				<tr>
+					<th>ADDRESS</th>
+					<td><input type="text" name="address2[address]" value="<?php echo $address2->address ?>"></td>
+				</tr>
+				<tr>
+					<th>CITY</th>
+					<td><input type="text" name="address2[city]" value="<?php echo $address2->city ?>"></td>
+				</tr>
+				<tr>
+					<th>STATE</th>
+					<td><input type="text" name="address2[state]" value="<?php echo $address2->state ?>"></td>
+				</tr>
+				<th>COUNTRY</th>
+				<td><input type="text" name="address2[country]" value="<?php echo $address2->country ?>"></td>
+			</tr>
+			<tr>
+				<th>ZIP_CODE</th>
+				<td><input type="number" name="address2[zip_code]" value="<?php echo $address2->zip_code ?>"></td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr><td><input type="submit" class="btn btn-primary ml-3" value="Update"></td></tr>
+</form>
+</table>
+
+<script type="text/javascript">
+
+$(document).ready(function (){
+$('#sameaddress').click(function()
+{
+if($(this).prop("checked") == true)
+{
+$('.showBillingAddresss').hide();
+}
+else if($(this).prop("checked") == false)
+{
+$('.showBillingAddresss').show();
+}
+});
+if($("#sameaddress").is(":checked"))
+{
+$('.showBillingAddresss').hide();
+}
+});
+</script>	

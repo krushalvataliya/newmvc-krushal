@@ -19,6 +19,7 @@ class Model_Salesman_Price extends Model_Core_Table
 	{
 		parent::__construct();
 		$this->setResourceClass('Model_Salesman_Price_Resource');
+		$this->setCollectionClass('Model_Salesman_Price_Collection');
 	}
 
 	public function getStatus()

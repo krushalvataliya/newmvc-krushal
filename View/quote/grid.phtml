@@ -14,164 +14,6 @@ $total =$this->getTotal();
 $grandTotal =$this->getGrandTotal();
 ?>
 
-<table width="50%" class="table table-bordered">
-	<tr>
-		<td>customer :
-			<select   class=""  onchange="change(this.value)">
-				<?php foreach ($customers as $customer): ?>
-				<option value="<?php echo $customer->customer_id;?>"<?php if($customer->customer_id == $id){$email = $customer->email; $number = $customer->mobile; echo "selected";}?>><?php echo $customer->first_name; ?></option>
-				<?php endforeach; ?>
-			</select>
-		</td>
-		<td>email : <?php echo $email ?></td>
-		<td>number : <?php echo $number ?></td>
-	</tr>
-</table>
-
-
-
-
-
-<table class="table table-bordered">
-	<form id="product" action="<?php echo $this->getUrl('addaddress','quote')?>" method="POST">
-	<tr>
-		<td>
-			<table >
-				<tr>
-					<th>ADDRESS</th>
-					<input type="number" name="address[customer_address_id]" value="<?php echo $address->address_id ?>" hidden>
-					<td><input type="text" name="address[address]" value="<?php echo $address->address ?>"></td>
-				</tr>
-				<tr>
-					<th>CITY</th>
-					<td><input type="text" name="address[city]" value="<?php echo $address->city ?>"></td>
-				</tr>
-				<tr>
-					<th>STATE</th>
-					<td><input type="text" name="address[state]" value="<?php echo $address->state ?>"></td>
-				</tr>
-				<tr>
-					<th>COUNTRY</th>
-					<td><input type="text" name="address[country]" value="<?php echo $address->country ?>"></td>
-				</tr>
-				<tr>
-					<th>ZIP_CODE</th>
-					<td><input type="number" name="address[zip_code]" value="<?php echo $address->zip_code ?>"></td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="savetoaddressbook" id="savetobook" value="1" >
-					<label>save to address book</label><br></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="markasshippinng	" id="sameaddress" value="1" checked> 
-					<label>mark as shipping</label><br></td>
-				</tr>
-			</table>
-		</td>
-		<td>
-			<table class="showBillingAddresss">
-				<input type="number" name="address2[customer_address_id]" value="<?php echo $address2->address_id ?>" hidden>	
-				<tr> <th>SHIPPING ADDRESS </th></tr>
-				<tr>
-					<th>ADDRESS</th>
-					<td><input type="text" name="address2[address]" value="<?php echo $address2->address ?>"></td>
-				</tr>
-				<tr>
-					<th>CITY</th>
-					<td><input type="text" name="address2[city]" value="<?php echo $address2->city ?>"></td>
-				</tr>
-				<tr>
-					<th>STATE</th>
-					<td><input type="text" name="address2[state]" value="<?php echo $address2->state ?>"></td>
-				</tr>
-				<th>COUNTRY</th>
-				<td><input type="text" name="address2[country]" value="<?php echo $address2->country ?>"></td>
-			</tr>
-			<tr>
-				<th>ZIP_CODE</th>
-				<td><input type="number" name="address2[zip_code]" value="<?php echo $address2->zip_code ?>"></td>
-			</tr>
-		</table>
-	</td>
-</tr>
-<tr><td><input type="submit" class="btn btn-primary ml-3" value="Update"></td></tr>
-</form>
-</table>
-
-
-
-
-
-
-<table class="table table-bordered">
-<tr>
-	<td>
-		<div>
-		<form id="product" action="<?php echo $this->getUrl('addmethod','quote')?>" method="POST">
-		<table >
-	<tr>Shipping method</tr><br>
-			<?php foreach ($shippingMethods as $value): ?>
-			<tr>
-				<input type="radio" name="shiping_method_id" value="<?php echo $value->shiping_method_id; ?>"<?php if($value->shiping_method_id == $quoteDetails->shiping_method_id){echo "checked";} ?>>
-				<label>&nbsp;<?php echo $value->name; ?></label><br>
-			</tr>
-			
-			<?php endforeach ?>
-
-			<tr>
-		<input type="submit" class="btn btn-primary mx-2" value="Update">
-	</tr>
-		</table>
-		</div>
-	</td>
-	<td>
-		<table>
-	<tr>payment method</tr><br>
-			<?php foreach ($PaymentMethods as $value): ?>
-			<tr>
-				<input type="radio" name="payment_method_id" value="<?php echo $value->payment_method_id; ?>" <?php if($value->payment_method_id == $quoteDetails->payment_method_id){echo "checked";} ?>>
-				<label>&nbsp;<?php echo $value->name; ?></label><br>
-			</tr>
-			
-			<?php endforeach ?>
-			<tr>
-		<input type="submit" class="btn btn-primary mx-2" value="Update" >
-	</tr>
-			</form>
-		</table>
-	</td>
-</tr>
-</table>
-
-
-
-
-
-
-	<form id="product" action="<?php echo $this->getUrl('addproduct','quote')?>" method="POST">
-	<input type="submit" class="btn btn-primary mx-1" value="add">
-<table class="table table-bordered">
-<tr>
-	<td>PRODUCT ID</td>
-	<td>NAME</td>
-	<td>SKU</td>
-	<td>PRICE</td>
-	<td>QUANTITY</td>
-	<td>ADD</td>
-</tr>
-
-<?php foreach ($products->getData() as $product):?>
-	<tr>
-		<td><?php echo $product->product_id ?></td>
-		<td><?php echo $product->name ?></td>
-		<td><?php echo $product->sku ?></td>
-		<td><?php echo $product->price ?></td>
-		<td> <input type="number" name="quantity[<?php echo $product->product_id ?>]" value="" >  </td>
-		<td><input type="checkbox" name="add[<?php echo $product->product_id ?>]" value="<?php echo $product->product_id ?>" ></td>
-	</tr>
-	<?php endforeach; ?>
-</form>
 
 
 
@@ -179,116 +21,36 @@ $grandTotal =$this->getGrandTotal();
 
 
 
-<table class="table table-bordered">
-	<tr>
-		<td>PRODUCT ID</td>
-		<td>NAME</td>
-		<td>SKU</td>
-		<td>PRICE</td>
-		<td>QUANTITY</td>
-		<td>DISCCOUNT</td>
-		<td>ROW TOTAL</td>
-		<td>REMOVE</td>
-	</tr>
-	<form id="product" action="<?php echo $this->getUrl('updateQuantity','quote')?>" method="POST">
-		<input type="submit" class="btn btn-primary mx-1" value="update">
-		<?php if (!$quoteItemDetails): ?>
-		<td colspan="7" >data not found </td>
-		<?php else: ?>
-		<?php foreach ($quoteItemDetails->getData() as $detail):?>
-		<tr>
-			<td><?php echo $detail->product_id ?></td>
-			<td><?php echo $detail->name ?></td>
-			<td><?php echo $detail->sku ?></td>
-			<td><?php echo $detail->price ?></td>
-			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][quantity]" value="<?php echo $detail->quantity?>">  </td>
-			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][discount]" value="<?php echo $detail->discount?>">  </td>
-			<td><?php echo ((int)$detail->price * (int)$detail->quantity)-(int)$detail->discount ?></td>
-			<td><a href="<?php echo $this->getUrl('deleteproduct','quote',['product_id'=>$detail->product_id]) ?>">remove</a></td>
-		</tr>
-		<?php endforeach; ?>
-		<?php endif ?>
-	</form>
 
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td style="text-align: right;">total = </td>
-		<td> <?php echo $total?> </td>
-	</tr>
-</table>
 
-<div style="text-align: right;float: right;">
-<table class="table table-bordered">
-	<?php if($quoteDetails != null): ?>
-	<tr >
-		<th>SUB TOTAL</th>
-		<td><?php echo $total;?></td>
-	</tr>
-	<tr>
-		<th>SHIPPING AMOUNT</th>
-		<td><?php echo $quoteDetails->shiping_amount ?></td>
-	</tr>
-	<tr>
-		<th>TAX (<?php echo $quoteDetails->tax_percent."%" ?>)</th>
-		<td><?php echo $tax = ($total*$quoteDetails->tax_percent)/100;?></td>
-	</tr>
-	<tr>
-		<th>GRAND TOTAL</th>
-		<td><?php echo $grandTotal ?></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="submit" class="btn btn-primary mx-1" value="PLACE ORDER"></td>
-	</tr>
-	<?php else: ?>
-	<tr >
-		<th>SUB TOTAL</th>
-		<td><?php echo $total;?></td>
-	</tr>
-	<tr>
-		<th>SHIPPING AMOUNT</th>
-		<td></td>
-	</tr>
-	<tr>
-		<th>TAX ()</th>
-		<td></td>
-	</tr>
-	<tr>
-		<th>GRAND TOTAL</th>
-		<td><?php echo $grandTotal;?></td>
-	</tr>
 
-	<tr>
-		<th></th>
-		<td><input type="submit" class="btn btn-primary mx-1" value="PLACE ORDER"></td>
-	</tr>
-	<?php endif; ?>
-</table>
-</div>
 
-<script type="text/javascript">
-	function change(value){
-		var customerId = value;
-window.location.assign('<?php echo $this->getUrl('setid','quote',null,true); ?>&customer_id='+value);
-}
-$(document).ready(function (){
-$('#sameaddress').click(function()
-{
-if($(this).prop("checked") == true)
-{
-$('.showBillingAddresss').hide();
-}
-else if($(this).prop("checked") == false)
-{
-$('.showBillingAddresss').show();
-}
-});
-if($("#sameaddress").is(":checked"))
-{
-$('.showBillingAddresss').hide();
-}
-});
-</script>	
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+$id = $this->getSession()->get('customer_id');
+
+
+$customer = $this->getQuote()->getCustomer();
+$products = $this->getQuote()->getProducts();
+
+
+
+?>
+
+<?php echo$this->getChild('customer')->toHtml(); ?>
+<?php echo$this->getChild('address')->toHtml(); ?>
+<?php echo$this->getChild('method')->toHtml(); ?>
+<?php echo$this->getChild('products')->toHtml(); ?>
+<?php echo$this->getChild('cartItems')->toHtml(); ?>
+<?php echo$this->getChild('total')->toHtml(); ?>

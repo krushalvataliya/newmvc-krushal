@@ -8,6 +8,10 @@ class Block_Core_Grid extends Block_Core_Template
 	protected $_columns = [];
 	protected $_actions = [];
 	protected $_buttons = [];
+    protected $_currentPage = 1;
+    protected $PagerModel = null;
+    protected $countRows = null;
+    protected $recordPerPage = 10;
 
 	
 	function __construct()
@@ -144,4 +148,64 @@ class Block_Core_Grid extends Block_Core_Template
         return $this;
     }
 
+    public function getCurrentPage()
+    {
+        return $this->_currentPage;
+    }
+
+    public function setCurrentPage($_currentPage)
+    {
+        $this->_currentPage = $_currentPage;
+
+        return $this;
+    }
+
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+            return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),(int)$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
+
+    public function setPagerModel($PagerModel)
+    {
+        $this->PagerModel = $PagerModel;
+
+        return $this;
+    }
+
+    public function getCountRows()
+    {
+        return $this->countRows;
+    }
+
+    public function setCountRows($countRows)
+    {
+        $this->countRows = $countRows;
+
+        return $this;
+    }
+
+    public function getRecordPerPage()
+    {
+        if($this->recordPerPage)
+        {
+            return $this->recordPerPage;
+        }
+       return 10;
+    }
+
+    public function setRecordPerPage($recordPerPage)
+    {
+        $this->recordPerPage = $recordPerPage;
+
+        return $this;
+    }
 }

@@ -1,6 +1,7 @@
 <?php 
 class Block_Category_Grid extends  Block_Core_Grid
 {
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -73,8 +74,26 @@ class Block_Category_Grid extends  Block_Core_Grid
 	public function getCollection()
 	{
 		$modelRowCetegory = Ccc::getModel('Cetegory');
-		$sql = "SELECT * FROM `category` WHERE category_id > 1 ORDER BY `path` ASC;";
+		$sql = "SELECT COUNT(category_id) FROM `category`;";
+		$count =$modelRowCetegory->getResource()->getAdapter()->fetchOne($sql);
+		$this->setCountRows($count);
+		$sql = "SELECT * FROM `category` WHERE category_id > 1 ORDER BY `path` ASC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$categories = $modelRowCetegory->fetchAll($sql);	
 		return $categories;
 	}
+    public function getPagerModel()
+    {
+        if($this->PagerModel)
+        {
+        	return $this->PagerModel;
+        }
+        $page = (!$this->getRequest()->getParam('p'))? 1 : $this->getRequest()->getParam('p');
+        $PagerModel = new Model_Core_Pager($this->getCountRows(),$page);
+        $PagerModel->setRecordPerPage($this->getRecordPerPage());
+        $PagerModel->calculate();
+        $this->setPagerModel($PagerModel);
+        return $PagerModel;
+    }
+    
+    
 }

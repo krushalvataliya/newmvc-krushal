@@ -1,5 +1,5 @@
 <?php 
-class Block_Quote_Grid extends  Block_Core_Template
+class Block_Quote_Grid extends  Block_Core_Layout
 {
 	protected $_quote = null;
 	protected $_session = null;
@@ -8,6 +8,30 @@ class Block_Quote_Grid extends  Block_Core_Template
 	{
 		parent::__construct();
 		$this->setTemplete('quote/grid.phtml');
+		$this->prepareChilderen();
+	}
+
+	public function prepareChilderen()
+	{
+
+		$customer = $this->createBlock('Quote_Customer');
+		$this->addChild('customer',$customer);
+
+		$address = $this->createBlock('Quote_Address');
+		$this->addChild('address',$address);
+
+		$method = $this->createBlock('Quote_Method');
+		$this->addChild('method',$method);
+
+		$products = $this->createBlock('Quote_Products');
+		$this->addChild('products',$products);
+
+		$cartItems = $this->createBlock('Quote_Cartitems');
+		$this->addChild('cartItems',$cartItems);
+
+		
+		$total = $this->createBlock('Quote_Total');
+		$this->addChild('total',$total);
 	}
 
 	

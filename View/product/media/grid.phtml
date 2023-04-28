@@ -10,6 +10,9 @@ $media = $this->getMedia();
   </tr>
 </table>
 <br>
+    <input class="btn btn-primary float-end mx-5"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="update">
+    <input class="btn btn-primary mx-5 float-end"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('delete','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="delete">
+  <form id="productmedia" action="" method="POST">
 <table class="table table-bordered">
   <tr>
     <th>IMAGE</th>
@@ -22,15 +25,13 @@ $media = $this->getMedia();
     <th>CREATED_AT </th>
     <th>DELETE</th>
   </tr>
-  
-  <form id="productmedia" action="" method="POST">
-    <input class="btn btn-primary float-end mx-5"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('update','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="update">
-    <input class="btn btn-primary mx-5 float-end"  type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('delete','product_media',['product_id'=> $request->getParam('product_id')]); ?>').setForm('productmedia').setMethod('post').call()" name="button" value="delete">
-    <br>
+  <tr>
     <?php if (!$media): ?>
-    <td colspan="9" >data not found </td>
+    <td colspan="9" >data not found</td>
     <?php else:?>
+  </tr>
     <?php foreach ($media->getData() as $result): ?>
+
     <tr>
       <td><img style="height: 100px;width: 100px;" class="img-thumbnail imgsize" src="View/product/media/image/<?php echo $result->img ?>"></td>
       <td><?php echo $result->filename ?></td>
@@ -43,6 +44,6 @@ $media = $this->getMedia();
       <td><input type="checkbox" value="<?php echo $result->media_id ?>" name="delete_image[]" ></td>
     </tr>
     <?php endforeach; ?>
+</form> 
     <?php endif;?>
-</form>
   </table>
