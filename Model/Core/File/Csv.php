@@ -6,10 +6,10 @@
 class Model_Core_File_Csv
 {
 	protected $file = null;
-	protected $filePath = 'var';
+	protected $filePath = 'Var';
 	protected $fileName = null;
     protected $handler = null;
-    protected $header = [];
+    protected $header = []; 
     protected $rows = [];
 	function __construct()
 	{
@@ -26,10 +26,10 @@ class Model_Core_File_Csv
         return $this;
     }
 
-    public function read($path)
+    public function read()
     {
         $this->open();
-        while (($row = fgetcsv($this->getHandler() !== FALSE)
+        while (($row = fgetcsv($this->getHandler())) !== FALSE)
         {
             if(!$this->header)
             {

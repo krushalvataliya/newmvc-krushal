@@ -162,43 +162,37 @@ class Controller_Product extends Controller_Core_Action
 
 	public function savefileAction()
 	{
-		$targetDir = "View/product/db/";
-		$uploadModel =  CCC::getModel('Core_File_Upload');
-		$uploadModel->setPath('csv')
-
-		$file = basename($_FILES["fileToUpload"]["name"]);
-		$fileArray = explode('.', $file);
-		$targetName='db_'.time().'.'.$fileArray[1];
-		$targetFile = $targetDir .$targetName;
-		if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile))
+		try
 		{
-		$count = 0;
-			$file = fopen($targetFile, "r");
-			echo "<pre>";
-			while (($row = fgetcsv($file)) !== FALSE)
+			
+		$uploadModel =  CCC::getModel('Core_File_Upload');
+		$uploadModel->setPath('csv')->setFileName('product.csv')->upload('fileToUpload');
+		$filePath =  $uploadModel->getPath().DS.$uploadModel->getFileName();
+
+		$readCsvModel =  CCC::getModel('Core_File_Csv');
+		$readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read();
+		foreach ($readCsvModel->getRows() as $row)
+		{
+			$sku = $row['sku'];
+			$modelProduct = Ccc::getModel('Product');
+			$sql = "SELECT * FROM `products` WHERE `sku` = '{$sku}'";
+			$product = $modelProduct->fetchrow($sql);
+			if($product->getData())
 			{
-				if(!$count)
-				{
-					$count = $row;
-				}
-				else
-				{
-				 $data = array_combine($count, $row); 
-				}
-				if($data)
-				{
-					$sku = $data['sku'];
-					$modelProduct = Ccc::getModel('Product');
-					echo $sql = "SELECT * FROM `products` WHERE `sku` = '{$sku}'";
-					$product = $modelProduct->fetchrow($sql);
-					if($product->getData)
-					{
-						$data['product_id'] = $product->product_id;
-					}
-				   	 $stmt = $modelProduct->setData($data)->save();
-				}
+				$row['product_id'] = $product->product_id;
 			}
-		    return $this->redirect('index');
+		   	 if(!$modelProduct->setData($row)->save())
+		   	 {
+		   	 	throw new Exception("invalid data in csv file.", 1);
+		   	 	
+		   	 }
+		}
+			$this->getMessage()->addMessage('csv imported successfully.',  Model_Core_Message::SUCCESS);
+		return $this->redirect('index');
+		} 
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not imported because of'.$e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 	}
 
