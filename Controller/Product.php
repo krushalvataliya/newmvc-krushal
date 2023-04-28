@@ -198,7 +198,28 @@ class Controller_Product extends Controller_Core_Action
 
 	public function exportAction()
 	{
-		
+		$fileName = 'products.csv';
+
+		$modelProduct = Ccc::getModel('Product');
+		$sql = "SELECT * FROM `products`";
+		$products = $modelProduct->getResource()->fetchAll($sql);
+
+		$file = fopen($fileName,"w");
+
+		$head = array_keys($products[0]);
+	    fputcsv($file,$head);
+
+		foreach ($products as $product)
+		{
+		    fputcsv($file,$product);
+		}
+		fclose($file);
+		header("Content-Description: File Transfer");
+		header("Content-Disposition: attachment; filename=".$fileName);
+		header("Content-Type: application/csv; "); 
+		readfile($fileName);
+		unlink($fileName);
+		exit();
 	}
 
   
