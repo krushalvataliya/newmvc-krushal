@@ -7,19 +7,18 @@ $quoteDetails = $this->getQuote()->getQuoteDetails();
 <tr>
 	<td>
 		<div>
-		<form id="product" action="<?php echo $this->getUrl('addmethod','quote')?>" method="POST">
 		<table >
 	<tr>Shipping method</tr><br>
 			<?php foreach ($shippingMethods as $value): ?>
 			<tr>
-				<input type="radio" name="shiping_method_id" value="<?php echo $value->shiping_method_id; ?>"<?php if($value->shiping_method_id == $quoteDetails->shiping_method_id){echo "checked";} ?>>
+				<input type="radio" name="method[shiping_method_id]" value="<?php echo $value->shiping_method_id; ?>"<?php if($value->shiping_method_id == $quoteDetails->shiping_method_id){echo "checked";} ?>>
 				<label>&nbsp;<?php echo $value->name; ?></label><br>
 			</tr>
 			
 			<?php endforeach ?>
 
 			<tr>
-		<input type="submit" class="btn btn-primary mx-2" value="Update">
+		<input type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('addmethod','quote')?>').setForm('quote').setMethod('post').call()" class="btn btn-primary mx-2" value="Update">
 	</tr>
 		</table>
 		</div>
@@ -29,15 +28,14 @@ $quoteDetails = $this->getQuote()->getQuoteDetails();
 	<tr>payment method</tr><br>
 			<?php foreach ($PaymentMethods as $value): ?>
 			<tr>
-				<input type="radio" name="payment_method_id" value="<?php echo $value->payment_method_id; ?>" <?php if($value->payment_method_id == $quoteDetails->payment_method_id){echo "checked";} ?>>
+				<input type="radio" name="method[payment_method_id]" value="<?php echo $value->payment_method_id; ?>" <?php if($value->payment_method_id == $quoteDetails->payment_method_id){echo "checked";} ?>>
 				<label>&nbsp;<?php echo $value->name; ?></label><br>
 			</tr>
 			
 			<?php endforeach ?>
 			<tr>
-		<input type="submit" class="btn btn-primary mx-2" value="Update" >
+		<input type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('addmethod','quote')?>').setForm('quote').setMethod('post').call()" class="btn btn-primary mx-2" value="Update" >
 	</tr>
-			</form>
 		</table>
 	</td>
 </tr>

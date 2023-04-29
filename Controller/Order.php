@@ -26,7 +26,7 @@ class Controller_Order extends Controller_Core_Action
 	public function quoteAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Quote_Grid')->toHtml();
+		$index = $layout->createBlock('Quote_Create')->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$index,'element'=>'content']);
 	}
 

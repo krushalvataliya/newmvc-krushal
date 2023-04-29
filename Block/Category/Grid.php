@@ -73,12 +73,12 @@ class Block_Category_Grid extends  Block_Core_Grid
 
 	public function getCollection()
 	{
-		$modelRowCetegory = Ccc::getModel('Cetegory');
+		$modelRowCategory = Ccc::getModel('Category');
 		$sql = "SELECT COUNT(category_id) FROM `category`;";
-		$count =$modelRowCetegory->getResource()->getAdapter()->fetchOne($sql);
+		$count =$modelRowCategory->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
 		$sql = "SELECT * FROM `category` WHERE category_id > 1 ORDER BY `path` ASC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
-		$categories = $modelRowCetegory->fetchAll($sql);	
+		$categories = $modelRowCategory->fetchAll($sql);	
 		return $categories;
 	}
     public function getPagerModel()

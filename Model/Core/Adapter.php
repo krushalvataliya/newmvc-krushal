@@ -54,7 +54,7 @@ class Model_core_Adapter{
    public function fetchRow($query){
    	$result =$this->connect()->query($query);
    	if(!$result){
-   		return null;
+   		return false;
    	}
    		return $result->fetch_assoc();
    }
@@ -89,7 +89,7 @@ class Model_core_Adapter{
       if(!$result){
          return false;
       }
-         return $result;
+         return true;;
    }
 
    public function getMysqli()

@@ -1,5 +1,5 @@
 <?php 
-class Block_Quote_Grid extends  Block_Core_Layout
+class Block_Quote_Create extends  Block_Core_Layout
 {
 	protected $_quote = null;
 	protected $_session = null;
@@ -7,7 +7,7 @@ class Block_Quote_Grid extends  Block_Core_Layout
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setTemplete('quote/grid.phtml');
+		$this->setTemplete('quote/create.phtml');
 		$this->prepareChilderen();
 	}
 

@@ -151,78 +151,65 @@ class Controller_Product extends Controller_Core_Action
 		}
 	}
 
+	// $insert = $modelProduct->getResource()->insertMultipleOnConditionUpdate($rows, 'sku');
 	public function importAction()
 	{
 		$layout = $this->getLayout();
-		$index = $layout->createBlock('Core_Layout')->setTemplete('product/importfile.phtml');;
-		$layout->getChild('content')->addChild('index',$index);
-		$this->renderLayout();
+		$addImage = $layout->createBlock('Core_Layout')->setTemplete('core/importfile.phtml');;
+		$addImage = $addImage->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$addImage,'element'=>'content']);
 		
 	}
 
 	public function savefileAction()
-	{
+	{	
 		try
 		{
-			
-		$uploadModel =  CCC::getModel('Core_File_Upload');
-		$uploadModel->setPath('csv')->setFileName('product.csv')->upload('fileToUpload');
-		$filePath =  $uploadModel->getPath().DS.$uploadModel->getFileName();
+			$uploadModel =  CCC::getModel('Core_File_Upload');
+			$uploadModel->setPath('csv')->setFileName('product.csv')->upload('fileToUpload');
 
-		$readCsvModel =  CCC::getModel('Core_File_Csv');
-		$readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read();
-		foreach ($readCsvModel->getRows() as $row)
-		{
-			$sku = $row['sku'];
+			$readCsvModel =  CCC::getModel('Core_File_Csv');
+			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
+
 			$modelProduct = Ccc::getModel('Product');
-			$sql = "SELECT * FROM `products` WHERE `sku` = '{$sku}'";
-			$product = $modelProduct->fetchrow($sql);
-			if($product->getData())
+			$insert = $modelProduct->getResource()->insertMultiple($rows, 'sku');
+			if(!$insert)
 			{
-				$row['product_id'] = $product->product_id;
+				throw new Exception("data not saved from csv file.", 1);
 			}
-		   	 if(!$modelProduct->setData($row)->save())
-		   	 {
-		   	 	throw new Exception("invalid data in csv file.", 1);
-		   	 	
-		   	 }
-		}
-			$this->getMessage()->addMessage('csv imported successfully.',  Model_Core_Message::SUCCESS);
-		return $this->redirect('index');
+			return $this->redirect('index');	
 		} 
 		catch (Exception $e)
 		{
-			$this->getMessage()->addMessage('csv not imported because of'.$e->getMessage(),  Model_Core_Message::FAILURE);
+			$this->getMessage()->addMessage('csv not imported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+			return $this->redirect('index');	
 		}
 	}
 
 	public function exportAction()
 	{
-		$fileName = 'products.csv';
-
-		$modelProduct = Ccc::getModel('Product');
-		$sql = "SELECT * FROM `products`";
-		$products = $modelProduct->getResource()->fetchAll($sql);
-
-		$file = fopen($fileName,"w");
-
-		$head = array_keys($products[0]);
-	    fputcsv($file,$head);
-
-		foreach ($products as $product)
+		try
 		{
-		    fputcsv($file,$product);
-		}
-		fclose($file);
-		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=".$fileName);
-		header("Content-Type: application/csv; "); 
-		readfile($fileName);
-		unlink($fileName);
-		exit();
-	}
 
-  
+			$modelProduct = Ccc::getModel('Product');
+			$sql = "SELECT * FROM `products`";
+			$products = $modelProduct->getResource()->fetchAll($sql);
+			if(!$products)
+			{
+				throw new Exception("data not found.", 1);
+			}
+
+			$exportModel =  CCC::getModel('Core_File_Export');
+			$exportModel->setFileName('products.csv')->putData($products);
+			$exportModel->export();
+			exit();
+		}
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not exported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+
+		}
+	}
     
 }
 

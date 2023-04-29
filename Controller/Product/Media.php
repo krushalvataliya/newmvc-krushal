@@ -1,7 +1,7 @@
 <?php 
 class Controller_Product_Media extends Controller_Core_Action
 {
-	function indexAction()
+	public function indexAction()
 	{
 		$layout = $this->getLayout();
 		$index = $layout->createBlock('Product_Media_Grid')->setTemplete('core/index.phtml');;
@@ -9,26 +9,31 @@ class Controller_Product_Media extends Controller_Core_Action
 		$this->renderLayout();
 	}
 	
-	function gridAction()
+	public function gridAction()
 	{
+		$request = $this->getRequest();
+		$productId =(int) $request->getParam('product_id');
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Product_Media_Grid');
+		$this->getSession()->start()->set('product_id',$productId );
 		$content = $content->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 	}
-	function addAction()
+
+	public function addAction()
 	{
 		$layout = $this->getLayout();
 		$content = $layout->createBlock('Product_Media_Add');
 		$content = $content->toHtml();
 		$this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
 	}
-	function insertAction()
+
+	public function insertAction()
 	{
 		try 
 		{
 			$request = $this->getRequest();
-			$productId =(int) $request->getParam('product_id');
+			$productId =(int) $this->getSession()->start()->get('product_id');
 			if(!isset($productId))
 			{
 				throw new Exception("invalid product ID.", 1);
@@ -55,7 +60,7 @@ class Controller_Product_Media extends Controller_Core_Action
 			// $content = $layout->createBlock('Product_Media_Grid');
 			// $content = $content->toHtml();
 			// $this->getResponse()->jsonResponse(['html'=>$content,'element'=>'content']);
-			return $this->redirect('index',null,null,true);
+			return $this->redirect('index',null,['product_id' => $productId],true);
 		}
 		catch (Exception $e) {
 			$this->getMessage()->addMessage('Media not inserted.',  Model_Core_Message::FAILURE);
@@ -63,19 +68,18 @@ class Controller_Product_Media extends Controller_Core_Action
 
 	}
 	
-	function updateAction()
+	public function updateAction()
 	{
 		try
 		{
 			$request = $this->getRequest();
-			$button = $request->getPost('button');
 			$request = $this->getRequest();
 			$productId =(int)$request->getParam('product_id');
 			$gallaryId = $request->getPost('gallary');
-			$thumbnail = (int)$request->getPost('thumbnail');
-			$midium = (int)$request->getPost('midium');
-			$large = (int)$request->getPost('large');
-			$small = (int)$request->getPost('small');
+			$thumbnail = (int)($request->getPost('thumbnail')) ? ($request->getPost('thumbnail')) : (null);
+			$midium = (int)($request->getPost('midium')) ? ($request->getPost('midium')) : (null);
+			$large = (int)($request->getPost('large')) ? ($request->getPost('large')) : (null);
+			$small = (int)($request->getPost('small')) ? ($request->getPost('small')) : (null);
 
 			$modeltMedia =Ccc::getModel('Product_Media_Resource');
 			$resetValue = ['gallary' => 0];
@@ -83,39 +87,22 @@ class Controller_Product_Media extends Controller_Core_Action
 			
 			$modelProduct =Ccc::getModel('Product');
 			
-			$setThumbnail = ['thumbnail_id' => $thumbnail,'product_id' => $productId];
-			if(!$modelProduct->setData($setThumbnail)->save())
+			$setMediaData = ['thumbnail_id' => $thumbnail,'midium_id' => $midium,'large_id' =>  $large,'small_id' => $small,'product_id' => $productId];
+			$setMediaData = array_filter($setMediaData);
+			if(!$modelProduct->setData($setMediaData)->save())
 			{
-				throw new Exception("thumbnail not updated.", 1);
+				throw new Exception("media's data not updated.", 1);
 			}
-			
-			$setMidium = ['midium_id' => $midium,'product_id' => $productId];
-			if(!$modelProduct->setData($setMidium)->save())
-			{
-				throw new Exception("midium not updated.", 1);
-			}
-			
-			$setLarge = ['large_id' =>  $large,'product_id' => $productId];
-			if(!$modelProduct->setData($setLarge)->save())
-			{
-				throw new Exception("large not updated.", 1);
-			}
-			
-			$setSmall = ['small_id' => $small,'product_id' => $productId];
-			if(!$modelProduct->setData($setSmall)->save())
-			{
-				throw new Exception("small not updated.", 1);
-			}
+
 			$modelProductMedia =Ccc::getModel('Product_Media');
 			if($gallaryId)
 			{
 				foreach ($gallaryId as $key => $value)
 				{
 				$setGallary = ['gallary' => 1,'media_id' => $value];
-					if(!$modelProductMedia->setData($setGallary)->save())
+					if(!$modelProductMedia->setData($setGallary)->save())	
 					{
 						throw new Exception("gallary not updated.", 1);
-						
 					}
 				}
 			}
@@ -131,7 +118,7 @@ class Controller_Product_Media extends Controller_Core_Action
 		}
 	}
 	
-	function deleteAction()
+	public function deleteAction()
 	{
 		try 
 		{

@@ -13,8 +13,7 @@ $total = $this->getTotal();
 		<td>ROW TOTAL</td>
 		<td>REMOVE</td>
 	</tr>
-	<form id="product" action="<?php echo $this->getUrl('updateQuantity','quote')?>" method="POST">
-		<input type="submit" class="btn btn-primary mx-1" value="update">
+		<input type="button" onclick="ajax.setUrl('<?php echo $this->getUrl('updateQuantity','quote')?>').setForm('quote').setMethod('post').call()" class="btn btn-primary mx-1" value="update">
 		<?php if (!$quoteItemDetails): ?>
 		<td colspan="7" >data not found </td>
 		<?php else: ?>
@@ -31,7 +30,6 @@ $total = $this->getTotal();
 		</tr>
 		<?php endforeach; ?>
 		<?php endif ?>
-	</form>
 
 	<tr>
 		<td></td>

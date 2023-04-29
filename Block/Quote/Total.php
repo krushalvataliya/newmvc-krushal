@@ -11,13 +11,13 @@ class Block_Quote_Total extends Block_Core_Template
 
 	public function getTotal()
 	{
-		$quote = new Block_Quote_Grid();
+		$quote = new Block_Quote_Create();
 		return $quote->getTotal();
 	}
 
 	public function getGrandTotal()
 	{
-		$quote = new Block_Quote_Grid();
+		$quote = new Block_Quote_Create();
 		return $quote->getGrandTotal();
 	}
 }

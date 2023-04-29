@@ -1,0 +1,2445 @@
+23-04-28 18:13:02 : Model_Category_Collection Object
+(
+    [data:protected] => Array
+        (
+            [0] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 1
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => root
+                            [path] => 1
+                            [status] => 1
+                            [description] => 
+                            [created_at] => 2023-04-18 23:58:25
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [1] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 284
+                            [entity_type_id] => 4
+                            [parent_id] => 283
+                            [name] => a
+                            [path] => 1=284
+                            [status] => 1
+                            [description] => a
+                            [created_at] => 2023-04-18 23:59:40
+                            [updated_at] => 2023-04-18 23:59:40
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [2] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 285
+                            [entity_type_id] => 4
+                            [parent_id] => 284
+                            [name] => b
+                            [path] => 1=284=285
+                            [status] => 1
+                            [description] => b
+                            [created_at] => 2023-04-19 00:00:23
+                            [updated_at] => 2023-04-19 00:00:23
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [3] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 286
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => c
+                            [path] => 1=284=285=286
+                            [status] => 1
+                            [description] => c
+                            [created_at] => 2023-04-19 00:00:31
+                            [updated_at] => 2023-04-19 00:00:31
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [4] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 287
+                            [entity_type_id] => 4
+                            [parent_id] => 286
+                            [name] => d
+                            [path] => 1=284=285=286=287
+                            [status] => 1
+                            [description] => d
+                            [created_at] => 2023-04-19 00:18:58
+                            [updated_at] => 2023-04-19 00:18:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [5] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 288
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => kv
+                            [path] => 1=288
+                            [status] => 1
+                            [description] => vk
+                            [created_at] => 2023-04-23 16:31:41
+                            [updated_at] => 2023-04-23 18:49:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 6
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 10
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+        )
+
+)
+
+
+23-04-28 18:15:14 : Model_Category_Collection Object
+(
+    [data:protected] => Array
+        (
+            [0] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 1
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => root
+                            [path] => 1
+                            [status] => 1
+                            [description] => 
+                            [created_at] => 2023-04-18 23:58:25
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [1] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 284
+                            [entity_type_id] => 4
+                            [parent_id] => 283
+                            [name] => a
+                            [path] => 1=284
+                            [status] => 1
+                            [description] => a
+                            [created_at] => 2023-04-18 23:59:40
+                            [updated_at] => 2023-04-18 23:59:40
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [2] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 285
+                            [entity_type_id] => 4
+                            [parent_id] => 284
+                            [name] => b
+                            [path] => 1=284=285
+                            [status] => 1
+                            [description] => b
+                            [created_at] => 2023-04-19 00:00:23
+                            [updated_at] => 2023-04-19 00:00:23
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [3] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 286
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => c
+                            [path] => 1=284=285=286
+                            [status] => 1
+                            [description] => c
+                            [created_at] => 2023-04-19 00:00:31
+                            [updated_at] => 2023-04-19 00:00:31
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [4] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 287
+                            [entity_type_id] => 4
+                            [parent_id] => 286
+                            [name] => d
+                            [path] => 1=284=285=286=287
+                            [status] => 1
+                            [description] => d
+                            [created_at] => 2023-04-19 00:18:58
+                            [updated_at] => 2023-04-19 00:18:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [5] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 288
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => kv
+                            [path] => 1=288
+                            [status] => 1
+                            [description] => vk
+                            [created_at] => 2023-04-23 16:31:41
+                            [updated_at] => 2023-04-23 18:49:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [6] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 291
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=291
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:14
+                            [updated_at] => 2023-04-28 21:43:15
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [7] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 292
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=292
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:16
+                            [updated_at] => 2023-04-28 21:43:16
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [8] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 293
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=293
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:27
+                            [updated_at] => 2023-04-28 21:43:27
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [9] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 294
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=294
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:44:35
+                            [updated_at] => 2023-04-28 21:44:35
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 10
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 35
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+        )
+
+)
+
+
+23-04-28 18:16:38 : Model_Category_Collection Object
+(
+    [data:protected] => Array
+        (
+            [0] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 1
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => root
+                            [path] => 1
+                            [status] => 1
+                            [description] => 
+                            [created_at] => 2023-04-18 23:58:25
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [1] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 284
+                            [entity_type_id] => 4
+                            [parent_id] => 283
+                            [name] => a
+                            [path] => 1=284
+                            [status] => 1
+                            [description] => a
+                            [created_at] => 2023-04-18 23:59:40
+                            [updated_at] => 2023-04-18 23:59:40
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [2] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 285
+                            [entity_type_id] => 4
+                            [parent_id] => 284
+                            [name] => b
+                            [path] => 1=284=285
+                            [status] => 1
+                            [description] => b
+                            [created_at] => 2023-04-19 00:00:23
+                            [updated_at] => 2023-04-19 00:00:23
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [3] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 286
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => c
+                            [path] => 1=284=285=286
+                            [status] => 1
+                            [description] => c
+                            [created_at] => 2023-04-19 00:00:31
+                            [updated_at] => 2023-04-19 00:00:31
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [4] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 287
+                            [entity_type_id] => 4
+                            [parent_id] => 286
+                            [name] => d
+                            [path] => 1=284=285=286=287
+                            [status] => 1
+                            [description] => d
+                            [created_at] => 2023-04-19 00:18:58
+                            [updated_at] => 2023-04-19 00:18:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [5] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 291
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=291
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:14
+                            [updated_at] => 2023-04-28 21:43:15
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [6] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 292
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=292
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:16
+                            [updated_at] => 2023-04-28 21:43:16
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [7] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 293
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=293
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:27
+                            [updated_at] => 2023-04-28 21:43:27
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 77
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+        )
+
+)
+
+
+23-04-29 13:11:31 : Model_Category_Collection Object
+(
+    [data:protected] => Array
+        (
+            [0] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 1
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => root
+                            [path] => 1
+                            [status] => 1
+                            [description] => 
+                            [created_at] => 2023-04-18 23:58:25
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [1] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 284
+                            [entity_type_id] => 4
+                            [parent_id] => 283
+                            [name] => a
+                            [path] => 1=284
+                            [status] => 1
+                            [description] => a
+                            [created_at] => 2023-04-18 23:59:40
+                            [updated_at] => 2023-04-18 23:59:40
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [2] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 285
+                            [entity_type_id] => 4
+                            [parent_id] => 284
+                            [name] => b
+                            [path] => 1=284=285
+                            [status] => 1
+                            [description] => b
+                            [created_at] => 2023-04-19 00:00:23
+                            [updated_at] => 2023-04-19 00:00:23
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [3] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 286
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => c
+                            [path] => 1=284=285=286
+                            [status] => 1
+                            [description] => c
+                            [created_at] => 2023-04-19 00:00:31
+                            [updated_at] => 2023-04-19 00:00:31
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [4] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 287
+                            [entity_type_id] => 4
+                            [parent_id] => 286
+                            [name] => d
+                            [path] => 1=284=285=286=287
+                            [status] => 1
+                            [description] => d
+                            [created_at] => 2023-04-19 00:18:58
+                            [updated_at] => 2023-04-19 00:18:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [5] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 291
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=291
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:14
+                            [updated_at] => 2023-04-28 21:43:15
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [6] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 292
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=292
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:16
+                            [updated_at] => 2023-04-28 21:43:16
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [7] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 293
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => e
+                            [path] => 1=284=285=293
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-29 16:41:11
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 241
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+        )
+
+)
+
+
+23-04-29 13:55:49 : Model_Category_Collection Object
+(
+    [data:protected] => Array
+        (
+            [0] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 1
+                            [entity_type_id] => 4
+                            [parent_id] => 1
+                            [name] => root
+                            [path] => 1
+                            [status] => 1
+                            [description] => 
+                            [created_at] => 2023-04-18 23:58:25
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [1] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 284
+                            [entity_type_id] => 4
+                            [parent_id] => 283
+                            [name] => a
+                            [path] => 1=284
+                            [status] => 1
+                            [description] => a
+                            [created_at] => 2023-04-18 23:59:40
+                            [updated_at] => 2023-04-18 23:59:40
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [2] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 285
+                            [entity_type_id] => 4
+                            [parent_id] => 284
+                            [name] => b
+                            [path] => 1=284=285
+                            [status] => 1
+                            [description] => b
+                            [created_at] => 2023-04-19 00:00:23
+                            [updated_at] => 2023-04-19 00:00:23
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [3] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 286
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => c
+                            [path] => 1=284=285=286
+                            [status] => 1
+                            [description] => c
+                            [created_at] => 2023-04-19 00:00:31
+                            [updated_at] => 2023-04-19 00:00:31
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [4] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 287
+                            [entity_type_id] => 4
+                            [parent_id] => 286
+                            [name] => d
+                            [path] => 1=284=285=286=287
+                            [status] => 1
+                            [description] => d
+                            [created_at] => 2023-04-19 00:18:58
+                            [updated_at] => 2023-04-19 00:18:58
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [5] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 291
+                            [entity_type_id] => 4
+                            [parent_id] => 287
+                            [name] => e
+                            [path] => 1=284=285=286=287=291
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:14
+                            [updated_at] => 2023-04-28 21:43:15
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [6] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 292
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => e
+                            [path] => 1=284=285=292
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-28 21:43:16
+                            [updated_at] => 2023-04-29 16:41:35
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+            [7] => Model_Category Object
+                (
+                    [data:protected] => Array
+                        (
+                            [category_id] => 293
+                            [entity_type_id] => 4
+                            [parent_id] => 285
+                            [name] => e
+                            [path] => 1=284=285=293
+                            [status] => 1
+                            [description] => e
+                            [created_at] => 2023-04-29 16:41:11
+                            [updated_at] => 
+                        )
+
+                    [resource:protected] => Model_Category_Resource Object
+                        (
+                            [tableName] => category
+                            [primaryKey] => category_id
+                            [adapter] => Model_core_Adapter Object
+                                (
+                                    [serverName] => localhost
+                                    [userName] => root
+                                    [password] => 
+                                    [databaseName] => newmvc-krushal
+                                    [connect] => mysqli Object
+                                        (
+                                            [affected_rows] => 8
+                                            [client_info] => mysqlnd 8.0.25
+                                            [client_version] => 80025
+                                            [connect_errno] => 0
+                                            [connect_error] => 
+                                            [errno] => 0
+                                            [error] => 
+                                            [error_list] => Array
+                                                (
+                                                )
+
+                                            [field_count] => 9
+                                            [host_info] => localhost via TCP/IP
+                                            [info] => 
+                                            [insert_id] => 0
+                                            [server_info] => 10.4.27-MariaDB
+                                            [server_version] => 100427
+                                            [sqlstate] => 00000
+                                            [protocol_version] => 10
+                                            [thread_id] => 258
+                                            [warning_count] => 0
+                                        )
+
+                                )
+
+                        )
+
+                    [resourceClass:protected] => Model_Category_Resource
+                    [collection:protected] => Model_Category_Collection Object
+ *RECURSION*
+                    [collectionClass:protected] => Model_Category_Collection
+                )
+
+        )
+
+)
+
+

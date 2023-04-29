@@ -1,6 +1,6 @@
 <?php $customers = $this->getQuote()->getCustomers();
 $id = $this->getSession()->get('customer_id'); ?>
-<table width="50%" class="table table-bordered">
+<table width="50%" class="table">
 	<tr>
 		<td>customer :
 			<select   class=""  onchange="change(this.value)">
@@ -9,14 +9,16 @@ $id = $this->getSession()->get('customer_id'); ?>
 				<?php endforeach; ?>
 			</select>
 		</td>
+		<?php if (isset($id)): ?>
 		<td>email : <?php echo $email ?></td>
 		<td>number : <?php echo $number ?></td>
+		<?php endif ?>
 	</tr>
 </table>
 
 <script type="text/javascript">
 	function change(value){
 		var customerId = value;
-window.location.assign('<?php echo $this->getUrl('setid','quote',null,true); ?>&customer_id='+value);
+ajax.setUrl('<?php echo $this->getUrl('setid','quote',null,true); ?>&customer_id='+value).call();
 }
 </script>
