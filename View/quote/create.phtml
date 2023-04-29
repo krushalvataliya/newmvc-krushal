@@ -1,0 +1,19 @@
+<!-- <?php // $this->getSession()->start()->unset('customer_id');?> -->
+
+<?php $id = $this->getSession()->get('customer_id'); ?>
+
+<?php echo$this->getChild('customer')->toHtml(); ?>
+<?php if (isset($id)): ?>
+
+<form id="quote" method="POST">
+
+<?php echo $this->getChild('address')->toHtml(); ?>
+<?php echo $this->getChild('method')->toHtml(); ?>
+<?php echo $this->getChild('products')->toHtml(); ?>
+<?php echo $this->getChild('cartItems')->toHtml(); ?>
+<?php echo $this->getChild('total')->toHtml(); ?>
+
+</form>
+<?php else: ?>
+	please select customer
+<?php endif ?>

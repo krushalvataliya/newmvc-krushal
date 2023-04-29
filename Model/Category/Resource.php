@@ -1,6 +1,6 @@
 <?php 
 
-class Model_Cetegory_Resource extends Model_Core_Table_Resource
+class Model_Category_Resource extends Model_Core_Table_Resource
 {
 
 	

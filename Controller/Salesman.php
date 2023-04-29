@@ -200,6 +200,64 @@ class Controller_Salesman extends Controller_Core_Action
 		}
 
 	}
+
+	public function importAction()
+	{
+		$layout = $this->getLayout();
+		$addImage = $layout->createBlock('Core_Layout')->setTemplete('core/importfile.phtml');;
+		$addImage = $addImage->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$addImage,'element'=>'content']);
+		
+	}
+
+	public function savefileAction()
+	{
+		try
+		{
+			$uploadModel =  CCC::getModel('Core_File_Upload');
+			$uploadModel->setPath('csv')->setFileName('salesman.csv')->upload('fileToUpload');
+
+			$readCsvModel =  CCC::getModel('Core_File_Csv');
+			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
+
+			$modelSalesman = Ccc::getModel('salesman');
+			$insert = $modelSalesman->getResource()->insertMultiple($rows, 'emeil');
+			if(!$insert)
+			{
+				throw new Exception("data not saved from csv file.", 1);
+			}
+			return $this->redirect('index');	
+		} 
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not imported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+			return $this->redirect('index');	
+		}
+	}
+
+	public function exportAction()
+	{
+		try
+		{
+			$modelSalesman = Ccc::getModel('salesman');
+			$sql = "SELECT * FROM `salesmen`";
+			$salesmans = $modelSalesman->getResource()->fetchAll($sql);
+			if(!$salesmans)
+			{
+				throw new Exception("data not found.", 1);
+			}
+
+			$exportModel =  CCC::getModel('Core_File_Export');
+			$exportModel->setFileName('salesm.csv')->putData($salesmans);
+			$exportModel->export();
+			exit();
+		}
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not exported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+
+		}
+	}
 }
 
 ?>

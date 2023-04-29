@@ -26,6 +26,7 @@ class Model_Core_Session
 
 	public function set($key, $value)
 	{
+		$this->start();
 		$_SESSION[$key] = $value;
 		return $this;
 	}
@@ -47,6 +48,7 @@ class Model_Core_Session
 
 	public function unset($key)
 	{
+		$this->start();
 		if(array_key_exists($key, $_SESSION))
 		{
 			unset($_SESSION[$key]);

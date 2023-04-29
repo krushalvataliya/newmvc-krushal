@@ -491,7 +491,7 @@ INSERT INTO `entity_type` (`entity_type_id`, `name`, `entity_model`) VALUES
 (1, 'product', 'Model_Product'),
 (2, 'customer', 'Model_Customer'),
 (3, 'vendor', 'Model_Vendor'),
-(4, 'category', 'Model_Cetegory'),
+(4, 'category', 'Model_Category'),
 (5, 'item', 'Model_Item'),
 (6, 'salesman', 'Model_Salesman'),
 (7, 'brand', 'Model_Brand');

@@ -38,13 +38,13 @@ class Controller_Category extends Controller_Core_Action
 			{
 				throw new Exception("id not found.", 1);
 			}
-			$category = Ccc::getModel('Cetegory')->load($id);
+			$category = Ccc::getModel('Category')->load($id);
 			if(!$category)
 			{
 				throw new Exception("id not found.", 1);
 			}
 			$sql = "SELECT * FROM `category` WHERE `path` NOT LIKE '{$category->path}=%' AND `path` NOT LIKE '{$category->path}';";
-			$categories = Ccc::getModel('Cetegory')->fetchAll($sql);
+			$categories = Ccc::getModel('Category')->fetchAll($sql);
 			if(!$categories)
 			{
 				throw new Exception("id not found.", 1);
@@ -72,11 +72,11 @@ class Controller_Category extends Controller_Core_Action
 			{
 				throw new Exception("invalid category ID.", 1);
 			}
-			$modelCetegory = Ccc::getModel('Cetegory');;
-			$delete = $modelCetegory->load($id)->delete();
+			$modelCategory = Ccc::getModel('Category');;
+			$delete = $modelCategory->load($id)->delete();
 			if(!$delete)
 			{
-				throw new Exception("cetegory not deleted.", 1);
+				throw new Exception("category not deleted.", 1);
 			}
 			$this->getMessage()->addMessage('category deleted successfully.',  Model_Core_Message::SUCCESS);
 			$layout = $this->getLayout();
@@ -100,13 +100,12 @@ class Controller_Category extends Controller_Core_Action
 			}
 
 			$postData = $request->getPost('category');
-			print_r($postData);
 			$attributeData = $request->getPost('attribute');
 			if(!$postData)
 			{
 				throw new Exception("no data posted.", 1);
 			}
-			$modelRowCategory = Ccc::getModel('Cetegory');
+			$modelRowCategory = Ccc::getModel('Category');
 			if($id = (int)$request->getParam('category_id'))
 			{
 				$categoryRow = $modelRowCategory->load($id);
@@ -117,7 +116,7 @@ class Controller_Category extends Controller_Core_Action
 				$postData['category_id'] =$categoryRow->category_id ;
 				$postData['path'] =$categoryRow->path ;
 			}
-			$postData['entity_type_id'] = Model_Cetegory::ENTITY_TYPE_ID ;
+			$postData['entity_type_id'] = Model_Category::ENTITY_TYPE_ID ;
 			$category = $modelRowCategory->setData($postData);
 			$result =$modelRowCategory->save();
 
@@ -154,7 +153,7 @@ class Controller_Category extends Controller_Core_Action
 			
 			}
 			$this->getMessage()->addMessage('Category saved successfully.',  Model_Core_Message::SUCCESS);
-			$edit = $this->getLayout()->createBlock('Product_Grid');
+			$edit = $this->getLayout()->createBlock('Category_Grid');
 			$edit = $edit->toHtml();
 			$this->getResponse()->jsonResponse(['html'=>$edit,'element'=>'content']);		
 		}
@@ -163,6 +162,64 @@ class Controller_Category extends Controller_Core_Action
 			$this->getMessage()->addMessage('category not saved.'.$e->getMessage(),  Model_Core_Message::FAILURE);
 		}
 
+	}
+
+	public function importAction()
+	{
+		$layout = $this->getLayout();
+		$addImage = $layout->createBlock('Core_Layout')->setTemplete('core/importfile.phtml');;
+		$addImage = $addImage->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$addImage,'element'=>'content']);
+		
+	}
+
+	public function savefileAction()
+	{
+		try
+		{
+			$uploadModel =  CCC::getModel('Core_File_Upload');
+			$uploadModel->setPath('csv')->setFileName('category.csv')->upload('fileToUpload');
+
+			$readCsvModel =  CCC::getModel('Core_File_Csv');
+			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
+
+			$modelcategory = Ccc::getModel('category');
+			$insert = $modelcategory->getResource()->insertMultiple($rows, 'path');
+			if(!$insert)
+			{
+				throw new Exception("data not saved from csv file.", 1);
+			}
+			return $this->redirect('index');	
+		} 
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not imported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+			return $this->redirect('index');	
+		}
+	}
+
+	public function exportAction()
+	{
+		try
+		{
+			$modelcategory = Ccc::getModel('category');
+			$sql = "SELECT * FROM `category`";
+			$categorys = $modelcategory->getResource()->fetchAll($sql);
+			if(!$categorys)
+			{
+				throw new Exception("data not found.", 1);
+			}
+
+			$exportModel =  CCC::getModel('Core_File_Export');
+			$exportModel->setFileName('categories.csv')->putData($categorys);
+			$exportModel->export();
+			exit();
+		}
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not exported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+
+		}
 	}
 	
 }

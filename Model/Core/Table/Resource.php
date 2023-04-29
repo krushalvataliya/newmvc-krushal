@@ -87,7 +87,7 @@ class Model_Core_Table_Resource
 
 	}
 
-	public function insertUpdateOnDuplicate($data,$uniqueColumns)
+	public function insertUpdateOnDuplicate(array $data,array $uniqueColumns)
 	{
 		$key =  implode('`,`', array_keys($data));
 		$value =  implode('\',\'', $data);
@@ -102,7 +102,6 @@ class Model_Core_Table_Resource
 		Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->query($sql);
 		return $result;
-
 	}
 
 	public function update($data,$condition)
@@ -111,8 +110,8 @@ class Model_Core_Table_Resource
 		{
 			$values [] =" `{$key}` = '{$value}'" ;
 		}
-		if(!is_array($condition))
 		$and = [];
+		if(!is_array($condition))
 		{
 			// $sql = "UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE `{$this->primaryKey}`='{$condition}' ";
 			$and[] = " `{$this->primaryKey}` = '{$condition}' " ;
@@ -164,6 +163,51 @@ class Model_Core_Table_Resource
     		unset($this->data[$key]);
     	}
 
+    }
+
+    public function insertMultiple($rows, $condition)
+    {
+    	foreach ($rows as $row)
+		{
+			$uniqueColumn = [$condition => $row[$condition]];
+			$result = $this->insertUpdateOnDuplicate($row, $uniqueColumn);
+			var_dump($result);
+		   	if(!$result)
+		   	{
+				return false;		   	 	
+		   	}
+		}
+		return true;
+    	
+    }
+
+    public function insertMultipleOnConditionUpdate($rows, $condition)
+    {
+    	foreach ($rows as $row)
+		{
+			$conditionVal = $row[$condition];
+			$sql = "SELECT * FROM `{$this->tableName}` WHERE `{$condition}` = '{$conditionVal}'";
+			$result = $this->fetchRow($sql);
+
+			if($result)
+			{
+				$update = $this->update($row, $result[$this->getPrimaryKey()]);
+			   	if(!$update)
+			   	{
+					return false;		   	 	
+			   	}
+			}
+			else
+			{
+				$insert = $this->insert($row);
+				if(!$insert)
+				{
+					return false;		   	 	
+				}
+				return true;
+			}
+		}
+    	
     }
 }
  

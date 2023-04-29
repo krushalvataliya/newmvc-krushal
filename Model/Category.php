@@ -1,6 +1,6 @@
 <?php 
 
-class Model_Cetegory  extends Model_Core_Table
+class Model_Category  extends Model_Core_Table
 {
 	const STATUS_ACTIVE = 1;
 	const STATUS_INACTIVE = 2;
@@ -19,8 +19,8 @@ class Model_Cetegory  extends Model_Core_Table
     function __construct()
 	{
 		parent::__construct();
-		$this->setResourceClass('Model_Cetegory_Resource');
-		$this->setCollectionClass('Model_Cetegory_Collection');
+		$this->setResourceClass('Model_Category_Resource');
+		$this->setCollectionClass('Model_Category_Collection');
 	}
 
 	public function getStatus()
@@ -29,7 +29,7 @@ class Model_Cetegory  extends Model_Core_Table
 		{
 			return $this->status; 
 		}
-		return Model_Cetegory::STATUS_DEFAULT;
+		return Model_Category::STATUS_DEFAULT;
 	}
 
 	public function getStatusText()
@@ -39,7 +39,7 @@ class Model_Cetegory  extends Model_Core_Table
 		{
 			return $statuses[$this->status];
 		}
-			return $statuses[ Model_Cetegory::STATUS_DEFAULT];
+			return $statuses[ Model_Category::STATUS_DEFAULT];
 	}
 
 	public function updatePath()
@@ -48,7 +48,7 @@ class Model_Cetegory  extends Model_Core_Table
 		{
 			return false;
 		}
-		$parent = Ccc::getModel('Cetegory')->load($this->parent_id);
+		$parent = Ccc::getModel('Category')->load($this->parent_id);
 		$oldPath = $this->path;
 		if(!$parent)
 		{
@@ -71,13 +71,13 @@ class Model_Cetegory  extends Model_Core_Table
 		$pathArry = explode('=', $this->path);
 		$sql = "SELECT `category_id`,`name` FROM `category`;";
 		$categoryNameArray = $this->getResource()->getAdapter()->fetchPairs($sql);
-		foreach ($pathArry as $id2 => &$cetegoryId)
+		foreach ($pathArry as $id2 => &$categoryId)
 		{
-			foreach ($categoryNameArray as $key => $cetegoryName)
+			foreach ($categoryNameArray as $key => $categoryName)
 			{
-				if($cetegoryId == $key)
+				if($categoryId == $key)
 				{
-					$cetegoryId = $cetegoryName ;
+					$categoryId = $categoryName ;
 				}
 			}
 		}

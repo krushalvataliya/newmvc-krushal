@@ -136,6 +136,64 @@ class Controller_ShippingMethod extends Controller_Core_Action
 
 	}
 
+	public function importAction()
+	{
+		$layout = $this->getLayout();
+		$addImage = $layout->createBlock('Core_Layout')->setTemplete('core/importfile.phtml');;
+		$addImage = $addImage->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$addImage,'element'=>'content']);
+		
+	}
+
+	public function savefileAction()
+	{
+		try
+		{
+			$uploadModel =  CCC::getModel('Core_File_Upload');
+			$uploadModel->setPath('csv')->setFileName('shippingMethod.csv')->upload('fileToUpload');
+
+			$readCsvModel =  CCC::getModel('Core_File_Csv');
+			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
+
+			$modelshippingMethod = Ccc::getModel('shippingMethod');
+			$insert = $modelshippingMethod->getResource()->insertMultiple($rows, 'emeil');
+			if(!$insert)
+			{
+				throw new Exception("data not saved from csv file.", 1);
+			}
+			return $this->redirect('index');	
+		} 
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not imported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+			return $this->redirect('index');	
+		}
+	}
+
+	public function exportAction()
+	{
+		try
+		{
+			$modelshippingMethod = Ccc::getModel('shippingMethod');
+			$sql = "SELECT * FROM `shiping_methods`";
+			$shippingMethods = $modelshippingMethod->getResource()->fetchAll($sql);
+			if(!$shippingMethods)
+			{
+				throw new Exception("data not found.", 1);
+			}
+
+			$exportModel =  CCC::getModel('Core_File_Export');
+			$exportModel->setFileName('shipping_methods.csv')->putData($shippingMethods);
+			$exportModel->export();
+			exit();
+		}
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not exported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+
+		}
+	}
+
 }
 
 ?>

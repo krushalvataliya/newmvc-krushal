@@ -99,5 +99,4 @@ class Block_Product_Grid extends  Block_Core_Grid
 		return $products;
 	}
 
-    
 }

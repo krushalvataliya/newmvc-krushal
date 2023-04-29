@@ -1,9 +1,0 @@
-<form id="addimage" action="<?php echo $this->getUrl('savefile','product') ?>" method="POST" enctype="multipart/form-data">
-<button id="subtn" class="btn btn-primary" type="submit" href="<?php echo $this->getUrl('insert','product_media',['product_id'=>$productId]); ?>').setForm('addimage').setMethod('post').call()">save</button>
-  <table class="table table-bordered">
-    <tr>
-      <th>upload csv file</th>
-      <td> <input type="file" name="fileToUpload" accept=".csv"></td>
-    </tr>
-  </table>
-</form>
