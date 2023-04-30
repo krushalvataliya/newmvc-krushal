@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 07:05 PM
+-- Generation Time: Apr 30, 2023 at 07:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -67,7 +67,7 @@ CREATE TABLE `brand` (
 INSERT INTO `brand` (`brand_id`, `name`, `description`, `image`, `entity_type_id`, `created_at`, `updated_at`) VALUES
 (5, 'nike', 'nike nike nike', 'IMG_1681895042.jpg', 7, '0000-00-00 00:00:00', '2023-04-30 08:39:41'),
 (7, 'lenovo', 'lenovo lenovo lenovo', 'IMG_1681895430.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:45:54'),
-(17, 'nike', 'wq', 'IMG_1682492328.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:46:18'),
+(17, 'nike1', 'wq', 'IMG_1682492328.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:46:18'),
 (23, 'qq', 'ww', 'IMG_1682492541.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:46:14');
 
 -- --------------------------------------------------------
@@ -284,10 +284,10 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customer_id`, `entity_type_id`, `first_name`, `last_name`, `email`, `gender`, `mobile`, `status`, `shiping_address_id`, `billing_address_id`, `created_at`, `updated_at`) VALUES
 (3452, 2, 'hiren', 'khut', 'hiren@gmail.com', 'male', '06353319278', 1, 290, 290, '2023-04-19 02:17:57', '2023-04-30 03:20:45'),
 (3453, 2, 'hemin', 'shah', 'hemin@gmail.com', 'male', '6325413365', 1, 291, 291, '2023-04-19 06:19:38', '2023-04-19 06:19:38'),
-(3459, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 301, 301, '2023-04-23 12:25:23', '2023-04-23 12:25:23'),
-(3462, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 304, 304, '2023-04-25 17:03:58', '2023-04-25 17:03:58'),
-(3463, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 305, 305, '2023-04-29 02:57:01', '2023-04-29 02:57:01'),
-(3464, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 306, 307, '2023-04-30 16:58:41', '2023-04-30 16:58:41');
+(3459, 2, 'krushal', 'vataliya', 'krushalvataliya224@gmail.com', 'male', '06353319278', 1, 301, 301, '2023-04-23 12:25:23', '2023-04-23 12:25:23'),
+(3462, 2, 'krushal', 'vataliya', 'krushalvataliya2124@gmail.com', 'male', '06353319278', 1, 304, 304, '2023-04-25 17:03:58', '2023-04-25 17:03:58'),
+(3463, 2, 'krushal', 'vataliya', 'krushalvataliya4@gmail.com', 'male', '06353319278', 1, 305, 305, '2023-04-29 02:57:01', '2023-04-29 02:57:01'),
+(3464, 2, 'krushal', 'vataliya', 'krushalvataliya424@gmail.com', 'male', '06353319278', 1, 306, 307, '2023-04-30 16:58:41', '2023-04-30 16:58:41');
 
 -- --------------------------------------------------------
 
@@ -411,14 +411,14 @@ CREATE TABLE `eav_attribute` (
 
 INSERT INTO `eav_attribute` (`attribute_id`, `entity_type_id`, `code`, `backend_type`, `name`, `status`, `source_model`, `input_type`, `updated_at`) VALUES
 (43, 2, 'qaq', 'varchar', 'qqax', 1, 'Eav_Attribute_Option_Source', 'multiselect', '0000-00-00 00:00:00'),
-(44, 5, 'age', 'int', 'jhgf', 1, 'Eav_Attribute_Option_Source', 'select', '0000-00-00 00:00:00'),
-(45, 5, 'age', 'int', 'aa', 1, 'Eav_Attribute_Option_Source', 'radio', '0000-00-00 00:00:00'),
-(46, 5, 'agdqe', 'varchar', 'aa', 1, 'Eav_Attribute_Option_Source', 'multiselect', '0000-00-00 00:00:00'),
+(44, 5, 'age1', 'int', 'jhgf', 1, 'Eav_Attribute_Option_Source', 'select', '2023-04-30 17:26:27'),
+(45, 5, 'age', 'int', 'age1', 1, 'Eav_Attribute_Option_Source', 'radio', '2023-04-30 17:25:07'),
+(46, 5, 'agdqe', 'varchar', 'age', 1, 'Eav_Attribute_Option_Source', 'multiselect', '2023-04-30 17:24:50'),
 (50, 5, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textarea', '0000-00-00 00:00:00'),
 (54, 5, 'cost', 'decimal', 'cost', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
-(62, 4, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
+(62, 4, 'desc1', 'text', 'desc1', 1, 'Eav_Attribute_Option_Source', 'textbox', '2023-04-30 17:26:30'),
 (64, 2, 'proof', 'varchar', 'proof', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
-(65, 3, 'proof', 'text', 'proof', 1, 'Eav_Attribute_Option_Source', 'select', '0000-00-00 00:00:00'),
+(65, 3, 'proof1', 'text', 'proof1', 1, 'Eav_Attribute_Option_Source', 'select', '2023-04-30 17:26:33'),
 (66, 1, 'description', 'text', 'description', 1, 'Eav_Attribute_Option_Source', 'textarea', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -502,7 +502,7 @@ CREATE TABLE `item` (
 
 INSERT INTO `item` (`item_id`, `sku`, `entity_type_id`, `status`, `created_at`, `updated_at`) VALUES
 (41, 'rt', 5, 2, '0000-00-00 00:00:00', '2023-04-30 08:32:52'),
-(42, 'rt', 5, 1, '0000-00-00 00:00:00', '2023-04-30 08:32:59');
+(42, 'r1t', 5, 1, '0000-00-00 00:00:00', '2023-04-30 08:32:59');
 
 -- --------------------------------------------------------
 
@@ -1121,13 +1121,15 @@ CREATE TABLE `vendor_varchar` (
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_id`);
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `brand`
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`brand_id`),
+  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `entity_type_id` (`entity_type_id`);
 
 --
@@ -1233,6 +1235,7 @@ ALTER TABLE `category_varchar`
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`),
   ADD UNIQUE KEY `customer_id` (`customer_id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `billing_address_id` (`billing_address_id`),
   ADD KEY `shiping_address_id` (`shiping_address_id`),
   ADD KEY `entity_type_id` (`entity_type_id`);
@@ -1285,6 +1288,7 @@ ALTER TABLE `customer_varchar`
 --
 ALTER TABLE `eav_attribute`
   ADD PRIMARY KEY (`attribute_id`),
+  ADD UNIQUE KEY `code` (`code`),
   ADD KEY `entity_type_id` (`entity_type_id`);
 
 --
@@ -1304,7 +1308,8 @@ ALTER TABLE `entity_type`
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`item_id`),
+  ADD UNIQUE KEY `sku` (`sku`);
 
 --
 -- Indexes for table `item_decimal`
@@ -1376,7 +1381,8 @@ ALTER TABLE `order_items`
 -- Indexes for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  ADD PRIMARY KEY (`payment_method_id`);
+  ADD PRIMARY KEY (`payment_method_id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `products`
@@ -1470,20 +1476,23 @@ ALTER TABLE `salesman_price`
 -- Indexes for table `salesmen`
 --
 ALTER TABLE `salesmen`
-  ADD PRIMARY KEY (`salesman_id`);
+  ADD PRIMARY KEY (`salesman_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `shiping_methods`
 --
 ALTER TABLE `shiping_methods`
-  ADD PRIMARY KEY (`shiping_method_id`);
+  ADD PRIMARY KEY (`shiping_method_id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `vendors`
 --
 ALTER TABLE `vendors`
   ADD PRIMARY KEY (`vendor_id`),
-  ADD UNIQUE KEY `vendor_id` (`vendor_id`);
+  ADD UNIQUE KEY `vendor_id` (`vendor_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `vendor_address`
@@ -1800,13 +1809,13 @@ ALTER TABLE `shiping_methods`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
 
 --
 -- AUTO_INCREMENT for table `vendor_address`
 --
 ALTER TABLE `vendor_address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `vendor_decimal`

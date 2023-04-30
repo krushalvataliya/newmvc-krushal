@@ -215,7 +215,7 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
 
 			$eavAttributeModel = Ccc::getModel('eav_attribute');
-			$insert = $eavAttributeModel->getResource()->insertMultiple($rows, 'name');
+			$insert = $eavAttributeModel->getResource()->insertMultiple($rows, 'code');
 			if(!$insert)
 			{
 				throw new Exception("data not saved from csv file.", 1);
