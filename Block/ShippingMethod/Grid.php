@@ -77,7 +77,7 @@ class Block_ShippingMethod_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(shiping_method_id) FROM `shiping_methods`;";
 		$count =$modelShippingMethod->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `shiping_methods` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `shiping_methods` ORDER BY `shiping_method_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$shippingMethods =$modelShippingMethod->fetchAll($sql);
 		return $shippingMethods;
 	}

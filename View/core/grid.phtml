@@ -2,15 +2,15 @@
 $collection = $this->getCollection();
 $pager = $this->getPagerModel();
 ?>
-<div><a  class="btn btn-primary" onclick="ajax.setUrl('<?php echo $this->getUrl('import'); ?>').call()">Import</a>
-	<a  class="btn btn-primary" href="<?php echo $this->getUrl('export'); ?>">Export</a>
+<div><a  class="btn btn-primary my-1" onclick="ajax.setUrl('<?php echo $this->getUrl('import'); ?>').call()">Import</a>
+	<a  class="btn btn-primary my-1" href="<?php echo $this->getUrl('export'); ?>">Export</a>
 </div>
 
 <div><div><h3><?php echo $this->getTitle(); ?></h3></div>
 
 
 <?php foreach ($this->getButtons() as $key => $button): ?>
-<div style="margin-left:640px;margin-top: 15px;"><a  class="btn btn-primary" onclick="ajax.setUrl('<?php echo $button['url'] ?>').call()">
+<div class="add-btn"><a  class="btn btn-primary my-1" onclick="ajax.setUrl('<?php echo $button['url'] ?>').call()">
 	<?php echo $button['title'] ?>
 </a></div></div>
 <?php endforeach ?>

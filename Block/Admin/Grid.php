@@ -79,7 +79,7 @@ class Block_Admin_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(admin_id) FROM `admins`;";
 		$count =$modelAdmin->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `admins` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `admins` ORDER BY `admin_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$admins =$modelAdmin->fetchAll($sql);
 		return $admins;
 	}

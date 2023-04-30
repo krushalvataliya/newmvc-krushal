@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2023 at 07:12 PM
+-- Generation Time: Apr 30, 2023 at 07:05 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -42,9 +42,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `name`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(32, 'krushal', 'kv@gmail.com', '123', 1, '2023-04-23 08:58:33', '2023-04-23 18:46:23'),
-(33, 'kv vataliya', '', '', 1, '2023-04-23 18:40:43', '2023-04-23 18:45:13'),
-(34, 'kv vataliya', 'krushalvataliya24@gmail.com', '22', 1, '2023-04-23 18:43:13', '2023-04-24 07:56:28');
+(36, 'kv vataliya', 'krushalvataliya24@gmail.com', '22', 1, '0000-00-00 00:00:00', '2023-04-30 08:02:37');
 
 -- --------------------------------------------------------
 
@@ -67,9 +65,10 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`brand_id`, `name`, `description`, `image`, `entity_type_id`, `created_at`, `updated_at`) VALUES
-(5, 'nike', 'nike nike nike', 'IMG_1681895042.jpg', 7, '2023-04-19 14:34:02', NULL),
-(7, 'lenovo', 'lenovo lenovo lenovo', 'IMG_1681895430.png', 7, '2023-04-19 14:40:30', NULL),
-(11, 'qq', '22', 'IMG_1682442179.jpg', 7, '2023-04-25 22:32:59', NULL);
+(5, 'nike', 'nike nike nike', 'IMG_1681895042.jpg', 7, '0000-00-00 00:00:00', '2023-04-30 08:39:41'),
+(7, 'lenovo', 'lenovo lenovo lenovo', 'IMG_1681895430.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:45:54'),
+(17, 'nike', 'wq', 'IMG_1682492328.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:46:18'),
+(23, 'qq', 'ww', 'IMG_1682492541.png', 7, '0000-00-00 00:00:00', '2023-04-30 13:46:14');
 
 -- --------------------------------------------------------
 
@@ -83,13 +82,6 @@ CREATE TABLE `brand_decimal` (
   `attribute_id` int(11) NOT NULL,
   `value` decimal(65,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `brand_decimal`
---
-
-INSERT INTO `brand_decimal` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(2, 7, 69, '145.00');
 
 -- --------------------------------------------------------
 
@@ -116,13 +108,6 @@ CREATE TABLE `brand_text` (
   `attribute_id` int(11) NOT NULL,
   `value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `brand_text`
---
-
-INSERT INTO `brand_text` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(1, 7, 70, '112');
 
 -- --------------------------------------------------------
 
@@ -201,11 +186,13 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`category_id`, `entity_type_id`, `parent_id`, `name`, `path`, `status`, `description`, `created_at`, `updated_at`) VALUES
 (1, 4, 1, 'root', '1', 1, '', '2023-04-18 18:28:25', NULL),
-(284, 4, 283, 'a', '1=284', 1, 'a', '2023-04-18 18:29:40', '2023-04-18 18:29:40'),
+(284, 4, 1, 'a', '1=284', 1, 'add', '2023-04-18 18:29:40', '2023-04-30 03:20:11'),
 (285, 4, 284, 'b', '1=284=285', 1, 'b', '2023-04-18 18:30:23', '2023-04-18 18:30:23'),
 (286, 4, 285, 'c', '1=284=285=286', 1, 'c', '2023-04-18 18:30:31', '2023-04-18 18:30:31'),
 (287, 4, 286, 'd', '1=284=285=286=287', 1, 'd', '2023-04-18 18:48:58', '2023-04-18 18:48:58'),
-(288, 4, 1, 'kv', '1=288', 1, 'vk', '2023-04-23 11:01:41', '2023-04-23 13:19:58');
+(291, 4, 287, 'e', '1=284=285=286=287=291', 1, 'e', '2023-04-28 16:13:14', '2023-04-28 16:13:15'),
+(292, 4, 285, 'e', '1=284=285=292', 1, 'e', '2023-04-28 16:13:16', '2023-04-29 11:11:35'),
+(293, 4, 285, 'e', '1=284=285=293', 1, 'e', '2023-04-29 11:11:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -252,7 +239,9 @@ CREATE TABLE `category_text` (
 
 INSERT INTO `category_text` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
 (1, 287, 62, 'ccq'),
-(2, 288, 62, 'ccq');
+(7, 291, 62, 'e'),
+(8, 292, 62, 'e'),
+(17, 284, 62, 'dg');
 
 -- --------------------------------------------------------
 
@@ -293,10 +282,12 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `entity_type_id`, `first_name`, `last_name`, `email`, `gender`, `mobile`, `status`, `shiping_address_id`, `billing_address_id`, `created_at`, `updated_at`) VALUES
-(3452, 2, 'hiren', 'khut', 'hiren@gmail.com', 'male', '06353319278', 1, 290, 290, '2023-04-19 02:17:57', '2023-04-25 17:05:58'),
+(3452, 2, 'hiren', 'khut', 'hiren@gmail.com', 'male', '06353319278', 1, 290, 290, '2023-04-19 02:17:57', '2023-04-30 03:20:45'),
 (3453, 2, 'hemin', 'shah', 'hemin@gmail.com', 'male', '6325413365', 1, 291, 291, '2023-04-19 06:19:38', '2023-04-19 06:19:38'),
 (3459, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 301, 301, '2023-04-23 12:25:23', '2023-04-23 12:25:23'),
-(3462, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 304, 304, '2023-04-25 17:03:58', '2023-04-25 17:03:58');
+(3462, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 304, 304, '2023-04-25 17:03:58', '2023-04-25 17:03:58'),
+(3463, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 305, 305, '2023-04-29 02:57:01', '2023-04-29 02:57:01'),
+(3464, 2, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 306, 307, '2023-04-30 16:58:41', '2023-04-30 16:58:41');
 
 -- --------------------------------------------------------
 
@@ -324,7 +315,10 @@ INSERT INTO `customer_address` (`address_id`, `address`, `city`, `state`, `count
 (290, 'plot no.76/B,', 'jamnafdgars', 'gujarat', 'India', 361008, '2023-04-19 07:47:57', '2023-04-25 22:34:12', 3452),
 (291, 'plot no.76/B,', 'jamsnagara', 'gujarat', 'India', 361008, '2023-04-19 11:49:38', NULL, 3453),
 (301, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008, '2023-04-23 17:55:23', NULL, 3459),
-(304, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008, '2023-04-25 22:33:58', NULL, 3462);
+(304, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008, '2023-04-25 22:33:58', NULL, 3462),
+(305, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008, '2023-04-29 08:27:01', NULL, 3463),
+(306, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008, '2023-04-30 22:28:41', NULL, 3464),
+(307, 'plot no.76/B,', 'panchvati society,', 'gujarat', 'India', 361008, '2023-04-30 22:28:41', NULL, 3464);
 
 -- --------------------------------------------------------
 
@@ -388,7 +382,10 @@ INSERT INTO `customer_varchar` (`value_id`, `entity_id`, `attribute_id`, `value`
 (5, 3459, 64, ''),
 (14, 3462, 43, '115,114'),
 (15, 3462, 64, ''),
-(16, 3452, 43, '115,114');
+(16, 3452, 43, '115,114'),
+(30, 3463, 43, '115,114'),
+(31, 3463, 64, ''),
+(34, 3464, 64, '');
 
 -- --------------------------------------------------------
 
@@ -413,20 +410,16 @@ CREATE TABLE `eav_attribute` (
 --
 
 INSERT INTO `eav_attribute` (`attribute_id`, `entity_type_id`, `code`, `backend_type`, `name`, `status`, `source_model`, `input_type`, `updated_at`) VALUES
-(43, 2, 'qaq', 'varchar', 'qqax', 1, 'Eav_Attribute_Option_Source', 'multiselect', '2023-04-23 16:56:15'),
-(44, 5, 'age', 'int', 'jhgf', 1, 'Eav_Attribute_Option_Source', 'select', '2023-04-18 03:19:06'),
-(45, 5, 'age', 'int', 'aa', 1, 'Eav_Attribute_Option_Source', 'radio', '2023-04-18 03:19:11'),
-(46, 5, 'agdqe', 'varchar', 'aa', 1, 'Eav_Attribute_Option_Source', 'multiselect', '2023-04-18 03:19:17'),
-(50, 5, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textarea', '2023-04-23 07:08:01'),
-(54, 5, 'cost', 'decimal', 'cost', 1, 'Eav_Attribute_Option_Source', 'textbox', '2023-04-23 07:08:01'),
-(62, 4, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textbox', '2023-04-19 02:14:53'),
-(64, 2, 'proof', 'varchar', 'proof', 1, 'Eav_Attribute_Option_Source', 'textbox', '2023-04-23 07:08:01'),
-(65, 3, 'proof', 'text', 'proof', 1, 'Eav_Attribute_Option_Source', 'select', '2023-04-19 02:14:37'),
-(66, 1, 'description', 'text', 'description', 1, 'Eav_Attribute_Option_Source', 'textarea', '2023-04-23 07:08:01'),
-(67, 1, 'color', 'int', 'color', 1, 'Eav_Attribute_Option_Source', 'select', '2023-04-23 07:08:01'),
-(68, 1, 'material', 'varchar', 'material', 1, 'Eav_Attribute_Option_Source', 'checkbox', '2023-04-23 07:08:01'),
-(69, 7, 'net worth', 'decimal', 'net worth', 1, 'Eav_Attribute_Option_Source', 'textbox', '2023-04-23 07:08:01'),
-(70, 7, 'international?', 'text', 'international?', 1, 'Eav_Attribute_Option_Source', 'radio', '2023-04-19 09:09:37');
+(43, 2, 'qaq', 'varchar', 'qqax', 1, 'Eav_Attribute_Option_Source', 'multiselect', '0000-00-00 00:00:00'),
+(44, 5, 'age', 'int', 'jhgf', 1, 'Eav_Attribute_Option_Source', 'select', '0000-00-00 00:00:00'),
+(45, 5, 'age', 'int', 'aa', 1, 'Eav_Attribute_Option_Source', 'radio', '0000-00-00 00:00:00'),
+(46, 5, 'agdqe', 'varchar', 'aa', 1, 'Eav_Attribute_Option_Source', 'multiselect', '0000-00-00 00:00:00'),
+(50, 5, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textarea', '0000-00-00 00:00:00'),
+(54, 5, 'cost', 'decimal', 'cost', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
+(62, 4, 'desc', 'text', 'desc', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
+(64, 2, 'proof', 'varchar', 'proof', 1, 'Eav_Attribute_Option_Source', 'textbox', '0000-00-00 00:00:00'),
+(65, 3, 'proof', 'text', 'proof', 1, 'Eav_Attribute_Option_Source', 'select', '0000-00-00 00:00:00'),
+(66, 1, 'description', 'text', 'description', 1, 'Eav_Attribute_Option_Source', 'textarea', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -459,14 +452,6 @@ INSERT INTO `eav_attribute_option` (`option_id`, `name`, `attribute_id`, `positi
 (102, 'licence', 65, 3, '2023-04-19 02:11:15'),
 (103, 'pan', 65, 2, '2023-04-19 02:11:15'),
 (104, 'adhar', 65, 1, '2023-04-19 02:11:15'),
-(105, 'green', 67, 3, '2023-04-19 05:06:31'),
-(106, 'blue', 67, 2, '2023-04-19 05:06:31'),
-(107, 'red', 67, 1, '2023-04-19 05:06:31'),
-(108, 'cotton', 68, 3, '2023-04-19 05:07:58'),
-(109, 'silk', 68, 2, '2023-04-19 05:07:58'),
-(110, 'solid', 68, 1, '2023-04-19 05:07:58'),
-(111, 'no', 70, 2, '2023-04-19 09:09:37'),
-(112, 'yes', 70, 1, '2023-04-19 09:09:37'),
 (113, 'c1', 43, 3, '2023-04-23 16:45:07'),
 (114, 'b1', 43, 2, '2023-04-23 16:45:07'),
 (115, 'a1', 43, 1, '2023-04-23 16:45:07');
@@ -491,7 +476,7 @@ INSERT INTO `entity_type` (`entity_type_id`, `name`, `entity_model`) VALUES
 (1, 'product', 'Model_Product'),
 (2, 'customer', 'Model_Customer'),
 (3, 'vendor', 'Model_Vendor'),
-(4, 'category', 'Model_Category'),
+(4, 'category', 'Model_Cetegory'),
 (5, 'item', 'Model_Item'),
 (6, 'salesman', 'Model_Salesman'),
 (7, 'brand', 'Model_Brand');
@@ -516,8 +501,8 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`item_id`, `sku`, `entity_type_id`, `status`, `created_at`, `updated_at`) VALUES
-(41, 'rt', 5, 2, '2023-04-25 08:36:39', NULL),
-(42, 'rt', 5, 1, '2023-04-25 16:46:15', '2023-04-25 22:22:07');
+(41, 'rt', 5, 2, '0000-00-00 00:00:00', '2023-04-30 08:32:52'),
+(42, 'rt', 5, 1, '0000-00-00 00:00:00', '2023-04-30 08:32:59');
 
 -- --------------------------------------------------------
 
@@ -537,7 +522,7 @@ CREATE TABLE `item_decimal` (
 --
 
 INSERT INTO `item_decimal` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(17, 41, 54, '0.00'),
+(17, 41, 54, '0.55'),
 (18, 42, 54, '11.00');
 
 -- --------------------------------------------------------
@@ -560,7 +545,8 @@ CREATE TABLE `item_int` (
 INSERT INTO `item_int` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
 (79, 41, 44, 48),
 (80, 42, 44, 48),
-(81, 42, 45, 51);
+(81, 42, 45, 51),
+(86, 41, 45, 51);
 
 -- --------------------------------------------------------
 
@@ -601,7 +587,8 @@ CREATE TABLE `item_varchar` (
 --
 
 INSERT INTO `item_varchar` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(145, 42, 46, '56,55');
+(145, 42, 46, '56,55'),
+(146, 41, 46, '56');
 
 -- --------------------------------------------------------
 
@@ -624,14 +611,8 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`media_id`, `filename`, `created_at`, `updated_at`, `img`, `gallary`, `product_id`) VALUES
-(118, 'aa', '2023-04-25 14:20:55', NULL, 'IMG_1682412655.', 0, 2565),
-(119, 'aa', '2023-04-25 14:21:01', NULL, 'IMG_1682412661.', 0, 2565),
-(120, '', '2023-04-25 14:22:48', NULL, '', 0, 2565),
-(121, 'aa', '2023-04-25 14:39:33', NULL, 'IMG_1682413773.', 0, 2565),
-(122, 'aa', '2023-04-25 14:39:37', NULL, 'IMG_1682413777.', 0, 2565),
-(123, 'java', '2023-04-25 14:40:08', NULL, 'IMG_1682413808.', 0, 2565),
-(132, '', '2023-04-25 21:18:20', '2023-04-25 16:31:34', 'IMG_1682437700.png', 1, 2589),
-(134, 'aa', '2023-04-25 21:20:21', '2023-04-25 16:31:34', 'IMG_1682437821.png', 1, 2589);
+(160, '', '2023-04-29 09:35:53', '2023-04-29 06:27:35', 'IMG_1682741153.jpg', 1, 1),
+(161, 'aa', '2023-04-29 09:36:04', '2023-04-29 06:27:35', 'IMG_1682741164.png', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -643,7 +624,7 @@ CREATE TABLE `order` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `total` int(11) NOT NULL,
-  `status` enum('Complete','Pending') NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `payment_method_id` int(11) NOT NULL,
   `shipping_method_id` int(11) NOT NULL,
   `shipping_amount` int(11) NOT NULL,
@@ -653,6 +634,13 @@ CREATE TABLE `order` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`order_id`, `customer_id`, `total`, `status`, `payment_method_id`, `shipping_method_id`, `shipping_amount`, `customer_name`, `email`, `mobile`, `created_at`, `updated_at`) VALUES
+(1, 3452, 1221, 4, 1, 334, 200, 'kv', 'kv', 'kv@gmail.com', '2023-04-26 12:08:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -740,7 +728,35 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `entity_type_id`, `name`, `sku`, `cost`, `price`, `quantity`, `description`, `status`, `color`, `material`, `thumbnail_id`, `midium_id`, `large_id`, `small_id`, `created_at`, `updated_at`) VALUES
-(2664, 1, 'nokia 1100', 'nokia 1100', 1100, 1100, 1100, '', 1, 'red', '', NULL, NULL, NULL, NULL, '2023-04-25 22:14:21', NULL);
+(2, 1, 'nnn', 'sku 2', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-30 08:49:15'),
+(4, 1, 'nnn', 'sku 4', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(5, 1, 'nnn', 'sku 5', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(6, 1, 'nnn', 'sku 6', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(7, 1, 'nnn', 'sku 7', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(8, 1, 'nnn', 'sku 8', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(9, 1, 'nnn', 'sku 9', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(10, 1, 'nnn', 'sku 10', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(11, 1, 'nnn', 'sku 11', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(12, 1, 'nnn', 'sku 12', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(13, 1, 'nnn', 'sku 13', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(14, 1, 'nnn', 'sku 14', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(15, 1, 'nnn', 'sku 15', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(16, 1, 'nnn', 'sku 16', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(17, 1, 'nnn', 'sku 17', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(18, 1, 'nnn', 'sku 18', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(19, 1, 'nnn', 'sku 19', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(20, 1, 'nnn', 'sku 20', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(21, 1, 'nnn', 'sku 21', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:17'),
+(22, 1, 'nnn', 'sku 22', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(23, 1, 'nnn', 'sku 23', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(24, 1, 'nnn', 'sku 24', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(25, 1, 'nnn', 'sku 25', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(26, 1, 'nnn', 'sku 26', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(27, 1, 'nnn', 'sku 27', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(28, 1, 'nnn', 'sku 28', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(29, 1, 'nnn', 'sku 29', 1100, 1100, 1100, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 11:32:03', '2023-04-28 11:32:18'),
+(119, 1, 'nnn', 'sku 3', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-28 15:36:54', NULL),
+(258, 1, 'nnn', 'sku1', 1100, 1100, 110, '', 1, 'red', 'black', NULL, NULL, NULL, NULL, '2023-04-29 15:54:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -768,13 +784,6 @@ CREATE TABLE `product_int` (
   `value` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_int`
---
-
-INSERT INTO `product_int` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(361, 2664, 67, 106);
-
 -- --------------------------------------------------------
 
 --
@@ -793,7 +802,7 @@ CREATE TABLE `product_text` (
 --
 
 INSERT INTO `product_text` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(383, 2664, 66, 'nokia 1100');
+(395, 2, 66, 'esdg');
 
 -- --------------------------------------------------------
 
@@ -807,13 +816,6 @@ CREATE TABLE `product_varchar` (
   `attribute_id` int(11) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_varchar`
---
-
-INSERT INTO `product_varchar` (`value_id`, `entity_id`, `attribute_id`, `value`) VALUES
-(43, 2664, 68, '110');
 
 -- --------------------------------------------------------
 
@@ -838,7 +840,11 @@ CREATE TABLE `quote` (
 --
 
 INSERT INTO `quote` (`quote_id`, `customer_id`, `total`, `status`, `payment_method_id`, `shiping_method_id`, `shiping_amount`, `created_at`, `updated_at`) VALUES
-(1, 3452, 100, 1, 450, 334, 100, '2023-04-20 05:49:29', '2023-04-25 09:48:44');
+(1, 3452, 107900, 1, 450, 334, 100, '2023-04-20 05:49:29', '2023-04-30 12:54:50'),
+(6, 3462, 6800, 1, 1, 335, 200, '2023-04-27 17:25:49', '2023-04-30 14:34:10'),
+(7, 3453, 200, 1, 1, 335, 200, '2023-04-28 07:17:00', '2023-04-30 14:34:31'),
+(8, 3459, 5666, 1, 40, 335, 200, '2023-04-28 07:24:40', '2023-04-30 14:34:59'),
+(9, 3463, 200, 1, 40, 335, 200, '2023-04-29 02:57:55', '2023-04-30 14:34:27');
 
 -- --------------------------------------------------------
 
@@ -862,7 +868,9 @@ CREATE TABLE `quote_address` (
 --
 
 INSERT INTO `quote_address` (`address_id`, `quote_id`, `customer_address_id`, `address`, `city`, `state`, `country`, `zip_code`) VALUES
-(17, 1, 290, 'plot no.76/B,', 'jamnafdgars', 'gujarat', 'India', 361008);
+(17, 1, 290, 'plot no.76/B,', 'jamnafdgars', 'gujarat', 'India', 361008),
+(25, 7, 291, 'plot no.76/B,', 'jamsn', 'gujarat', 'India', 361008),
+(26, 9, 305, 'plot no.76/B,', 'jamnagar', 'gujarat', 'India', 361008);
 
 -- --------------------------------------------------------
 
@@ -878,6 +886,22 @@ CREATE TABLE `quote_items` (
   `price` varchar(255) NOT NULL,
   `quote_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `quote_items`
+--
+
+INSERT INTO `quote_items` (`item_id`, `product_id`, `quantity`, `discount`, `price`, `quote_id`) VALUES
+(91, 28, '23', '0', '1100', 1),
+(92, 29, '24', '0', '1100', 1),
+(93, 119, '25', '0', '1100', 1),
+(94, 258, '26', '0', '1100', 1),
+(97, 5, '2', '0', '1100', 6),
+(102, 4, '1', '34', '1100', 8),
+(103, 5, '1', '0', '1100', 8),
+(104, 6, '1', '0', '1100', 8),
+(105, 7, '1', '0', '1100', 8),
+(106, 8, '1', '0', '1100', 8);
 
 -- --------------------------------------------------------
 
@@ -951,7 +975,7 @@ CREATE TABLE `salesmen` (
 --
 
 INSERT INTO `salesmen` (`salesman_id`, `first_name`, `last_name`, `email`, `gender`, `mobile`, `status`, `company`, `created_at`, `updated_at`) VALUES
-(64, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 'ww', '2023-04-24 12:22:00', NULL);
+(64, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '6353319278', 1, 'ww', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1026,7 @@ CREATE TABLE `vendors` (
 --
 
 INSERT INTO `vendors` (`vendor_id`, `entity_type_id`, `first_name`, `last_name`, `email`, `gender`, `mobile`, `status`, `company`, `created_at`, `updated_at`) VALUES
-(417, 0, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '06353319278', 1, 'qqqq', '2023-04-24 12:16:16', NULL);
+(417, 0, 'krushal', 'vataliya', 'krushalvataliya24@gmail.com', 'male', '6353319278', 1, 'qqqq', '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1163,6 +1187,7 @@ ALTER TABLE `cart_item`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `path` (`path`),
   ADD KEY `parent -id` (`parent_id`),
   ADD KEY `entity_type_id` (`entity_type_id`);
 
@@ -1358,6 +1383,7 @@ ALTER TABLE `payment_methods`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
+  ADD UNIQUE KEY `sku` (`sku`),
   ADD KEY `thumbnail_id` (`thumbnail_id`),
   ADD KEY `midium_id` (`midium_id`),
   ADD KEY `large_id` (`large_id`),
@@ -1510,13 +1536,13 @@ ALTER TABLE `vendor_varchar`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `brand_decimal`
@@ -1558,7 +1584,7 @@ ALTER TABLE `cart_item`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
 
 --
 -- AUTO_INCREMENT for table `category_decimal`
@@ -1576,7 +1602,7 @@ ALTER TABLE `category_int`
 -- AUTO_INCREMENT for table `category_text`
 --
 ALTER TABLE `category_text`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `category_varchar`
@@ -1588,13 +1614,13 @@ ALTER TABLE `category_varchar`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3463;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3465;
 
 --
 -- AUTO_INCREMENT for table `customer_address`
 --
 ALTER TABLE `customer_address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
 
 --
 -- AUTO_INCREMENT for table `customer_decimal`
@@ -1618,13 +1644,13 @@ ALTER TABLE `customer_text`
 -- AUTO_INCREMENT for table `customer_varchar`
 --
 ALTER TABLE `customer_varchar`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `eav_attribute`
 --
 ALTER TABLE `eav_attribute`
-  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `attribute_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `eav_attribute_option`
@@ -1648,37 +1674,37 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `item_decimal`
 --
 ALTER TABLE `item_decimal`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `item_int`
 --
 ALTER TABLE `item_int`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `item_text`
 --
 ALTER TABLE `item_text`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `item_varchar`
 --
 ALTER TABLE `item_varchar`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_address`
@@ -1702,7 +1728,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2665;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=404;
 
 --
 -- AUTO_INCREMENT for table `product_decimal`
@@ -1714,37 +1740,37 @@ ALTER TABLE `product_decimal`
 -- AUTO_INCREMENT for table `product_int`
 --
 ALTER TABLE `product_int`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
 
 --
 -- AUTO_INCREMENT for table `product_text`
 --
 ALTER TABLE `product_text`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=397;
 
 --
 -- AUTO_INCREMENT for table `product_varchar`
 --
 ALTER TABLE `product_varchar`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `quote`
 --
 ALTER TABLE `quote`
-  MODIFY `quote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `quote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `quote_address`
 --
 ALTER TABLE `quote_address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `quote_items`
 --
 ALTER TABLE `quote_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `salesman_address`
@@ -1756,7 +1782,7 @@ ALTER TABLE `salesman_address`
 -- AUTO_INCREMENT for table `salesman_price`
 --
 ALTER TABLE `salesman_price`
-  MODIFY `entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `entity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `salesmen`
@@ -1774,13 +1800,13 @@ ALTER TABLE `shiping_methods`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=418;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
 
 --
 -- AUTO_INCREMENT for table `vendor_address`
 --
 ALTER TABLE `vendor_address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `vendor_decimal`

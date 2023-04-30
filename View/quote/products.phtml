@@ -18,7 +18,28 @@ $products = $this->getQuote()->getProducts();
 		<td><?php echo $product->name ?></td>
 		<td><?php echo $product->sku ?></td>
 		<td><?php echo $product->price ?></td>
-		<td> <input type="number" name="quantity[<?php echo $product->product_id ?>]" value="" >  </td>
-		<!-- <td><input type="checkbox" name="add[<?php echo $product->product_id ?>]" value="<?php echo $product->product_id ?>" ></td> -->
+		<td> <input type="number" name="quantity[<?php echo $product->product_id ?>]" value="" class="quantity">  </td>
+		<td><input type="checkbox" value="<?php echo $product->product_id ?>" class="addq"></td>
 	</tr>
 	<?php endforeach; ?>
+
+<script type="text/javascript">
+$(document).ready(function (){
+	console.log($('.quantity'));
+$('.addq').click(function()
+{
+	var ind  = ($('.addq').index(this));
+	console.log();
+if($(this).prop("checked") == true)
+{
+$('.quantity').eq(ind).attr('value',1);
+}
+else if($(this).prop("checked") == false)
+{
+$('.quantity').eq(ind).removeAttr('value',);
+}
+});
+
+});
+
+</script>

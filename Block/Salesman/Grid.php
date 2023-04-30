@@ -101,7 +101,7 @@ class Block_Salesman_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(salesman_id) FROM `salesmen`;";
 		$count =$modelSalesman->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `salesmen` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `salesmen` ORDER BY `salesman_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$products =$modelSalesman->fetchAll($sql);
 		return $products;
 	}

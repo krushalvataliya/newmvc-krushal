@@ -81,7 +81,6 @@ class Model_Core_Table_Resource
 		}
 
 		$sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}')";
-		Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->insert($sql);
 		return $result;
 
@@ -99,7 +98,6 @@ class Model_Core_Table_Resource
 			$values [] =" `{$key1}` = '{$value1}'" ;
 		}
 		$sql = "INSERT INTO `{$this->tableName}` (`{$key}`) VALUES ('{$value}') ON DUPLICATE KEY UPDATE ".implode(',', $values);
-		Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->query($sql);
 		return $result;
 	}
@@ -125,12 +123,10 @@ class Model_Core_Table_Resource
 
 		}
 	  	$sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values).", `updated_at` = current_timestamp() WHERE ".implode('AND', $and) ;
-		  Ccc::log($sql, 'query.log');
 		$result = $this->getAdapter()->update($sql);
 		if(!$result)
 		{
 			$sql ="UPDATE `{$this->tableName}` SET ".implode(',', $values)." WHERE ".implode('AND', $and) ;
-			Ccc::log($sql, 'query.log');
 			$result = $this->getAdapter()->update($sql);
 		}
 		return $result;
@@ -145,12 +141,10 @@ class Model_Core_Table_Resource
 			}
 
 			$sql = "DELETE FROM `{$this->tableName}` WHERE ".implode('AND', $and) ;
-			Ccc::log($sql, 'query.log');
 		}
 		else
 		{
-		$sql = "DELETE FROM `{$this->tableName}` WHERE `{$this->tableName}`.`{$this->primaryKey}` = '{$condition}'  ";
-		Ccc::log($sql, 'query.log');
+			$sql = "DELETE FROM `{$this->tableName}` WHERE `{$this->tableName}`.`{$this->primaryKey}` = '{$condition}'  ";
 		}
 		$result = $this->getAdapter()->delete($sql);
 		return $result;

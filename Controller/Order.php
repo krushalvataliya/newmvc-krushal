@@ -167,7 +167,10 @@ class Controller_Order extends Controller_Core_Action
 		}
 	}
 
-  
+	public function exportAction()
+	{
+		return $this->redirect('index');
+	}
     
 }
 

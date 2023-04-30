@@ -58,8 +58,8 @@ class Block_Html_Head extends Block_Core_Template
 
     protected function _prepareJs()
     {
-        $this->addJs('Model/Js/Ajax.js');
-        $this->addJs('Model/Js/jquery-3.6.4.min.js');
+        $this->addJs('Model/Skin/js/ajax.js');
+        $this->addJs('Model/Skin/js/jquery-3.6.4.min.js');
     }
 
     protected function _prepareCss()

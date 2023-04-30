@@ -26,7 +26,7 @@ $total = $this->getTotal();
 			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][quantity]" value="<?php echo $detail->quantity?>">  </td>
 			<td> <input type="number" name="product[<?php echo $detail->product_id ?>][discount]" value="<?php echo $detail->discount?>">  </td>
 			<td><?php echo ((int)$detail->price * (int)$detail->quantity)-(int)$detail->discount ?></td>
-			<td><a href="<?php echo $this->getUrl('deleteproduct','quote',['product_id'=>$detail->product_id]) ?>">remove</a></td>
+			<td><a onclick="ajax.setUrl('<?php echo $this->getUrl('deleteproduct','quote',['product_id'=>$detail->product_id]) ?>').call()">remove</a></td>
 		</tr>
 		<?php endforeach; ?>
 		<?php endif ?>

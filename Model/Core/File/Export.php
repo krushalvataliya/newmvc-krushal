@@ -8,8 +8,8 @@ class Model_Core_File_Export
 
 	public function putData($data)
 	{
-		$file = fopen($this->getFileName(),"w");
-	    $header = [];
+		$file = fopen($this->getFileName(),"w+");
+	    $header = null;
 		foreach ($data as $row)
 		{
 			if(!$header)
