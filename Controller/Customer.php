@@ -246,7 +246,7 @@ class Controller_Customer extends Controller_Core_Action
 			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
 
 			$modelcustomer = Ccc::getModel('customer');
-			$insert = $modelcustomer->getResource()->insertMultiple($rows, 'emeil');
+			$insert = $modelcustomer->getResource()->insertMultiple($rows, 'email');
 			if(!$insert)
 			{
 				throw new Exception("data not saved from csv file.", 1);

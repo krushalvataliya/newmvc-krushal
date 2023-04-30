@@ -159,7 +159,6 @@ class Controller_Product_Media extends Controller_Core_Action
 		catch (Exception $e)
 		{
 			$this->getMessage()->addMessage($e->getMessage(),  Model_Core_Message::FAILURE);
-			Ccc::log($_POST,'error.log');
 		}
 
 	}

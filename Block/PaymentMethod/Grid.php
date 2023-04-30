@@ -73,7 +73,7 @@ class Block_PaymentMethod_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(payment_method_id) FROM `payment_methods`;";
 		$count =$modelPaymentMethod->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `payment_methods` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `payment_methods` ORDER BY `payment_method_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$paymentMethods =$modelPaymentMethod->fetchAll($sql);
 		return $paymentMethods;
 	}

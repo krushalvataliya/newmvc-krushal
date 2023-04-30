@@ -50,42 +50,40 @@ class Controller_Quote extends Controller_Core_Action
 			$modelQuoteItems =Ccc::getModel('Quote_Items');
 			$modelQuote =Ccc::getModel('Quote');
 			$quoteId = $modelQuote->getQuoteDetails()->quote_id;
-			$quantity=$request->getPost('quantity');
+			$quantityData=$request->getPost('quantity');
 			$add=$request->getPost('add');
-			$quantity = array_filter($quantity);
+			$quantities = array_filter($quantityData);
 
 			$customerId=(int)$this->getSession()->start()->get('customer_id');
-			foreach ($quantity as $productId => $quantity)
+			foreach ($quantities as $productId => $singleQuantity)
 			{
 				$sql = "SELECT * FROM `quote_items` WHERE `product_id` = '{$productId}' AND `quote_id` = '{$quoteId}'";
 				$result =$modelQuote->fetchRow($sql);
 				$data['product_id'] = $productId;
-				$data['quantity'] = $quantity;
-				if(!$result->getData())
-				{
-					$modelQuoteItems =Ccc::getModel('Quote_Items');
-					$modelQuote =Ccc::getModel('Quote');
-					$sql = "SELECT * FROM `products` WHERE `product_id` = '{$productId}'";
-					$product =$modelQuote->fetchRow($sql);
-					$data['price'] = $product->price;
-					$data['quote_id'] = $quoteId;
-					$result =$modelQuoteItems->setData($data)->save();
-					if(!$result)
-					{
-						throw new Exception("product not inserted in cart.", 1);
-					}
-				}
-				else
+				$data['quantity'] = $singleQuantity;
+				if($result->getData())
 				{
 					$modelQuoteItems =Ccc::getModel('Quote_Items');
 					$modelQuote =Ccc::getModel('Quote');
 					$data['quantity'] += $result->quantity;
 					$data['item_id'] = $result->item_id;
-					unset($productId);
 					$result2 =$modelQuoteItems->setData($data)->save();
 					if(!$result2)
 					{
 						throw new Exception("product not updated in cart.", 1);
+					}
+				}
+				else
+				{
+					$modelQuoteItems1 =Ccc::getModel('Quote_Items');
+					$sql = "SELECT * FROM `products` WHERE `product_id` = '{$productId}'";
+					$product =$modelQuoteItems1->fetchRow($sql);
+					$data['price'] = $product->price;
+					$data['quote_id'] = $quoteId;
+					$result1 =$modelQuoteItems->setData($data)->save();
+					if(!$result1)
+					{
+						throw new Exception("product not inserted in cart.", 1);
 					}
 				}
 			}

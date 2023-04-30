@@ -92,7 +92,7 @@ class Block_Vendor_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(vendor_id) FROM `vendors`;";
 		$count =$modelVendor->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `vendors` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `vendors` ORDER BY `vendor_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$vendors =$modelVendor->fetchall($sql);	
 		return $vendors;
 	}

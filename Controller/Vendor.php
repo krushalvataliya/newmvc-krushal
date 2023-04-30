@@ -189,7 +189,7 @@ class Controller_Vendor extends Controller_Core_Action
 			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
 
 			$modelvendor = Ccc::getModel('vendor');
-			$insert = $modelvendor->getResource()->insertMultiple($rows, 'emeil');
+			$insert = $modelvendor->getResource()->insertMultiple($rows, 'email');
 			if(!$insert)
 			{
 				throw new Exception("data not saved from csv file.", 1);

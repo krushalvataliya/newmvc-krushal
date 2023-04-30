@@ -9,8 +9,8 @@ class Block_Order_Grid extends  Block_Core_Grid
 
 	protected function _prepareColumns()
 	{	
-		$this->addColumn('quote_id',[
-			'title' =>'QUOTE_ID'
+		$this->addColumn('order_id',[
+			'title' =>'ORDER_ID'
 		]);
 		$this->addColumn('customer_id',[
 			'title' =>'CUSTOMER_ID'
@@ -79,7 +79,7 @@ class Block_Order_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(order_id) FROM `order`;";
 		$count =$modelOrder->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `order` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `order` ORDER BY `order_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$orders =$modelOrder->fetchAll($sql);
 		return $orders;
 	}

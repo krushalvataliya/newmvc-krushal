@@ -80,7 +80,8 @@ class Block_Brand_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(brand_id) FROM `brand`;";
 		$count =$modelbrand->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `brand` ORDER BY `name` ASC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `brand` ORDER BY `name` ASC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()} ;";
+
 		$products =$modelbrand->fetchAll($sql);
 		return $products;
 	}

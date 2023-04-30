@@ -88,7 +88,7 @@ class Block_Customer_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(customer_id) FROM `customers`;";
 		$count =$modelCustomer->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `customers` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `customers` ORDER BY `customer_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$customers =$modelCustomer->fetchall($sql);	
 		return $customers;
 	}

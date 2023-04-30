@@ -102,7 +102,7 @@ class Block_Eav_Attribute_Grid extends Block_Core_Grid
 		$sql = "SELECT COUNT(attribute_id) FROM `eav_attribute`;";
 		$count = $attributes->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT * FROM `eav_attribute` LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		$sql = "SELECT * FROM `eav_attribute` ORDER BY `attribute_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 		$collection = $attributes->fetchAll($sql);
 		return $collection;
 	}

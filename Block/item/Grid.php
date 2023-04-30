@@ -81,7 +81,7 @@ class Block_item_Grid extends  Block_Core_Grid
 		$this->setCountRows($count);
 		$sql = "SELECT I.*, IVName.`value` as name , IVType.`value` as type FROM `item` I
 		LEFT JOIN `item_varchar` IVName ON I.`item_id` = IVName.`entity_id` AND IVName.`attribute_id`= 38
-		LEFT JOIN `item_varchar` IVType ON I.`item_id` = IVType.`entity_id` AND IVType.`attribute_id`= 40 LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
+		LEFT JOIN `item_varchar` IVType ON I.`item_id` = IVType.`entity_id` AND IVType.`attribute_id`= 40 ORDER BY `item_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
 
 		$items =$modelitem->fetchAll($sql);
 		return $items;

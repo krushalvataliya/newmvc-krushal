@@ -155,8 +155,8 @@ class Controller_ShippingMethod extends Controller_Core_Action
 			$readCsvModel =  CCC::getModel('Core_File_Csv');
 			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
 
-			$modelshippingMethod = Ccc::getModel('shippingMethod');
-			$insert = $modelshippingMethod->getResource()->insertMultiple($rows, 'emeil');
+			$modelShippingMethod = Ccc::getModel('shippingMethod');
+			$insert = $modelShippingMethod->getResource()->insertMultiple($rows, 'name');
 			if(!$insert)
 			{
 				throw new Exception("data not saved from csv file.", 1);
@@ -174,9 +174,9 @@ class Controller_ShippingMethod extends Controller_Core_Action
 	{
 		try
 		{
-			$modelshippingMethod = Ccc::getModel('shippingMethod');
+			$modelShippingMethod = Ccc::getModel('shippingMethod');
 			$sql = "SELECT * FROM `shiping_methods`";
-			$shippingMethods = $modelshippingMethod->getResource()->fetchAll($sql);
+			$shippingMethods = $modelShippingMethod->getResource()->fetchAll($sql);
 			if(!$shippingMethods)
 			{
 				throw new Exception("data not found.", 1);

@@ -62,7 +62,6 @@ class Controller_Brand extends Controller_Core_Action
 
 	}
 
-	
 	public function saveAction()
 	{
 		try 
@@ -154,7 +153,63 @@ class Controller_Brand extends Controller_Core_Action
 
 	}
 
-  
+	public function importAction()
+	{
+		$layout = $this->getLayout();
+		$addImage = $layout->createBlock('Core_Layout')->setTemplete('core/importfile.phtml');;
+		$addImage = $addImage->toHtml();
+		$this->getResponse()->jsonResponse(['html'=>$addImage,'element'=>'content']);
+		
+	}
+
+	public function savefileAction()
+	{
+		try
+		{
+			$uploadModel =  CCC::getModel('Core_File_Upload');
+			$uploadModel->setPath('csv')->setFileName('brand.csv')->upload('fileToUpload');
+
+			$readCsvModel =  CCC::getModel('Core_File_Csv');
+			$rows = $readCsvModel->setPath('csv')->setFileName($uploadModel->getFileName())->read()->getRows();
+
+			$brand = Ccc::getModel('brand');
+			$insert = $brand->getResource()->insertMultiple($rows, 'name');
+			if(!$insert)
+			{
+				throw new Exception("data not saved from csv file.", 1);
+			}
+			return $this->redirect('index');	
+		} 
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not imported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+			return $this->redirect('index');	
+		}
+	}
+
+	public function exportAction()
+	{
+		try
+		{
+			$brand = Ccc::getModel('brand');
+			$sql = "SELECT * FROM `brand`";
+			$brands = $brand->getResource()->fetchAll($sql);
+			if(!$brands)
+			{
+				throw new Exception("data not found.", 1);
+			}
+
+			$exportModel =  CCC::getModel('Core_File_Export');
+			$exportModel->setFileName('brand.csv')->putData($brands);
+			$exportModel->export();
+			exit();
+		}
+		catch (Exception $e)
+		{
+			$this->getMessage()->addMessage('csv not exported because of '.$e->getMessage(),  Model_Core_Message::FAILURE);
+
+		}
+	}
     
 }
 

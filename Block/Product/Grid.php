@@ -92,9 +92,8 @@ class Block_Product_Grid extends  Block_Core_Grid
 		$sql = "SELECT COUNT(product_id) FROM `products`;";
 		$count =$modelProduct->getResource()->getAdapter()->fetchOne($sql);
 		$this->setCountRows($count);
-		$sql = "SELECT P.*,PVDesc.`value` as description FROM `products`P
-		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66 LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()}";
-		Ccc::log($sql,'query.log');
+		$sql = "SELECT P.*,PVDesc.`value` as description FROM `products`P 
+		LEFT JOIN `product_text` PVDesc ON P.`product_id` = PVDesc.`entity_id` AND PVDesc.`attribute_id`= 66 ORDER BY `product_id` DESC LIMIT {$this->getPagerModel()->getStartLimit()},{$this->getPagerModel()->getRecordPerPage()} ";
 		$products =$modelProduct->fetchAll($sql);
 		return $products;
 	}

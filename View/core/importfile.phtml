@@ -1,4 +1,5 @@
 <form id="addcsv" action="<?php echo $this->getUrl('savefile') ?>" method="POST" enctype="multipart/form-data">
+<a class="btn btn-primary my-1" onclick="ajax.setUrl('<?php echo $this->getUrl('grid') ?>').call()">cancel</a>
 <button id="subtn" class="btn btn-primary" type="submit">upload</button>
   <table class="table table-bordered">
     <tr>
