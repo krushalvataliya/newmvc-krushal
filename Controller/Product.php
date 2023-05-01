@@ -192,13 +192,22 @@ class Controller_Product extends Controller_Core_Action
 		{
 
 			$modelProduct = Ccc::getModel('Product');
-			$sql = "SELECT * FROM `products`";
-			$products = $modelProduct->getResource()->fetchAll($sql);
+			$sql = "SELECT product_id,entity_type_id,name,sku,cost,price,quantity,description,status,color,material,thumbnail_id,midium_id,large_id,small_id FROM `products`";
+		$products = $modelProduct->getResource()->fetchAll($sql);
 			if(!$products)
 			{
 				throw new Exception("data not found.", 1);
 			}
-
+			foreach ($products as &$product) {
+				if($product['status'] == Model_Product::STATUS_ACTIVE)
+				{
+					$product['status'] = Model_Product::STATUS_ACTIVE_LBL;
+				}
+				if($product['status'] == Model_Product::STATUS_INACTIVE)
+				{
+					$product['status'] = Model_Product::STATUS_INACTIVE_LBL;
+				}
+			}
 			$exportModel =  CCC::getModel('Core_File_Export');
 			$exportModel->setFileName('products.csv')->putData($products);
 			$exportModel->export();

@@ -203,15 +203,27 @@ class Controller_Category extends Controller_Core_Action
 		try
 		{
 			$modelcategory = Ccc::getModel('category');
-			$sql = "SELECT * FROM `category`";
-			$categorys = $modelcategory->getResource()->fetchAll($sql);
-			if(!$categorys)
+			$sql = "SELECT category_id, entity_type_id, parent_id, name, 'path', status,description FROM `category`";
+		$categories = $modelcategory->getResource()->fetchAll($sql);
+			if(!$categories)
 			{
 				throw new Exception("data not found.", 1);
 			}
 
+			foreach ($categories as &$category)
+			{
+				if($category['status'] == Model_Category::STATUS_ACTIVE)
+				{
+					$category['status'] = Model_Category::STATUS_ACTIVE_LBL;
+				}
+				if($category['status'] == Model_Category::STATUS_INACTIVE)
+				{
+					$category['status'] = Model_Category::STATUS_INACTIVE_LBL;
+				}
+			}
+
 			$exportModel =  CCC::getModel('Core_File_Export');
-			$exportModel->setFileName('categories.csv')->putData($categorys);
+			$exportModel->setFileName('categories.csv')->putData($categories);
 			$exportModel->export();
 			exit();
 		}

@@ -175,11 +175,22 @@ class Controller_ShippingMethod extends Controller_Core_Action
 		try
 		{
 			$modelShippingMethod = Ccc::getModel('shippingMethod');
-			$sql = "SELECT * FROM `shiping_methods`";
+			$sql = "SELECT shiping_method_id,name,amount,status FROM `shiping_methods`";
 			$shippingMethods = $modelShippingMethod->getResource()->fetchAll($sql);
 			if(!$shippingMethods)
 			{
 				throw new Exception("data not found.", 1);
+			}
+			foreach ($shippingMethods as &$shippingMethod)
+			{
+				if($shippingMethod['status'] == Model_ShippingMethod::STATUS_ACTIVE)
+				{
+					$shippingMethod['status'] = Model_ShippingMethod::STATUS_ACTIVE_LBL;
+				}
+				if($shippingMethod['status'] == Model_ShippingMethod::STATUS_INACTIVE)
+				{
+					$shippingMethod['status'] = Model_ShippingMethod::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

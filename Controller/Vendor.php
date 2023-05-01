@@ -208,11 +208,23 @@ class Controller_Vendor extends Controller_Core_Action
 		try
 		{
 			$modelvendor = Ccc::getModel('vendor');
-			$sql = "SELECT * FROM `vendors`";
-			$vendors = $modelvendor->getResource()->fetchAll($sql);
+			$sql = "SELECT vendor_id, entity_type_id, first_name, last_name, email, gender, mobile, status, company FROM `vendors`";
+	$vendors = $modelvendor->getResource()->fetchAll($sql);
 			if(!$vendors)
 			{
 				throw new Exception("data not found.", 1);
+			}
+
+			foreach ($vendors as &$vendor)
+			{
+				if($vendor['status'] == Model_Vendor::STATUS_ACTIVE)
+				{
+					$vendor['status'] = Model_Vendor::STATUS_ACTIVE_LBL;
+				}
+				if($vendor['status'] == Model_Vendor::STATUS_INACTIVE)
+				{
+					$vendor['status'] = Model_Vendor::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

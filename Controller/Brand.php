@@ -192,8 +192,8 @@ class Controller_Brand extends Controller_Core_Action
 		try
 		{
 			$brand = Ccc::getModel('brand');
-			$sql = "SELECT * FROM `brand`";
-			$brands = $brand->getResource()->fetchAll($sql);
+			$sql = "SELECT brand_id,name,description,image,entity_type_id FROM `brand`";
+		$brands = $brand->getResource()->fetchAll($sql);
 			if(!$brands)
 			{
 				throw new Exception("data not found.", 1);
