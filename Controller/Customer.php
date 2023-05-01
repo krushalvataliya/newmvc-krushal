@@ -265,11 +265,21 @@ class Controller_Customer extends Controller_Core_Action
 		try
 		{
 			$modelcustomer = Ccc::getModel('customer');
-			$sql = "SELECT * FROM `customers`";
+			$sql = "SELECT customer_id,entity_type_id,first_name,last_name,email,gender,mobile,status,shiping_address_id,billing_address_id FROM `customers`";
 			$customers = $modelcustomer->getResource()->fetchAll($sql);
 			if(!$customers)
 			{
 				throw new Exception("data not found.", 1);
+			}
+			foreach ($customers as &$customer) {
+				if($customer['status'] == Model_Customer::STATUS_ACTIVE)
+				{
+					$customer['status'] = Model_Customer::STATUS_ACTIVE_LBL;
+				}
+				if($customer['status'] == Model_Customer::STATUS_INACTIVE)
+				{
+					$customer['status'] = Model_Customer::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

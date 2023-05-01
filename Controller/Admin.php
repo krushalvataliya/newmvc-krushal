@@ -171,11 +171,22 @@ class Controller_Admin extends Controller_Core_Action
 		try
 		{
 			$admin = Ccc::getModel('admin');
-			$sql = "SELECT * FROM `admins`";
+			$sql = "SELECT admin_id,name,email,status FROM `admins`";
 			$admins = $admin->getResource()->fetchAll($sql);
 			if(!$admins)
 			{
 				throw new Exception("data not found.", 1);
+			}
+			foreach ($admins as &$admin)
+			{
+				if($admin['status'] == Model_Admin::STATUS_ACTIVE)
+				{
+					$admin['status'] = Model_Admin::STATUS_ACTIVE_LBL;
+				}
+				if($admin['status'] == Model_Admin::STATUS_INACTIVE)
+				{
+					$admin['status'] = Model_Admin::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

@@ -169,11 +169,22 @@ class Controller_PaymentMethod extends Controller_Core_Action
 		try
 		{
 			$paymentMethod = Ccc::getModel('paymentMethod');
-			$sql = "SELECT * FROM `payment_methods`";
-			$paymentMethods = $paymentMethod->getResource()->fetchAll($sql);
+			$sql = "SELECT payment_method_id,name,status FROM `payment_methods`",
+		$paymentMethods = $paymentMethod->getResource()->fetchAll($sql);
 			if(!$paymentMethods)
 			{
 				throw new Exception("data not found.", 1);
+			}
+			foreach ($paymentMethods as &$paymentMethod)
+			{
+				if($paymentMethod['status'] == Model_PaymentMethod::STATUS_ACTIVE)
+				{
+					$paymentMethod['status'] = Model_paymentMethod::STATUS_ACTIVE_LBL;
+				}
+				if($paymentMethod['status'] == Model_paymentMethod::STATUS_INACTIVE)
+				{
+					$paymentMethod['status'] = Model_paymentMethod::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

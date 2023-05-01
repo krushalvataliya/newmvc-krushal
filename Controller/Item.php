@@ -203,11 +203,22 @@ class Controller_Item extends Controller_Core_Action
 		try
 		{
 			$item = Ccc::getModel('item');
-			$sql = "SELECT * FROM `item`";
-			$items = $item->getResource()->fetchAll($sql);
+			$sql = "SELECT item_id, sku, entity_type_id,status FROM `item`" ;
+		$items = $item->getResource()->fetchAll($sql);
 			if(!$items)
 			{
 				throw new Exception("data not found.", 1);
+			}
+			foreach ($items as &$item)
+			{
+				if($item['status'] == Model_Item::STATUS_ACTIVE)
+				{
+					$item['status'] = Model_Item::STATUS_ACTIVE_LBL;
+				}
+				if($item['status'] == Model_Item::STATUS_INACTIVE)
+				{
+					$item['status'] = Model_Item::STATUS_INACTIVE_LBL;
+				}
 			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');

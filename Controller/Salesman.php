@@ -240,15 +240,26 @@ class Controller_Salesman extends Controller_Core_Action
 		try
 		{
 			$modelSalesman = Ccc::getModel('salesman');
-			$sql = "SELECT * FROM `salesmen`";
-			$salesmans = $modelSalesman->getResource()->fetchAll($sql);
-			if(!$salesmans)
+			$sql = "SELECT salesman_id,first_name,last_name,email,gender,mobile,status,company FROM `salesmen`";
+			$salesmem = $modelSalesman->getResource()->fetchAll($sql);
+			if(!$salesmem)
 			{
 				throw new Exception("data not found.", 1);
 			}
+			foreach ($salesmem as &$salesman)
+			{
+				if($salesman['status'] == Model_Salesman::STATUS_ACTIVE)
+				{
+					$salesman['status'] = Model_Salesman::STATUS_ACTIVE_LBL;
+				}
+				if($salesman['status'] == Model_Salesman::STATUS_INACTIVE)
+				{
+					$salesman['status'] = Model_Salesman::STATUS_INACTIVE_LBL;
+				}
+			}
 
 			$exportModel =  CCC::getModel('Core_File_Export');
-			$exportModel->setFileName('salesm.csv')->putData($salesmans);
+			$exportModel->setFileName('salesm.csv')->putData($salesmem);
 			$exportModel->export();
 			exit();
 		}

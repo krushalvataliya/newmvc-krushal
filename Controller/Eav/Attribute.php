@@ -234,15 +234,27 @@ class Controller_Eav_Attribute extends Controller_Core_Action
 		try
 		{
 			$eavAttributeModel = Ccc::getModel('eav_attribute');
-			$sql = "SELECT * FROM `eav_attribute`";
-			$eavAttributeModels = $eavAttributeModel->getResource()->fetchAll($sql);
-			if(!$eavAttributeModels)
+			$sql = "SELECT attribute_id,entity_type_id,code,backend_type,name,status,source_model,input_type FROM `eav_attribute`";
+			$attributes = $eavAttributeModel->getResource()->fetchAll($sql);
+			if(!$attributes)
 			{
 				throw new Exception("data not found.", 1);
 			}
+			foreach ($attributes as &$attribute)
+			{
+				if($attribute['status'] == Model_Eav_Attribute::STATUS_ACTIVE)
+				{
+					$attribute['status'] = Model_Eav_Attribute::STATUS_ACTIVE_LBL;
+				}
+				if($attribute['status'] == Model_Eav_Attribute::STATUS_INACTIVE)
+				{
+					$attribute['status'] = Model_Eav_Attribute::STATUS_INACTIVE_LBL;
+				}
+			}
+
 
 			$exportModel =  CCC::getModel('Core_File_Export');
-			$exportModel->setFileName('eav_attribute.csv')->putData($eavAttributeModels);
+			$exportModel->setFileName('eav_attribute.csv')->putData($attributes);
 			$exportModel->export();
 			exit();
 		}
