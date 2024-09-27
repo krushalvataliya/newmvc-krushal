@@ -5,7 +5,7 @@ spl_autoload_register(function ($className) {
    $classPath = str_replace('_', '/', $className);
 	require_once $classPath.'.php';
 });
-class Ccc 
+class Kv 
 {
 	
 	public static function init()
@@ -62,6 +62,6 @@ class Ccc
 
 }
 
-Ccc::init();
+Kv::init();
 
 ?>
